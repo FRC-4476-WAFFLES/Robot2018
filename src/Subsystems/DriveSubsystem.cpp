@@ -32,8 +32,17 @@ void DriveSubsystem::InitDefaultCommand() {
 }
 
 void DriveSubsystem::drive(float left, float right) {
+	specialturnsolenoid.Set(DoubleSolenoid::kReverse);
+	specialturnmotor.Set(ControlMode::PercentOutput, 0);
 	drive_base.TankDrive(left, right, false);
 }
+
+void DriveSubsystem::special_turn(float direction){
+	specialturnsolenoid.Set(DoubleSolenoid::kForward);
+	specialturnmotor.Set(ControlMode::PercentOutput, direction);
+	drive_base.TankDrive(0, 0, false);
+}
+
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

@@ -14,6 +14,7 @@ public:
 	DriveSubsystem();
 	void InitDefaultCommand() override;
 	void drive(float left, float right);
+	void special_turn(float direction);
 	ADIS16448_IMU gyro;
 private:
 	// It's desirable that everything possible under private except
