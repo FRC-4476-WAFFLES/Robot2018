@@ -59,7 +59,7 @@ class ADIS16448_IMU : public frc::GyroBase {
   double GetQuaternionZ() const;
   void SetTiltCompYaw(bool enabled);
 
-  void UpdateTable();
+  void InitSendable(SendableBuilder& builder) override;
 
  private:
   // Sample from the IMU

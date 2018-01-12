@@ -14,6 +14,8 @@
 #include "ErrorBase.h"
 #include "Timer.h"
 #include "WPIErrors.h"
+#include "networktables/NetworkTableEntry.h"
+#include "SmartDashboard/SendableBuilder.h"
 
 #include <cmath>
 
@@ -130,7 +132,7 @@ ADIS16448_IMU::ADIS16448_IMU(Axis yaw_axis, AHRSAlgorithm algorithm)
   if (ReadRegister(kRegXGYRO_OFF) == 0) Calibrate();
 
   //HALReport(HALUsageReporting::kResourceType_ADIS16448, 0);
-  LiveWindow::GetInstance()->AddSensor("ADIS16448_IMU", 0, this);
+  SetName("ADIS16448_IMU");
 }
 
 /**
@@ -140,7 +142,7 @@ void ADIS16448_IMU::Calibrate() {
   Wait(0.1);
 
   {
-    std::lock_guard<priority_mutex> sync(m_mutex);
+    std::lock_guard<std::mutex> sync(m_mutex);
     m_accum_count = 0;
     m_accum_gyro_x = 0.0;
     m_accum_gyro_y = 0.0;
@@ -150,7 +152,7 @@ void ADIS16448_IMU::Calibrate() {
   Wait(kCalibrationSampleTime);
 
   {
-    std::lock_guard<priority_mutex> sync(m_mutex);
+    std::lock_guard<std::mutex> sync(m_mutex);
     m_gyro_offset_x = m_accum_gyro_x / m_accum_count;
     m_gyro_offset_y = m_accum_gyro_y / m_accum_count;
     m_gyro_offset_z = m_accum_gyro_z / m_accum_count;
@@ -182,7 +184,7 @@ void ADIS16448_IMU::WriteRegister(uint8_t reg, uint16_t val) {
  * {@inheritDoc}
  */
 void ADIS16448_IMU::Reset() {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   m_integ_gyro_x = 0.0;
   m_integ_gyro_y = 0.0;
   m_integ_gyro_z = 0.0;
@@ -204,7 +206,7 @@ void ADIS16448_IMU::Acquire() {
   cmd[1] = 0;
 
   {
-    std::lock_guard<priority_mutex> sync(m_mutex);
+    std::lock_guard<std::mutex> sync(m_mutex);
     m_last_sample_time = Timer::GetFPGATimestamp();
   }
   while (!m_freed) {
@@ -215,7 +217,7 @@ void ADIS16448_IMU::Acquire() {
     double sample_time = m_interrupt->ReadFallingTimestamp();
     double dt;
     {
-      std::lock_guard<priority_mutex> sync(m_mutex);
+      std::lock_guard<std::mutex> sync(m_mutex);
       dt = sample_time - m_last_sample_time;
       m_last_sample_time = sample_time;
     }
@@ -235,7 +237,7 @@ void ADIS16448_IMU::Acquire() {
     double temp = ToShort(&resp[24]) * kDegCPerLSB + kDegCOffset;
 
     {
-      std::lock_guard<priority_mutex> sync(m_samples_mutex);
+      std::lock_guard<std::mutex> sync(m_samples_mutex);
       // If the FIFO is full, just drop it
       if (m_calculate_started && m_samples_count < kSamplesDepth) {
         Sample& sample = m_samples[m_samples_put_index];
@@ -261,7 +263,7 @@ void ADIS16448_IMU::Acquire() {
 
     // Update global state
     {
-      std::lock_guard<priority_mutex> sync(m_mutex);
+      std::lock_guard<std::mutex> sync(m_mutex);
       m_gyro_x = gyro_x;
       m_gyro_y = gyro_y;
       m_gyro_z = gyro_z;
@@ -291,9 +293,9 @@ void ADIS16448_IMU::Calculate() {
     // Wait for next sample and get it
     Sample* sample;
     {
-      std::unique_lock<priority_mutex> sync(m_samples_mutex);
+      std::unique_lock<std::mutex> sync(m_samples_mutex);
       m_calculate_started = true;
-      m_samples_not_empty.wait(m_samples_mutex,
+      m_samples_not_empty.wait(sync,
                                [=] { return m_samples_count != 0 || m_freed; });
       if (m_freed) return;
       sample = &m_samples[m_samples_take_index];
@@ -319,7 +321,7 @@ void ADIS16448_IMU::CalculateMadgwick(Sample& sample, double beta) {
   // Make local copy of quaternion and angle global state
   double q1, q2, q3, q4;
   {
-    std::lock_guard<priority_mutex> sync(m_mutex);
+    std::lock_guard<std::mutex> sync(m_mutex);
     q1 = m_ahrs_q1;
     q2 = m_ahrs_q2;
     q3 = m_ahrs_q3;
@@ -485,7 +487,7 @@ void ADIS16448_IMU::CalculateMadgwick(Sample& sample, double beta) {
 
   // Update global state
   {
-    std::lock_guard<priority_mutex> sync(m_mutex);
+    std::lock_guard<std::mutex> sync(m_mutex);
     m_ahrs_q1 = q1;
     m_ahrs_q2 = q2;
     m_ahrs_q3 = q3;
@@ -744,7 +746,7 @@ void ADIS16448_IMU::CalculateComplementary(Sample& sample) {
 
   // Update global state
   {
-    std::lock_guard<priority_mutex> sync(m_mutex);
+    std::lock_guard<std::mutex> sync(m_mutex);
     m_roll = roll;
     m_pitch = pitch;
     m_yaw = yaw;
@@ -766,112 +768,112 @@ double ADIS16448_IMU::GetRate() const {
 }
 
 double ADIS16448_IMU::GetAngleX() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_integ_gyro_x;
 }
 
 double ADIS16448_IMU::GetAngleY() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_integ_gyro_y;
 }
 
 double ADIS16448_IMU::GetAngleZ() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_integ_gyro_z;
 }
 
 double ADIS16448_IMU::GetRateX() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_gyro_x;
 }
 
 double ADIS16448_IMU::GetRateY() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_gyro_y;
 }
 
 double ADIS16448_IMU::GetRateZ() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_gyro_z;
 }
 
 double ADIS16448_IMU::GetAccelX() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_accel_x;
 }
 
 double ADIS16448_IMU::GetAccelY() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_accel_y;
 }
 
 double ADIS16448_IMU::GetAccelZ() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_accel_z;
 }
 
 double ADIS16448_IMU::GetMagX() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_mag_x;
 }
 
 double ADIS16448_IMU::GetMagY() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_mag_y;
 }
 
 double ADIS16448_IMU::GetMagZ() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_mag_z;
 }
 
 double ADIS16448_IMU::GetPitch() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_pitch;
 }
 
 double ADIS16448_IMU::GetRoll() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_roll;
 }
 
 double ADIS16448_IMU::GetYaw() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_yaw;
 }
 
 double ADIS16448_IMU::GetLastSampleTime() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_last_sample_time;
 }
 
 double ADIS16448_IMU::GetBarometricPressure() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_baro;
 }
 
 double ADIS16448_IMU::GetTemperature() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_temp;
 }
 
 double ADIS16448_IMU::GetQuaternionW() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_ahrs_q1;
 }
 
 double ADIS16448_IMU::GetQuaternionX() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_ahrs_q2;
 }
 
 double ADIS16448_IMU::GetQuaternionY() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_ahrs_q3;
 }
 
 double ADIS16448_IMU::GetQuaternionZ() const {
-  std::lock_guard<priority_mutex> sync(m_mutex);
+  std::lock_guard<std::mutex> sync(m_mutex);
   return m_ahrs_q4;
 }
 
@@ -889,18 +891,28 @@ void ADIS16448_IMU::SetTiltCompYaw(bool enabled) {
 /**
  * {@inheritDoc}
  */
-void ADIS16448_IMU::UpdateTable() {
-  auto table = GetTable();
-  if (table) {
-    table->PutNumber("Value", GetAngle());
-    table->PutNumber("Pitch", GetPitch());
-    table->PutNumber("Roll", GetRoll());
-    table->PutNumber("Yaw", GetYaw());
-    table->PutNumber("AccelX", GetAccelX());
-    table->PutNumber("AccelY", GetAccelY());
-    table->PutNumber("AccelZ", GetAccelZ());
-    table->PutNumber("AngleX", GetAngleX());
-    table->PutNumber("AngleY", GetAngleY());
-    table->PutNumber("AngleZ", GetAngleZ());
-  }
+void ADIS16448_IMU::InitSendable(SendableBuilder& builder) {
+	builder.SetSmartDashboardType("ADIS16448_IMU");
+	auto value = builder.GetEntry("Value").GetHandle();
+	auto pitch = builder.GetEntry("Pitch").GetHandle();
+	auto roll = builder.GetEntry("Roll").GetHandle();
+	auto yaw = builder.GetEntry("Yaw").GetHandle();
+	auto accel_x = builder.GetEntry("AccelX").GetHandle();
+	auto accel_y = builder.GetEntry("AccelY").GetHandle();
+	auto accel_z = builder.GetEntry("AccelZ").GetHandle();
+	auto angle_x = builder.GetEntry("AngleX").GetHandle();
+	auto angle_y = builder.GetEntry("AngleY").GetHandle();
+	auto angle_z = builder.GetEntry("AngleZ").GetHandle();
+	builder.SetUpdateTable([=]() {
+		nt::NetworkTableEntry(value).SetDouble(GetAngle());
+		nt::NetworkTableEntry(pitch).SetDouble(GetPitch());
+		nt::NetworkTableEntry(roll).SetDouble(GetRoll());
+		nt::NetworkTableEntry(yaw).SetDouble(GetYaw());
+		nt::NetworkTableEntry(accel_x).SetDouble(GetAccelX());
+		nt::NetworkTableEntry(accel_y).SetDouble(GetAccelY());
+		nt::NetworkTableEntry(accel_z).SetDouble(GetAccelZ());
+		nt::NetworkTableEntry(angle_x).SetDouble(GetAngleX());
+		nt::NetworkTableEntry(angle_y).SetDouble(GetAngleY());
+		nt::NetworkTableEntry(angle_z).SetDouble(GetAngleZ());
+	});
 }
