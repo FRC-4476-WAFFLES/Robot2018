@@ -19,9 +19,12 @@
 constexpr int drive_left1 = 8;
 constexpr int drive_left2 = 9;
 constexpr int drive_left3 = 7;
-constexpr int drive_right1 = 4;
-constexpr int drive_right2 = 5;
 constexpr int drive_right3 = 6;
+constexpr int drive_right2 = 5;
+constexpr int drive_right1 = 4;
+constexpr int arm_tilt = 3;
+constexpr int intake_tilt = 2;
+
 constexpr int drive_lift_turn = 3;
 constexpr int solenoid_extend = 1;
 constexpr int solenoid_retract = 2;

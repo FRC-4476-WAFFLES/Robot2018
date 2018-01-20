@@ -8,6 +8,7 @@
 #include "OI.h"
 
 class DriveSubsystem;
+class ArmSubsystem;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -21,7 +22,9 @@ public:
 
 	static void InitializeSubsystems();
 
+
 	// Create a single static instance of all of your subsystems
-	static DriveSubsystem& drive();
+	static DriveSubsystem& Drive();
+	static ArmSubsystem& Arm();
 	static OI& oi();
 };

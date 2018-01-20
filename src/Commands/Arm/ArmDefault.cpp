@@ -1,37 +1,35 @@
-#include "AutoDriveForward.h"
-#include "Subsystems/DriveSubsystem.h"
+#include "ArmDefault.h"
 
-
-AutoDriveForward::AutoDriveForward():
-	CommandBase("AutoDriveForward")
+ArmDefault::ArmDefault():
+CommandBase("ArmDefault")
 {
+
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(&Drive());
 }
 
 // Called just before this Command runs the first time
-void AutoDriveForward::Initialize() {
+void ArmDefault::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void AutoDriveForward::Execute() {
-	Drive().drive(0.1, 0.1);
+void ArmDefault::Execute() {
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool AutoDriveForward::IsFinished() {
+bool ArmDefault::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void AutoDriveForward::End() {
-	Drive().drive(0.0, 0.0);
+void ArmDefault::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void AutoDriveForward::Interrupted() {
-	End();
+void ArmDefault::Interrupted() {
+
 }

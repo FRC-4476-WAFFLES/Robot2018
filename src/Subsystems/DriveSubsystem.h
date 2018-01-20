@@ -28,7 +28,7 @@ private:
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
 	DifferentialDrive drive_base;
-	DoubleSolenoid specialturnsolenoid;
-	TalonSRX specialturnmotor;
+	DoubleSolenoid special_turn_solenoid;
+	TalonSRX special_turn_motor;
 
 };

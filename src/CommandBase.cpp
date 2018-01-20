@@ -4,6 +4,7 @@
 #include <Commands/Command.h>
 
 #include "Subsystems/DriveSubsystem.h"
+#include "Subsystems/ArmSubsystem.h"
 
 CommandBase::CommandBase(const std::string& name) :
 		frc::Command(name)
@@ -11,7 +12,7 @@ CommandBase::CommandBase(const std::string& name) :
 
 }
 
-DriveSubsystem& CommandBase::drive() {
+DriveSubsystem& CommandBase::Drive() {
 	static DriveSubsystem subsystem;
 	return subsystem;
 }
@@ -19,4 +20,9 @@ DriveSubsystem& CommandBase::drive() {
 OI& CommandBase::oi() {
 	static OI oi;
 	return oi;
+}
+
+ArmSubsystem& CommandBase::Arm() {
+	static ArmSubsystem subsystem;
+	return subsystem;
 }

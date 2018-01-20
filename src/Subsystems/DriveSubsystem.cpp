@@ -17,11 +17,8 @@ DriveSubsystem::DriveSubsystem() :
 		left(left1, left2, left3),
 		right(right1, right2, right3),
 		drive_base(left, right),
-		specialturnsolenoid(solenoid_extend, solenoid_retract),
-		specialturnmotor(drive_lift_turn)
-
-
-
+		special_turn_solenoid(solenoid_extend, solenoid_retract),
+		special_turn_motor(drive_lift_turn)
 {
 
 }
@@ -32,14 +29,14 @@ void DriveSubsystem::InitDefaultCommand() {
 }
 
 void DriveSubsystem::drive(float left, float right) {
-	specialturnsolenoid.Set(DoubleSolenoid::kReverse);
-	specialturnmotor.Set(ControlMode::PercentOutput, 0);
+	special_turn_solenoid.Set(DoubleSolenoid::kReverse);
+	special_turn_motor.Set(ControlMode::PercentOutput, 0);
 	drive_base.TankDrive(left, right, false);
 }
 
 void DriveSubsystem::special_turn(float direction){
-	specialturnsolenoid.Set(DoubleSolenoid::kForward);
-	specialturnmotor.Set(ControlMode::PercentOutput, direction);
+	special_turn_solenoid.Set(DoubleSolenoid::kForward);
+	special_turn_motor.Set(ControlMode::PercentOutput, direction);
 	drive_base.TankDrive(0, 0, false);
 }
 
