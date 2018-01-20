@@ -12,5 +12,6 @@ private:
 public:
 	IntakeSubsystem();
 	void InitDefaultCommand();
+	void SetIntakeSpeed(double Speed);
 };
 

@@ -15,5 +15,9 @@ void IntakeSubsystem::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
+void IntakeSubsystem::SetIntakeSpeed(double Speed) {
+	intake_motor_1.Set(Speed);
+	intake_motor_2.Set(Speed*-1);
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
