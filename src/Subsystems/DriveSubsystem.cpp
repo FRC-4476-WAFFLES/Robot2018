@@ -17,7 +17,7 @@ DriveSubsystem::DriveSubsystem() :
 		left(left1, left2, left3),
 		right(right1, right2, right3),
 		drive_base(left, right),
-		special_turn_solenoid(solenoid_extend, solenoid_retract),
+		special_turn_solenoid(drive_solenoid_extend, drive_solenoid_retract),
 		special_turn_motor(drive_lift_turn)
 {
 
