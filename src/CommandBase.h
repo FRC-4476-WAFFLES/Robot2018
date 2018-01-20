@@ -9,6 +9,7 @@
 
 class DriveSubsystem;
 class ArmSubsystem;
+class IntakeSubsystem;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -26,5 +27,6 @@ public:
 	// Create a single static instance of all of your subsystems
 	static DriveSubsystem& Drive();
 	static ArmSubsystem& Arm();
+	static IntakeSubsystem& Intake();
 	static OI& oi();
 };

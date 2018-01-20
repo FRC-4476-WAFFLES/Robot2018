@@ -5,6 +5,7 @@
 
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/ArmSubsystem.h"
+#include "Subsystems/IntakeSubsystem.h"
 
 CommandBase::CommandBase(const std::string& name) :
 		frc::Command(name)
@@ -24,5 +25,10 @@ OI& CommandBase::oi() {
 
 ArmSubsystem& CommandBase::Arm() {
 	static ArmSubsystem subsystem;
+	return subsystem;
+}
+
+IntakeSubsystem& CommandBase::Intake() {
+	static IntakeSubsystem subsystem;
 	return subsystem;
 }
