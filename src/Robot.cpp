@@ -70,6 +70,7 @@ public:
 		// this line or comment it out.
 		if (autonomousCommand != nullptr) {
 			autonomousCommand->Cancel();
+
 		}
 	}
 

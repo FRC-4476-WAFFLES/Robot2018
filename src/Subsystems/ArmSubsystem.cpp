@@ -9,9 +9,33 @@ ArmSubsystem::ArmSubsystem() :
 
 }
 
+void ArmSubsystem::SetArmTiltMotorSpeed(float speed) {
+
+}
+
+void ArmSubsystem::SetIntakeTiltMotorSpeed(float speed) {
+
+}
+
 void ArmSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	 SetDefaultCommand(new ArmDefault());
+}
+
+void ArmSubsystem::TiltFudge(double target) {
+
+}
+
+void ArmSubsystem::ScoreHighSetpiont() {
+
+}
+
+void ArmSubsystem::ScoreLowSetpoint() {
+
+}
+
+void ArmSubsystem::HangSetpoint() {
+
 }
 
 // Put methods for controlling this subsystem

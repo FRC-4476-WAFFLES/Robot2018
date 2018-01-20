@@ -16,4 +16,6 @@ public:
 	void ScoreHighSetpiont();
 	void ScoreLowSetpoint();
 	void HangSetpoint();
+	void SetArmTiltMotorSpeed(float speed);
+	void SetIntakeTiltMotorSpeed(float speed);
 };

@@ -1,7 +1,7 @@
-#include "ArmDefault.h"
+#include "HighSetpoint.h"
 
-ArmDefault::ArmDefault():
-	CommandBase("ArmDefault")
+HighSetpoint::HighSetpoint():
+	CommandBase("HighSetpoint")
 {
 	Requires(&Arm());
 	// Use Requires() here to declare subsystem dependencies
@@ -9,28 +9,27 @@ ArmDefault::ArmDefault():
 }
 
 // Called just before this Command runs the first time
-void ArmDefault::Initialize() {
+void HighSetpoint::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ArmDefault::Execute() {
-	Arm().SetArmTiltMotorSpeed(0);
-	Arm().SetIntakeTiltMotorSpeed(0);
+void HighSetpoint::Execute() {
+	Arm().ScoreHighSetpiont();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmDefault::IsFinished() {
+bool HighSetpoint::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void ArmDefault::End() {
+void HighSetpoint::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ArmDefault::Interrupted() {
+void HighSetpoint::Interrupted() {
 
 }

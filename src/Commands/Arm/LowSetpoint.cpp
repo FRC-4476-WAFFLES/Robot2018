@@ -1,7 +1,7 @@
-#include "ArmDefault.h"
+#include "LowSetpoint.h"
 
-ArmDefault::ArmDefault():
-	CommandBase("ArmDefault")
+LowSetpoint::LowSetpoint():
+	CommandBase("LowSetpoint")
 {
 	Requires(&Arm());
 	// Use Requires() here to declare subsystem dependencies
@@ -9,28 +9,27 @@ ArmDefault::ArmDefault():
 }
 
 // Called just before this Command runs the first time
-void ArmDefault::Initialize() {
+void LowSetpoint::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ArmDefault::Execute() {
-	Arm().SetArmTiltMotorSpeed(0);
-	Arm().SetIntakeTiltMotorSpeed(0);
+void LowSetpoint::Execute() {
+	Arm().ScoreLowSetpoint();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmDefault::IsFinished() {
+bool LowSetpoint::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void ArmDefault::End() {
+void LowSetpoint::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ArmDefault::Interrupted() {
+void LowSetpoint::Interrupted() {
 
 }
