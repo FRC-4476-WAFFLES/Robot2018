@@ -1,0 +1,12 @@
+Drive:
+ Drive
+
+Operator:
+ Score high backwards (Activate piston, Move to setpoint)
+ Score high forwards (Activate piston, Move to setpoint)
+ Score low forwards (Activate piston, Move to setpoint)
+ Put intake down (Deactivate piston, Move to setpoint)
+ Intake
+ Outtake (Deactivate pistons)
+
+

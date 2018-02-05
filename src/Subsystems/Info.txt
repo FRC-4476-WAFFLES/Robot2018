@@ -1,0 +1,17 @@
+Drive:
+ 3 drive motors on the left
+ 3 drive motors on the right
+ 2 encoders
+ 1 Gyro
+
+Arm:
+ 1 Motor on pivot
+ 1 Motor on wrist
+ 2 encoders (1 for each)
+
+Intake:
+ 2 Motors on rollers
+ 1 DoubleSolenoid
+ 
+Robot:
+ Compressor
