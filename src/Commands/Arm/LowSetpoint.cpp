@@ -1,4 +1,4 @@
-#include "LowSetpoint.h"
+#include "Commands/Arm/LowSetpoint.h"
 
 LowSetpoint::LowSetpoint():
 	CommandBase("LowSetpoint")
@@ -10,7 +10,8 @@ LowSetpoint::LowSetpoint():
 
 // Called just before this Command runs the first time
 void LowSetpoint::Initialize() {
-	Arm().ScoreLowSetpoint();
+	Arm().SetClamp(true);
+	Arm().SeekTo(Arm().LOW_FORWARD_ARM, Arm().LOW_FORWARD_WRIST);
 }
 
 // Called repeatedly when this Command is scheduled to run

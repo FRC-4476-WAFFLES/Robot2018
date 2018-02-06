@@ -1,4 +1,4 @@
-#include "Commands\Arm\IntakeDown.h"
+#include "Commands/Arm/IntakeDown.h"
 
 IntakeDown::IntakeDown():
 	CommandBase("IntakeDown")
@@ -9,7 +9,8 @@ IntakeDown::IntakeDown():
 
 // Called just before this Command runs the first time
 void IntakeDown::Initialize() {
-	Arm().IntakeDownSetpoint();
+	Arm().SetClamp(false);
+	Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST);
 }
 
 // Called repeatedly when this Command is scheduled to run

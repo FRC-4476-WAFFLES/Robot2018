@@ -10,7 +10,8 @@ HighForwardSetpoint::HighForwardSetpoint():
 
 // Called just before this Command runs the first time
 void HighForwardSetpoint::Initialize() {
-	Arm().ScoreHighForwardSetpiont();
+	Arm().SetClamp(true);
+	Arm().SeekTo(Arm().HIGH_FORWARD_ARM, Arm().HIGH_FORWARD_WRIST);
 }
 
 // Called repeatedly when this Command is scheduled to run

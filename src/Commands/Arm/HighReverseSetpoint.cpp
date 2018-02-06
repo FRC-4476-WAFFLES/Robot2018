@@ -10,7 +10,8 @@ HighReverseSetpoint::HighReverseSetpoint():
 
 // Called just before this Command runs the first time
 void HighReverseSetpoint::Initialize() {
-	Arm().ScoreHighReverseSetpiont();
+	Arm().SetClamp(true);
+	Arm().SeekTo(Arm().HIGH_REVERSE_ARM, Arm().HIGH_REVERSE_WRIST);
 }
 
 // Called repeatedly when this Command is scheduled to run
