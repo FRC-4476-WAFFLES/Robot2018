@@ -26,11 +26,19 @@ void ArmSubsystem::TiltFudge(double target) {
 
 }
 
-void ArmSubsystem::ScoreHighSetpiont() {
+void ArmSubsystem::ScoreHighForwardSetpiont() {
+
+}
+
+void ArmSubsystem::ScoreHighReverseSetpiont() {
 
 }
 
 void ArmSubsystem::ScoreLowSetpoint() {
+
+}
+
+void ArmSubsystem::IntakeDownSetpoint() {
 
 }
 

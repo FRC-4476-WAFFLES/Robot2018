@@ -3,9 +3,9 @@
 #include "CommandBase.h"
 #include "Subsystems/ArmSubsystem.h"
 
-class HighSetpoint : public CommandBase {
+class HighReverseSetpoint : public CommandBase {
 public:
-	HighSetpoint();
+	HighReverseSetpoint();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -1,7 +1,7 @@
-#include "LowSetpoint.h"
+#include <Commands/Arm/HighReverseSetpoint.h>
 
-LowSetpoint::LowSetpoint():
-	CommandBase("LowSetpoint")
+HighReverseSetpoint::HighReverseSetpoint():
+	CommandBase("HighSetpoint")
 {
 	Requires(&Arm());
 	// Use Requires() here to declare subsystem dependencies
@@ -9,27 +9,27 @@ LowSetpoint::LowSetpoint():
 }
 
 // Called just before this Command runs the first time
-void LowSetpoint::Initialize() {
-	Arm().ScoreLowSetpoint();
+void HighReverseSetpoint::Initialize() {
+	Arm().ScoreHighReverseSetpiont();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void LowSetpoint::Execute() {
+void HighReverseSetpoint::Execute() {
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool LowSetpoint::IsFinished() {
+bool HighReverseSetpoint::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void LowSetpoint::End() {
+void HighReverseSetpoint::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void LowSetpoint::Interrupted() {
+void HighReverseSetpoint::Interrupted() {
 
 }

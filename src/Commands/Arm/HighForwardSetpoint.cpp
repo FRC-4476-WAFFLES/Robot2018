@@ -1,6 +1,6 @@
-#include "HighSetpoint.h"
+#include <Commands/Arm/HighForwardSetpoint.h>
 
-HighSetpoint::HighSetpoint():
+HighForwardSetpoint::HighForwardSetpoint():
 	CommandBase("HighSetpoint")
 {
 	Requires(&Arm());
@@ -9,27 +9,27 @@ HighSetpoint::HighSetpoint():
 }
 
 // Called just before this Command runs the first time
-void HighSetpoint::Initialize() {
-
+void HighForwardSetpoint::Initialize() {
+	Arm().ScoreHighForwardSetpiont();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void HighSetpoint::Execute() {
-	Arm().ScoreHighSetpiont();
+void HighForwardSetpoint::Execute() {
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool HighSetpoint::IsFinished() {
+bool HighForwardSetpoint::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void HighSetpoint::End() {
+void HighForwardSetpoint::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void HighSetpoint::Interrupted() {
+void HighForwardSetpoint::Interrupted() {
 
 }

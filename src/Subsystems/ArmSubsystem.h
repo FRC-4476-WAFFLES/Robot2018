@@ -13,8 +13,10 @@ public:
 	ArmSubsystem();
 	void InitDefaultCommand();
 	void TiltFudge(double target);
-	void ScoreHighSetpiont();
+	void ScoreHighForwardSetpiont();
+	void ScoreHighReverseSetpiont();
 	void ScoreLowSetpoint();
+	void IntakeDownSetpoint();
 	void HangSetpoint();
 	void SetArmTiltMotorSpeed(float speed);
 	void SetIntakeTiltMotorSpeed(float speed);
