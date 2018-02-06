@@ -9,33 +9,25 @@ ArmSubsystem::ArmSubsystem() :
 
 }
 
-void ArmSubsystem::SetArmTiltMotorSpeed(float speed) {
+void ArmSubsystem::Periodic() {
 
 }
 
-void ArmSubsystem::SetIntakeTiltMotorSpeed(float speed) {
+void ArmSubsystem::SetUseEncoder(bool useEncoder) {
+
+}
+
+void ArmSubsystem::SetClamp(bool shouldClamp) {
+
+}
+
+void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
 
 }
 
 void ArmSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	 SetDefaultCommand(new ArmDefault());
-}
-
-void ArmSubsystem::TiltFudge(double target) {
-
-}
-
-void ArmSubsystem::ScoreHighSetpiont() {
-
-}
-
-void ArmSubsystem::ScoreLowSetpoint() {
-
-}
-
-void ArmSubsystem::HangSetpoint() {
-
 }
 
 // Put methods for controlling this subsystem
