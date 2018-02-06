@@ -17,6 +17,9 @@ public:
 	void SetUseEncoder(bool useEncoder);
 	void SetClamp(bool shouldClamp);
 	void SeekTo(float armPosition, float wristPosition);
+	float NextArmPosition;
+	float NextWristPosition;
+
 
 	const float INTAKE_ARM = 0;
 	const float INTAKE_WRIST = 0;
@@ -26,4 +29,7 @@ public:
 	const float HIGH_FORWARD_WRIST = 0;
 	const float HIGH_REVERSE_ARM = 0;
 	const float HIGH_REVERSE_WRIST = 0;
+
+	DoubleSolenoid left_intake_solenoid;
+	DoubleSolenoid right_intake_solenoid;
 };

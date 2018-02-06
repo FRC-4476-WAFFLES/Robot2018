@@ -16,7 +16,6 @@ void IntakeStop::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void IntakeStop::Execute() {
 	Intake().SetIntakeSpeed(0.0);
-	Intake().CloseIntake();
 }
 
 // Make this return true when this Command no longer needs to run execute()

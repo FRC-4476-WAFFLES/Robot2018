@@ -4,7 +4,9 @@
 ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
 		arm_tilt_motor(arm_tilt),
-		intake_tilt_motor(intake_tilt)
+		intake_tilt_motor(intake_tilt),
+		left_intake_solenoid(intake_solenoid_extend_1, intake_solenoid_retract_1),
+		right_intake_solenoid(intake_solenoid_extend_2, intake_solenoid_retract_2)
 {
 
 }
@@ -29,11 +31,7 @@ void ArmSubsystem::SetClamp(bool shouldClamp) {
 }
 
 void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
+	NextArmPosition = armPosition;
+	NextWristPosition = wristPosition;
 
 }
-
-
-
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
