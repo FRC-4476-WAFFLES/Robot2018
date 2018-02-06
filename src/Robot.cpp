@@ -6,6 +6,7 @@
 #include <LiveWindow/LiveWindow.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
+#include <Compressor.h>
 
 #include "Commands/Drive/AutoDriveForward.h"
 #include "CommandBase.h"
@@ -17,6 +18,7 @@ public:
 		// chooser.AddObject("My Auto", new MyAutoCommand());
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
+		compressor.get()->SetClosedLoopControl(true);
 	}
 
 	/**
@@ -84,6 +86,7 @@ public:
 private:
 	std::unique_ptr<frc::Command> autonomousCommand;
 	frc::SendableChooser<frc::Command*> chooser;
+	std::unique_ptr<Compressor> compressor;
 };
 
 START_ROBOT_CLASS(Robot)

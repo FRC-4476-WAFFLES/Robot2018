@@ -6,7 +6,9 @@ Operator:
  Score high forwards (Activate piston, Move to setpoint)
  Score low forwards (Activate piston, Move to setpoint)
  Put intake down (Deactivate piston, Move to setpoint)
+ ==LOW PRIORITY==Fold inside while holding cube ( Activate piston, Move to setpoint )
+ Fudge
  Intake
  Outtake (Deactivate pistons)
-
-
+ No encoder mode
+ ==LOWEST PRIORITY== Climbing
