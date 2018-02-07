@@ -4,6 +4,7 @@
 #include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 #include <ctre/Phoenix.h>
 #include "Commands/Arm/ArmDefault.h"
+#include "DoubleSolenoid.h"
 
 class ArmSubsystem : public Subsystem {
 private:
