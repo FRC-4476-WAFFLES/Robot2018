@@ -27,7 +27,7 @@ public:
 	 * the robot is disabled.
 	 */
 	void DisabledInit() override {
-
+		CommandBase::ModeChange();
 	}
 
 	void DisabledPeriodic() override {
@@ -53,6 +53,7 @@ public:
 		else {
 			autonomousCommand.reset(new ExampleCommand());
 		} */
+		CommandBase::ModeChange();
 
 		autonomousCommand.reset(chooser.GetSelected());
 
@@ -72,8 +73,9 @@ public:
 		// this line or comment it out.
 		if (autonomousCommand != nullptr) {
 			autonomousCommand->Cancel();
-
 		}
+
+		CommandBase::ModeChange();
 	}
 
 	void TeleopPeriodic() override {

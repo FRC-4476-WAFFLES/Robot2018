@@ -1,7 +1,6 @@
 #pragma once
 #include <Commands/Subsystem.h>
 #include <Victor.h>
-#include <DoubleSolenoid.h>
 
 class IntakeSubsystem : public Subsystem {
 private:
@@ -10,11 +9,13 @@ private:
 	Victor intake_motor_1;
 	Victor intake_motor_2;
 
+	double speed = 0.0;
 
 public:
 	IntakeSubsystem();
-	void InitDefaultCommand();
-	void SetIntakeSpeed(double Speed);
+	void Periodic();
+	void ModeChange();
 
+	void SetSpeed(double speed);
 };
 

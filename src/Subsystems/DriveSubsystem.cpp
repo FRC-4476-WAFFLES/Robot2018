@@ -8,19 +8,22 @@
 DriveSubsystem::DriveSubsystem() :
 		frc::Subsystem("DriveSubsystem"),
 		gyro(),
-		left1(drive_left1),
-		left2(drive_left2),
-		left3(drive_left3),
-		right1(drive_right1),
-		right2(drive_right2),
-		right3(drive_right3),
+		left1(DRIVE_LEFT1),
+		left2(DRIVE_LEFT2),
+		left3(DRIVE_LEFT3),
+		right1(DRIVE_RIGHT1),
+		right2(DRIVE_RIGHT2),
+		right3(DRIVE_RIGHT3),
 		left(left1, left2, left3),
 		right(right1, right2, right3),
 		drive_base(left, right),
-		special_turn_solenoid(drive_solenoid_extend, drive_solenoid_retract),
-		special_turn_motor(drive_lift_turn)
+		special_turn_solenoid(DRIVE_SOLENOID_EXTEND, DRIVE_SOLENOID_RETRACT),
+		special_turn_motor(DRIVE_LIFT_TURN)
 {
+		AddChild(&drive_base);
+}
 
+void DriveSubsystem::ModeChange() {
 }
 
 void DriveSubsystem::InitDefaultCommand() {

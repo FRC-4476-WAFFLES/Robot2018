@@ -22,11 +22,11 @@ public:
 	explicit CommandBase(const std::string& name);
 
 	static void InitializeSubsystems();
-
+	static void ModeChange();
 
 	// Create a single static instance of all of your subsystems
-	static DriveSubsystem& Drive();
 	static ArmSubsystem& Arm();
+	static DriveSubsystem& Drive();
 	static IntakeSubsystem& Intake();
 	static OI& oi();
 };

@@ -7,9 +7,6 @@ class IntakeStop : public CommandBase {
 public:
 	IntakeStop();
 	void Initialize();
-	void Execute();
-	bool IsFinished();
-	void End();
-	void Interrupted();
+	bool IsFinished() { return true; };
 };
 

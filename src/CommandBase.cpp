@@ -13,6 +13,12 @@ CommandBase::CommandBase(const std::string& name) :
 
 }
 
+void CommandBase::ModeChange() {
+	Arm().ModeChange();
+	Drive().ModeChange();
+	Intake().ModeChange();
+}
+
 DriveSubsystem& CommandBase::Drive() {
 	static DriveSubsystem subsystem;
 	return subsystem;

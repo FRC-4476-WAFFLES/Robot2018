@@ -6,8 +6,5 @@ class IntakeDefault : public CommandBase {
 public:
 	IntakeDefault();
 	void Initialize();
-	void Execute();
-	bool IsFinished();
-	void End();
-	void Interrupted();
+	bool IsFinished() { return true; };
 };

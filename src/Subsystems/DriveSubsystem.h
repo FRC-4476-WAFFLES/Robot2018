@@ -11,13 +11,8 @@
 #include <ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h>
 #include <ctre/phoenix/MotorControl/CAN/WPI_TalonSRX.h>
 #include <ctre/Phoenix.h>
+
 class DriveSubsystem: public frc::Subsystem {
-public:
-	DriveSubsystem();
-	void InitDefaultCommand() override;
-	void drive(float left, float right);
-	void special_turn(float direction);
-	ADIS16448_IMU gyro;
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
@@ -33,4 +28,12 @@ private:
 	DoubleSolenoid special_turn_solenoid;
 	TalonSRX special_turn_motor;
 
+public:
+	DriveSubsystem();
+	void InitDefaultCommand() override;
+	void ModeChange();
+
+	void drive(float left, float right);
+	void special_turn(float direction);
+	ADIS16448_IMU gyro;
 };
