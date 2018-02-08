@@ -36,4 +36,14 @@ constexpr int intake_solenoid_retract_1 = 4;
 constexpr int intake_solenoid_extend_2 = 5;
 constexpr int intake_solenoid_retract_2 = 6;
 
+//digital input
+constexpr int right_drive_encoder_a = 1;
+constexpr int right_drive_encoder_b = 2;
+constexpr int left_drive_encoder_a = 3;
+constexpr int left_drive_encoder_b = 4;
+constexpr int intake_tilt_encoder_a = 5;
+constexpr int intake_tilt_encoder_b = 6;
+constexpr int arm_tilt_encoder_a = 7;
+constexpr int arm_tilt_encoder_b = 8;
+
 
