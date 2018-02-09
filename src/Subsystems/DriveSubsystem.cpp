@@ -7,7 +7,6 @@
 
 DriveSubsystem::DriveSubsystem() :
 		frc::Subsystem("DriveSubsystem"),
-		gyro(),
 		left1(DRIVE_LEFT1),
 		left2(DRIVE_LEFT2),
 		left3(DRIVE_LEFT3),
@@ -18,7 +17,8 @@ DriveSubsystem::DriveSubsystem() :
 		right(right1, right2, right3),
 		drive_base(left, right),
 		special_turn_solenoid(DRIVE_SOLENOID_EXTEND, DRIVE_SOLENOID_RETRACT),
-		special_turn_motor(DRIVE_LIFT_TURN)
+		special_turn_motor(DRIVE_LIFT_TURN),
+		gyro()
 {
 		AddChild(&drive_base);
 }
