@@ -14,7 +14,7 @@ private:
 
 	float NextArmPosition;
 	float NextWristPosition;
-	bool PIDJoystick;
+	bool PIDJoystick = true;
 
 public:
 	ArmSubsystem();
@@ -33,4 +33,5 @@ public:
 	const float HIGH_FORWARD_WRIST = 0;
 	const float HIGH_REVERSE_ARM = 0;
 	const float HIGH_REVERSE_WRIST = 0;
+	bool PIDModeEnabled;
 };

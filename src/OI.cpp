@@ -4,6 +4,7 @@
 #include "Commands/Arm/HighReverseSetpoint.h"
 #include "Commands/Arm/IntakeDown.h"
 #include "Commands/Arm/LowSetpoint.h"
+#include "Commands/Arm/PIDJoystickSwitch.h"
 #include <math.h>
 #include "Buttons/Button.h"
 #include "Buttons/JoystickButton.h"
@@ -25,6 +26,9 @@ OI::OI():
 
 	Button* Lowest = new JoystickButton(&operate, OperatorButton::B);
 	Lowest->WhenReleased(new IntakeDown());
+
+	Button* ArmEncSwitch = new JoystickButton(&operate, OperatorButton::Start);
+	ArmEncSwitch->WhenReleased(new PIDJoystickSwitch());
 }
 
 double OI::ArmFudge() {

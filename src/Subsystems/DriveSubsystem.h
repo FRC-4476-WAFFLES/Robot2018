@@ -7,9 +7,9 @@
 #include <Victor.h>
 #include "CustomSensors/ADIS16448_IMU.h"
 #include <DoubleSolenoid.h>
-#include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 #include <ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h>
 #include <ctre/phoenix/MotorControl/CAN/WPI_TalonSRX.h>
+#include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 #include <ctre/Phoenix.h>
 
 class DriveSubsystem: public frc::Subsystem {

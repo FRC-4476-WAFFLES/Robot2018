@@ -79,6 +79,7 @@ void ArmSubsystem::Periodic() {
 // set true if the sensor should be used
 void ArmSubsystem::SetUseEncoder(bool useEncoder) {
 	PIDJoystick = useEncoder;
+	PIDModeEnabled = useEncoder;
 }
 
 // set the intake open/closed
