@@ -3,6 +3,7 @@
 #include "../RobotMap.h"
 #include "../CommandBase.h"
 #include "../OI.h"
+#include "PIDPreferences.h"
 
 ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
@@ -17,18 +18,12 @@ ArmSubsystem::ArmSubsystem() :
 
 	//---------------------arm pid-----------------------//
 	arm_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
-	arm_motor.Config_kP(0, 0, 10);
-	arm_motor.Config_kI(0, 0, 10);
-	arm_motor.Config_kD(0, 0, 10);
 	AddChild(&arm_motor);
 	arm_motor_slave.SetInverted(true);
 	arm_motor_slave.Follow(arm_motor);
 
 	//--------------------wrist pid----------------------//
 	wrist_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
-	wrist_motor.Config_kP(0, 0, 10);
-	wrist_motor.Config_kI(0, 0, 10);
-	wrist_motor.Config_kD(0, 0, 10);
 	AddChild(&wrist_motor);
 }
 
@@ -38,6 +33,8 @@ void ArmSubsystem::ModeChange() {
 
 // Apply all of the changes and send the commands to the motors.
 void ArmSubsystem::Periodic() {
+	UpdatePID("wrist", wrist_motor, 0.0, 0.0, 0.0, 0.0);
+
 	if(CommandBase::oi().left.GetRawButton(10)) {
 		wrist_motor.SetSelectedSensorPosition(0, 0, 0);
 	}
