@@ -28,12 +28,12 @@ public:
 	void SeekTo(float armPosition, float wristPosition);
 
 	const float INTAKE_ARM = 0;
-	const float INTAKE_WRIST = 0;
+	const float INTAKE_WRIST = 100;
 	const float LOW_FORWARD_ARM = 0;
-	const float LOW_FORWARD_WRIST = 0;
+	const float LOW_FORWARD_WRIST = 963;//for testing
 	const float HIGH_FORWARD_ARM = 0;
-	const float HIGH_FORWARD_WRIST = 0;
+	const float HIGH_FORWARD_WRIST = 356;//for testing
 	const float HIGH_REVERSE_ARM = 0;
-	const float HIGH_REVERSE_WRIST = 0;
+	const float HIGH_REVERSE_WRIST = 100;
 	bool PIDModeEnabled;
 };
