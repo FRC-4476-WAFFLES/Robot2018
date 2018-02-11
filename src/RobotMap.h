@@ -8,19 +8,20 @@
  */
 
 // PWM
-constexpr int DRIVE_LEFT1 = 8;
-constexpr int DRIVE_LEFT2 = 9;
-constexpr int DRIVE_LEFT3 = 7;
-constexpr int DRIVE_RIGHT3 = 6;
-constexpr int DRIVE_RIGHT2 = 5;
-constexpr int DRIVE_RIGHT1 = 4;
+constexpr int DRIVE_LEFT1 = 0;
+constexpr int DRIVE_LEFT2 = 1;
+constexpr int DRIVE_LEFT3 = 2;
+constexpr int DRIVE_RIGHT3 = 3;
+constexpr int DRIVE_RIGHT2 = 4;
+constexpr int DRIVE_RIGHT1 = 5;
 constexpr int DRIVE_LIFT_TURN = 3;
-constexpr int INTAKE1 = 1;
-constexpr int INTAKE2 = 2;
+constexpr int INTAKE1 = 6;
+constexpr int INTAKE2 = 7;
 
 // CAN
-constexpr int ARM_TILT = 2;
-constexpr int INTAKE_TILT = 1;
+constexpr int ARM_TILT_SLAVE = 0;
+constexpr int ARM_TILT = 1;
+constexpr int INTAKE_TILT = 2;
 
 // PCM
 constexpr int DRIVE_SOLENOID_EXTEND = 1;

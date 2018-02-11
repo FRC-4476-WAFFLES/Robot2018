@@ -21,6 +21,8 @@ DriveSubsystem::DriveSubsystem() :
 		gyro()
 {
 		AddChild(&drive_base);
+		right.SetInverted(true);
+		left.SetInverted(true);
 }
 
 void DriveSubsystem::ModeChange() {

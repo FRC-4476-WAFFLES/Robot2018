@@ -7,6 +7,7 @@
 class ArmSubsystem : public Subsystem {
 private:
 	WPI_TalonSRX arm_motor;
+	WPI_VictorSPX arm_motor_slave;
 	WPI_TalonSRX wrist_motor;
 
 	DoubleSolenoid left_intake_solenoid;
@@ -14,7 +15,7 @@ private:
 
 	float NextArmPosition;
 	float NextWristPosition;
-	bool PIDJoystick = true;
+	bool PIDJoystick = false;
 
 public:
 	ArmSubsystem();

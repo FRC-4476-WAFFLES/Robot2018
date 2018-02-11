@@ -3,8 +3,7 @@
 #include <Commands/Subsystem.h>
 #include <Drive/DifferentialDrive.h>
 #include <SpeedControllerGroup.h>
-#include <Spark.h>
-#include <Victor.h>
+#include <VictorSP.h>
 #include "CustomSensors/ADIS16448_IMU.h"
 #include <DoubleSolenoid.h>
 #include <ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h>
@@ -16,12 +15,12 @@ class DriveSubsystem: public frc::Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	WPI_VictorSPX left1;
-	WPI_VictorSPX left2;
-	WPI_VictorSPX left3;
-	WPI_VictorSPX right1;
-	WPI_VictorSPX right2;
-	WPI_VictorSPX right3;
+	VictorSP left1;
+	VictorSP left2;
+	VictorSP left3;
+	VictorSP right1;
+	VictorSP right2;
+	VictorSP right3;
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
 	DifferentialDrive drive_base;
