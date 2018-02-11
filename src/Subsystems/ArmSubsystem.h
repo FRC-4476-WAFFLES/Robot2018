@@ -21,6 +21,7 @@ public:
 	ArmSubsystem();
 	void Periodic();
 	void ModeChange();
+	void Prints();
 
 	void SetUseEncoder(bool useEncoder);
 	void SetClamp(bool shouldClamp);

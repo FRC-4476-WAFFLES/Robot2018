@@ -40,5 +40,5 @@ double OI::WristFudge() {
 }
 
 double OI::IntakeSpeed() {
-	return operate.GetRawAxis(2) - operate.GetRawAxis(3);
+	return operate.GetRawAxis(3) - operate.GetRawAxis(2);
 }

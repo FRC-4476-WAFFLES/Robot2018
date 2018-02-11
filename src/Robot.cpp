@@ -33,6 +33,7 @@ public:
 
 	void DisabledPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
+		CommandBase::Prints();
 	}
 
 	/**
@@ -65,6 +66,7 @@ public:
 
 	void AutonomousPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
+		CommandBase::Prints();
 	}
 
 	void TeleopInit() override {
@@ -81,6 +83,7 @@ public:
 
 	void TeleopPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
+		CommandBase::Prints();
 	}
 
 	void TestPeriodic() override {

@@ -10,6 +10,7 @@
 class DriveSubsystem;
 class ArmSubsystem;
 class IntakeSubsystem;
+class RobotInfo;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -23,10 +24,12 @@ public:
 
 	static void InitializeSubsystems();
 	static void ModeChange();
+	static void Prints();
 
 	// Create a single static instance of all of your subsystems
 	static ArmSubsystem& Arm();
 	static DriveSubsystem& Drive();
 	static IntakeSubsystem& Intake();
+	static RobotInfo& Info();
 	static OI& oi();
 };

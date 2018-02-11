@@ -10,6 +10,7 @@ private:
 	VictorSP intake_motor_2;
 
 	double speed = 0.0;
+	double hasCube = false;
 
 public:
 	IntakeSubsystem();

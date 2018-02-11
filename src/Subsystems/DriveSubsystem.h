@@ -4,7 +4,6 @@
 #include <Drive/DifferentialDrive.h>
 #include <SpeedControllerGroup.h>
 #include <VictorSP.h>
-#include "CustomSensors/ADIS16448_IMU.h"
 #include <DoubleSolenoid.h>
 #include <ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h>
 #include <ctre/phoenix/MotorControl/CAN/WPI_TalonSRX.h>
@@ -34,5 +33,4 @@ public:
 
 	void drive(float left, float right);
 	void special_turn(float direction);
-	ADIS16448_IMU gyro;
 };

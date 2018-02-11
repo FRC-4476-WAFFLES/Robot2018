@@ -17,14 +17,16 @@ ArmSubsystem::ArmSubsystem() :
 
 	//---------------------arm pid-----------------------//
 	arm_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
-	arm_motor.Config_kP(0.1, 0, 10);
+	arm_motor.Config_kP(0, 0, 10);
 	arm_motor.Config_kI(0, 0, 10);
 	arm_motor.Config_kD(0, 0, 10);
 	AddChild(&arm_motor);
+	arm_motor_slave.SetInverted(true);
+	arm_motor_slave.Follow(arm_motor);
 
 	//--------------------wrist pid----------------------//
 	wrist_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
-	wrist_motor.Config_kP(0.1, 0, 10);
+	wrist_motor.Config_kP(0, 0, 10);
 	wrist_motor.Config_kI(0, 0, 10);
 	wrist_motor.Config_kD(0, 0, 10);
 	AddChild(&wrist_motor);
@@ -36,6 +38,10 @@ void ArmSubsystem::ModeChange() {
 
 // Apply all of the changes and send the commands to the motors.
 void ArmSubsystem::Periodic() {
+	if(CommandBase::oi().left.GetRawButton(10)) {
+		wrist_motor.SetSelectedSensorPosition(0, 0, 0);
+	}
+
 	double arm_joy = CommandBase::oi().ArmFudge();
 	double wrist_joy = CommandBase::oi().WristFudge();
 
@@ -54,14 +60,21 @@ void ArmSubsystem::Periodic() {
 		}
 
 		// Go to the target position
-		arm_motor.Set(ControlMode::Position, NextArmPosition);
+		arm_motor.Set(ControlMode::PercentOutput, 0.0);
+		//arm_motor.Set(ControlMode::Position, NextArmPosition);
 		wrist_motor.Set(ControlMode::Position, NextWristPosition);
 
 	} else {
 		// Only fudge works when in manual mode.
-		arm_motor.Set(ControlMode::PercentOutput, arm_joy);
+		arm_motor.Set(ControlMode::PercentOutput, 0.0);
 		wrist_motor.Set(ControlMode::PercentOutput, wrist_joy);
 	}
+
+}
+
+void ArmSubsystem::Prints() {
+	double current_arm = arm_motor.GetSelectedSensorPosition(0);
+	double current_wrist = wrist_motor.GetSelectedSensorPosition(0);
 
 	// Print out useful info
 	{

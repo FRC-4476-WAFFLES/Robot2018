@@ -17,8 +17,7 @@ DriveSubsystem::DriveSubsystem() :
 		right(right1, right2, right3),
 		drive_base(left, right),
 		special_turn_solenoid(DRIVE_SOLENOID_EXTEND, DRIVE_SOLENOID_RETRACT),
-		special_turn_motor(DRIVE_LIFT_TURN),
-		gyro()
+		special_turn_motor(DRIVE_LIFT_TURN)
 {
 		AddChild(&drive_base);
 		right.SetInverted(true);

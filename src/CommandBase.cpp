@@ -6,11 +6,16 @@
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/ArmSubsystem.h"
 #include "Subsystems/IntakeSubsystem.h"
+#include "Subsystems/RobotInfo.h"
 
 CommandBase::CommandBase(const std::string& name) :
 		frc::Command(name)
 {
 
+}
+
+void CommandBase::Prints() {
+	Arm().Prints();
 }
 
 void CommandBase::ModeChange() {
@@ -36,5 +41,10 @@ ArmSubsystem& CommandBase::Arm() {
 
 IntakeSubsystem& CommandBase::Intake() {
 	static IntakeSubsystem subsystem;
+	return subsystem;
+}
+
+RobotInfo& CommandBase::Info() {
+	static RobotInfo subsystem;
 	return subsystem;
 }
