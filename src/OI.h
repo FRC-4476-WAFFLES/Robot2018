@@ -11,10 +11,8 @@ public:
 		Y=4,
 		BumperTopLeft=5,
 		BumperTopRight=6,
-		BumperBottomLeft=7,
-		BumperBottomRight=8,
-		Back=9,
-		Start=10,
+		Back=7,
+		Start=8,
 	};
 	Joystick left;
 	Joystick right;

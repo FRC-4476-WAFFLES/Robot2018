@@ -10,8 +10,8 @@ private:
 	WPI_VictorSPX arm_motor_slave;
 	WPI_TalonSRX wrist_motor;
 
-	DoubleSolenoid left_intake_solenoid;
-	DoubleSolenoid right_intake_solenoid;
+//	DoubleSolenoid left_intake_solenoid;
+//	DoubleSolenoid right_intake_solenoid;
 
 	float NextArmPosition;
 	float NextWristPosition;

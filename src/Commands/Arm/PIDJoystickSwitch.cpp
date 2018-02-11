@@ -10,6 +10,7 @@ PIDJoystickSwitch::PIDJoystickSwitch():
 
 // Called just before this Command runs the first time
 void PIDJoystickSwitch::Initialize() {
+	printf("HERE\n");
 	Arm().SetUseEncoder(!Arm().PIDModeEnabled);
 }
 

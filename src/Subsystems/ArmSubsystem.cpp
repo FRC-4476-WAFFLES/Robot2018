@@ -9,9 +9,9 @@ ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
 		arm_motor(ARM_TILT),
 		arm_motor_slave(ARM_TILT_SLAVE),
-		wrist_motor(INTAKE_TILT),
-		left_intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1),
-		right_intake_solenoid(INTAKE_SOLENOID_EXTEND_2, INTAKE_SOLENOID_RETRACT_2)
+		wrist_motor(INTAKE_TILT)
+		//left_intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1),
+		//right_intake_solenoid(INTAKE_SOLENOID_EXTEND_2, INTAKE_SOLENOID_RETRACT_2)
 {
 	// Don't use PID until a button is pressed
 	PIDJoystick = false;
@@ -21,6 +21,8 @@ ArmSubsystem::ArmSubsystem() :
 	AddChild(&arm_motor);
 	arm_motor_slave.SetInverted(true);
 	arm_motor_slave.Follow(arm_motor);
+	wrist_motor.SetInverted(true);
+	wrist_motor.SetSensorPhase(true);
 
 	//--------------------wrist pid----------------------//
 	wrist_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
@@ -76,11 +78,11 @@ void ArmSubsystem::Prints() {
 	// Print out useful info
 	{
 		SmartDashboard::PutNumber("Arm/Arm/Encoder", current_arm);
-		SmartDashboard::PutNumber("Arm/Arm/Target", current_arm);
+		SmartDashboard::PutNumber("Arm/Arm/Target", NextArmPosition);
 		SmartDashboard::PutNumber("Arm/Arm/Output", arm_motor.GetMotorOutputPercent());
 
 		SmartDashboard::PutNumber("Arm/Wrist/Encoder", current_wrist);
-		SmartDashboard::PutNumber("Arm/Wrist/Target", current_wrist);
+		SmartDashboard::PutNumber("Arm/Wrist/Target", NextWristPosition);
 		SmartDashboard::PutNumber("Arm/Wrist/Output", wrist_motor.GetMotorOutputPercent());
 
 		SmartDashboard::PutBoolean("Arm/UseEncoder", PIDJoystick);
@@ -95,13 +97,13 @@ void ArmSubsystem::SetUseEncoder(bool useEncoder) {
 
 // set the intake open/closed
 void ArmSubsystem::SetClamp(bool shouldClamp) {
-	if(shouldClamp) {
-		left_intake_solenoid.Set(DoubleSolenoid::kForward);
-		right_intake_solenoid.Set(DoubleSolenoid::kForward);
-	} else {
-		left_intake_solenoid.Set(DoubleSolenoid::kReverse);
-		right_intake_solenoid.Set(DoubleSolenoid::kReverse);
-	}
+//	if(shouldClamp) {
+//		left_intake_solenoid.Set(DoubleSolenoid::kForward);
+//		right_intake_solenoid.Set(DoubleSolenoid::kForward);
+//	} else {
+//		left_intake_solenoid.Set(DoubleSolenoid::kReverse);
+//		right_intake_solenoid.Set(DoubleSolenoid::kReverse);
+//	}
 }
 
 // set target
