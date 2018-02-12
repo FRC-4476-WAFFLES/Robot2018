@@ -35,7 +35,7 @@ void ArmSubsystem::ModeChange() {
 
 // Apply all of the changes and send the commands to the motors.
 void ArmSubsystem::Periodic() {
-	UpdatePID("wrist", wrist_motor, 0.0, 0.0, 0.0, 0.0);
+	//UpdatePID("wrist", wrist_motor, 0.0, 0.0, 0.0, 0.0);
 
 	if(CommandBase::oi().left.GetRawButton(10)) {
 		wrist_motor.SetSelectedSensorPosition(0, 0, 0);
@@ -59,13 +59,12 @@ void ArmSubsystem::Periodic() {
 		}
 
 		// Go to the target position
-		arm_motor.Set(ControlMode::PercentOutput, 0.0);
-		//arm_motor.Set(ControlMode::Position, NextArmPosition);
+		arm_motor.Set(ControlMode::Position, NextArmPosition);
 		wrist_motor.Set(ControlMode::Position, NextWristPosition);
 
 	} else {
 		// Only fudge works when in manual mode.
-		arm_motor.Set(ControlMode::PercentOutput, 0.0);
+		arm_motor.Set(ControlMode::PercentOutput, arm_joy);
 		wrist_motor.Set(ControlMode::PercentOutput, wrist_joy);
 	}
 

@@ -32,11 +32,11 @@ OI::OI():
 }
 
 double OI::ArmFudge() {
-	return operate.GetY(Joystick::kLeftHand);
+	return operate.GetRawAxis(1);
 }
 
 double OI::WristFudge() {
-	return operate.GetY(Joystick::kRightHand);
+	return operate.GetRawAxis(5);
 }
 
 double OI::IntakeSpeed() {
