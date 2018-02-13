@@ -3,7 +3,7 @@
 #include "../RobotMap.h"
 #include "../CommandBase.h"
 #include "../OI.h"
-#include "PIDPreferences.h"
+#include "Utils/PIDPreferences.h"
 
 ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
@@ -71,21 +71,16 @@ void ArmSubsystem::Periodic() {
 }
 
 void ArmSubsystem::Prints() {
-	double current_arm = arm_motor.GetSelectedSensorPosition(0);
-	double current_wrist = wrist_motor.GetSelectedSensorPosition(0);
-
 	// Print out useful info
-	{
-		SmartDashboard::PutNumber("Arm/Arm/Encoder", current_arm);
-		SmartDashboard::PutNumber("Arm/Arm/Target", NextArmPosition);
-		SmartDashboard::PutNumber("Arm/Arm/Output", arm_motor.GetMotorOutputPercent());
+	SmartDashboard::PutNumber("Arm/Arm/Encoder", arm_motor.GetSelectedSensorPosition(0));
+	SmartDashboard::PutNumber("Arm/Arm/Target", arm_motor.GetClosedLoopTarget(0));
+	SmartDashboard::PutNumber("Arm/Arm/Output", arm_motor.GetMotorOutputPercent());
 
-		SmartDashboard::PutNumber("Arm/Wrist/Encoder", current_wrist);
-		SmartDashboard::PutNumber("Arm/Wrist/Target", NextWristPosition);
-		SmartDashboard::PutNumber("Arm/Wrist/Output", wrist_motor.GetMotorOutputPercent());
+	SmartDashboard::PutNumber("Arm/Wrist/Encoder", wrist_motor.GetSelectedSensorPosition(0));
+	SmartDashboard::PutNumber("Arm/Wrist/Target", wrist_motor.GetClosedLoopTarget(0));
+	SmartDashboard::PutNumber("Arm/Wrist/Output", wrist_motor.GetMotorOutputPercent());
 
-		SmartDashboard::PutBoolean("Arm/UseEncoder", PIDJoystick);
-	}
+	SmartDashboard::PutBoolean("Arm/UseEncoder", PIDJoystick);
 }
 
 // set true if the sensor should be used
