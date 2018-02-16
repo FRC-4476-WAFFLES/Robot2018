@@ -47,6 +47,7 @@ void ArmSubsystem::Periodic() {
 	double current_arm = arm_motor.GetSelectedSensorPosition(0);
 	double current_wrist = wrist_motor.GetSelectedSensorPosition(0);
 
+
 	if(PIDJoystick) {
 		// Arm fudge
 		if(fabs(arm_joy) > 0.1) {
@@ -59,8 +60,28 @@ void ArmSubsystem::Periodic() {
 		}
 
 		// Go to the target position
-		arm_motor.Set(ControlMode::Position, NextArmPosition);
-		wrist_motor.Set(ControlMode::Position, NextWristPosition);
+		if(WristArmSwitch == 1){
+			wrist_motor.Set(ControlMode::Position, FULL_IN_WRIST);
+			arm_motor.Set(ControlMode::Position, PosWhenSeekToSet_Arm);
+			if(fabs(wrist_motor.GetClosedLoopError(0)) < 20){//check if on target
+				WristArmSwitch = 2;
+			}
+		}else if(WristArmSwitch == 2){
+			wrist_motor.Set(ControlMode::Position, FULL_IN_WRIST);
+			arm_motor.Set(ControlMode::Position, NextArmPosition);
+			if(fabs(arm_motor.GetClosedLoopError(0)) < 20){//check if on target
+					WristArmSwitch = 3;
+			}
+		}else if(WristArmSwitch == 3){
+			arm_motor.Set(ControlMode::Position, NextArmPosition);
+			wrist_motor.Set(ControlMode::Position, NextWristPosition);
+			if(fabs(wrist_motor.GetClosedLoopError(0)) < 20){//check if on target
+					WristArmSwitch = 4;
+			}
+		} else {
+			arm_motor.Set(ControlMode::Position, NextArmPosition);
+			wrist_motor.Set(ControlMode::Position, NextWristPosition);
+		}
 
 	} else {
 		// Only fudge works when in manual mode.
@@ -102,6 +123,9 @@ void ArmSubsystem::SetClamp(bool shouldClamp) {
 
 // set target
 void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
-	NextArmPosition = armPosition;
+	WristArmSwitch = 1;
+	PosWhenSeekToSet_Wrist = wrist_motor.GetSelectedSensorPosition(0);
 	NextWristPosition = wristPosition;
+	PosWhenSeekToSet_Arm = arm_motor.GetSelectedSensorPosition(0);
+	NextArmPosition = armPosition;
 }
