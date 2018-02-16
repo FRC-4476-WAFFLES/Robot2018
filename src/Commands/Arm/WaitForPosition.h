@@ -2,9 +2,9 @@
 
 #include "CommandBase.h"
 
-class AutoDriveForward : public CommandBase {
+class WaitForPosition : public CommandBase {
 public:
-	AutoDriveForward();
+	WaitForPosition();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

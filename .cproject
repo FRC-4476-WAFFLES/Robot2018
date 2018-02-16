@@ -70,18 +70,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751.1081025520" name="/" resourcePath="Lib">
-						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.933461127" name="Cross GCC" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
-							<option id="cdt.managedbuild.option.gnu.cross.prefix.541714056.288125923" name="Prefix" superClass="cdt.managedbuild.option.gnu.cross.prefix.541714056"/>
-							<option id="cdt.managedbuild.option.gnu.cross.path.1246856819.1492006157" name="Path" superClass="cdt.managedbuild.option.gnu.cross.path.1246856819"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.487967660" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler.1261239456"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.650018411" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1505235107"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.1980249736" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker.362679811"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.linker.240589909" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker.1895838080"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.485991297" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver.412234585"/>
-							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.1978014102" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler.1047448065"/>
-						</toolChain>
-					</folderInfo>
 					<sourceEntries>
 						<entry excluding="Lib|src/Commands/Drive/climber.cpp|src/Commands/Drive/climber.h" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>

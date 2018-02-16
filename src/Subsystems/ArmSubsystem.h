@@ -16,7 +16,7 @@ private:
 	float NextArmPosition;
 	float NextWristPosition;
 	bool PIDJoystick = false;
-	int WristArmSwitch = 1;
+
 
 	float PosWhenSeekToSet_Arm = 0;
 	float PosWhenSeekToSet_Wrist = 0;
@@ -41,4 +41,5 @@ public:
 	const float HIGH_REVERSE_WRIST = 100;//for testing
 	const float FULL_IN_WRIST = 100;//for testing
 	bool PIDModeEnabled;
+	int WristArmSwitch = 1;
 };

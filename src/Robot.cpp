@@ -8,7 +8,7 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <Compressor.h>
 
-#include "Commands/Drive/AutoDriveForward.h"
+#include "Commands/Auto/AutoDoNothing.h"
 #include "CommandBase.h"
 
 class Robot: public frc::IterativeRobot {
@@ -16,7 +16,7 @@ public:
 	void RobotInit() override {
 		//compressor = std::make_unique<Compressor>();
 		//compressor.get()->SetClosedLoopControl(true);
-		chooser.AddDefault("Drive Forward", new AutoDriveForward());
+		chooser.AddDefault("Drive Do Nothing", new AutoDoNothing());
 		// chooser.AddObject("My Auto", new MyAutoCommand());
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
