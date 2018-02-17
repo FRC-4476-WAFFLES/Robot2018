@@ -8,5 +8,6 @@ RobotInfo::RobotInfo():
 	position = new SendableChooser<int*>();
 	position->AddObject("Right", new int(0));
 	position->AddObject("Left", new int(1));
+	position->AddDefault("Center", new int(2));
 }
 
