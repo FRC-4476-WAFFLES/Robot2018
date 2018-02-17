@@ -5,6 +5,7 @@
 #include "Commands/Arm/WaitForPosition.h"
 #include "Commands/Arm/LowSetpoint.h"
 #include "Commands/Intake/IntakeOut.h"
+#include "Commands/Intake/IntakeStop.h"
 
 AutoScoreSwitchFromCenter::AutoScoreSwitchFromCenter() {
 	SetTimeout(15.0);
@@ -13,6 +14,7 @@ AutoScoreSwitchFromCenter::AutoScoreSwitchFromCenter() {
 	AddSequential(new WaitForPosition());
 	AddSequential(new IntakeOut());
 	AddSequential(new WaitCommand(3.0));
+	AddSequential(new IntakeStop());
 
 
 }
