@@ -8,28 +8,29 @@
  */
 
 // PWM
-constexpr int DRIVE_LEFT1 = 0;
-constexpr int DRIVE_LEFT2 = 1;
-constexpr int DRIVE_LEFT3 = 2;
-constexpr int DRIVE_RIGHT3 = 3;
-constexpr int DRIVE_RIGHT2 = 4;
-constexpr int DRIVE_RIGHT1 = 5;
-constexpr int DRIVE_LIFT_TURN = 3;
-constexpr int INTAKE1 = 6;
-constexpr int INTAKE2 = 7;
+constexpr int SPARE_1 = 6;
+constexpr int SPARE_2 = 7;
+constexpr int INTAKE1 = 8;
+constexpr int INTAKE2 = 9;
 
 // CAN
-constexpr int ARM_TILT_SLAVE = 0;
-constexpr int ARM_TILT = 1;
-constexpr int INTAKE_TILT = 2;
+constexpr int DRIVE_LEFT1 = 1;//srx
+constexpr int DRIVE_LEFT2 = 1;//spx
+constexpr int DRIVE_LEFT3 = 2;//spx
+constexpr int DRIVE_RIGHT1 = 2;//srx
+constexpr int DRIVE_RIGHT2 = 3;//spx
+constexpr int DRIVE_RIGHT3 = 4;//spx
+//constexpr int DRIVE_LIFT_TURN = 3;
+constexpr int ARM_TILT_SLAVE = 8;//spx
+constexpr int ARM_TILT = 4;//srx
+constexpr int INTAKE_TILT = 3;//srx
+constexpr int SPARE_3 = 9;//spx
 
 // PCM
-constexpr int DRIVE_SOLENOID_EXTEND = 1;
-constexpr int DRIVE_SOLENOID_RETRACT = 2;
+//constexpr int DRIVE_SOLENOID_EXTEND = 1;
+//constexpr int DRIVE_SOLENOID_RETRACT = 2;
 constexpr int INTAKE_SOLENOID_EXTEND_1 = 3;
 constexpr int INTAKE_SOLENOID_RETRACT_1 = 4;
-constexpr int INTAKE_SOLENOID_EXTEND_2 = 5;
-constexpr int INTAKE_SOLENOID_RETRACT_2 = 6;
 
 //DIGITAL INPUT
 constexpr int RIGHT_DRIVE_ENCODER_A = 1;

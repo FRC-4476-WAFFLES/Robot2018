@@ -9,9 +9,8 @@ ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
 		arm_motor(ARM_TILT),
 		arm_motor_slave(ARM_TILT_SLAVE),
-		wrist_motor(INTAKE_TILT)
-		//left_intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1),
-		//right_intake_solenoid(INTAKE_SOLENOID_EXTEND_2, INTAKE_SOLENOID_RETRACT_2)
+		wrist_motor(INTAKE_TILT),
+		intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1)
 {
 	// Don't use PID until a button is pressed
 	PIDJoystick = false;

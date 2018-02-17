@@ -23,8 +23,8 @@ private:
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
 	DifferentialDrive drive_base;
-	DoubleSolenoid special_turn_solenoid;
-	TalonSRX special_turn_motor;
+	//DoubleSolenoid special_turn_solenoid;
+	//TalonSRX special_turn_motor;
 
 public:
 	DriveSubsystem();
@@ -32,5 +32,5 @@ public:
 	void ModeChange();
 
 	void drive(float left, float right);
-	void special_turn(float direction);
+	//void special_turn(float direction);
 };

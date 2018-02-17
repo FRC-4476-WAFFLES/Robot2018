@@ -15,9 +15,9 @@ DriveSubsystem::DriveSubsystem() :
 		right3(DRIVE_RIGHT3),
 		left(left1, left2, left3),
 		right(right1, right2, right3),
-		drive_base(left, right),
-		special_turn_solenoid(DRIVE_SOLENOID_EXTEND, DRIVE_SOLENOID_RETRACT),
-		special_turn_motor(DRIVE_LIFT_TURN)
+		drive_base(left, right)
+		//special_turn_solenoid(DRIVE_SOLENOID_EXTEND, DRIVE_SOLENOID_RETRACT)
+		//special_turn_motor(DRIVE_LIFT_TURN)
 {
 		AddChild(&drive_base);
 		right.SetInverted(true);
@@ -33,16 +33,16 @@ void DriveSubsystem::InitDefaultCommand() {
 }
 
 void DriveSubsystem::drive(float left, float right) {
-	special_turn_solenoid.Set(DoubleSolenoid::kReverse);
-	special_turn_motor.Set(ControlMode::PercentOutput, 0);
+//	special_turn_solenoid.Set(DoubleSolenoid::kReverse);
+	//special_turn_motor.Set(ControlMode::PercentOutput, 0);
 	drive_base.TankDrive(left, right, false);
 }
 
-void DriveSubsystem::special_turn(float direction){
-	special_turn_solenoid.Set(DoubleSolenoid::kForward);
-	special_turn_motor.Set(ControlMode::PercentOutput, direction);
-	drive_base.TankDrive(0, 0, false);
-}
+//void DriveSubsystem::special_turn(float direction){
+//	special_turn_solenoid.Set(DoubleSolenoid::kForward);
+//	//special_turn_motor.Set(ControlMode::PercentOutput, direction);
+//	drive_base.TankDrive(0, 0, false);
+//}
 
 
 // Put methods for controlling this subsystem
