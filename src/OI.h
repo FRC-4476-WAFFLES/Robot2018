@@ -5,9 +5,9 @@
 class OI {
 public:
 	enum OperatorButton {
-		X=1,
-		A=2,
-		B=3,
+		X=3,
+		A=1,
+		B=2,
 		Y=4,
 		BumperTopLeft=5,
 		BumperTopRight=6,

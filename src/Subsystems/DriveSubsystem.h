@@ -14,15 +14,12 @@ class DriveSubsystem: public frc::Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	VictorSP left1;
-	VictorSP left2;
-	VictorSP left3;
-	VictorSP right1;
-	VictorSP right2;
-	VictorSP right3;
-	SpeedControllerGroup left;
-	SpeedControllerGroup right;
-	DifferentialDrive drive_base;
+	WPI_TalonSRX left1;
+	WPI_VictorSPX left2;
+	WPI_VictorSPX left3;
+	WPI_TalonSRX right1;
+	WPI_VictorSPX right2;
+	WPI_VictorSPX right3;
 	//DoubleSolenoid special_turn_solenoid;
 	//TalonSRX special_turn_motor;
 

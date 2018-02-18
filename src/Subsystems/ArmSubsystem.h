@@ -30,15 +30,15 @@ public:
 	void SetClamp(bool shouldClamp);
 	void SeekTo(float armPosition, float wristPosition);
 
-	const float INTAKE_ARM = 0;
-	const float INTAKE_WRIST = 100;//for testing
-	const float LOW_FORWARD_ARM = 0;
-	const float LOW_FORWARD_WRIST = 963;//for testing
-	const float HIGH_FORWARD_ARM = 0;
-	const float HIGH_FORWARD_WRIST = 356;//for testing
-	const float HIGH_REVERSE_ARM = 0;
-	const float HIGH_REVERSE_WRIST = 100;//for testing
-	const float FULL_IN_WRIST = 100;//for testing
+	const float INTAKE_ARM = 21;
+	const float INTAKE_WRIST = -726;
+	const float LOW_FORWARD_ARM = 100;
+	const float LOW_FORWARD_WRIST = -385;
+	const float HIGH_FORWARD_ARM = 713;
+	const float HIGH_FORWARD_WRIST = -1679;//for testing
+	const float HIGH_REVERSE_ARM = 713;
+	const float HIGH_REVERSE_WRIST = -527;//for testing
+	const float FULL_IN_WRIST = 20;
 	bool PIDModeEnabled;
 	int WristArmSwitch = 1;
 };
