@@ -42,6 +42,8 @@ void DriveSubsystem::Prints() {
 	SmartDashboard::PutNumber("Drive/LeftEncoder", Left());
 	SmartDashboard::PutNumber("Drive/RightEncoder", Right());
 	SmartDashboard::PutNumber("Drive/Gyro", Gyro());
+	SmartDashboard::PutNumber("Drive/LeftOutput", left1.GetMotorOutputPercent());
+	SmartDashboard::PutNumber("Drive/RightOutput", right1.GetMotorOutputPercent());
 }
 
 float DriveSubsystem::Left() {

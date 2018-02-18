@@ -41,19 +41,19 @@ void DriveAuto::Execute() {
 	float angle = Drive().Gyro();
 
 	float angle_difference = r2d(left_follower.heading) - angle;
-	float turn = 0.8 * angle_difference;
+	float turn = 0.0; //DriveSubsystem::ANGLE_P * angle_difference;
 
-	Drive().drive(l + turn, r - turn);
+	Drive().drive(l, -r);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveAuto::IsFinished() {
-	return false;
+	return left_follower.finished && right_follower.finished;
 }
 
 // Called once after isFinished returns true
 void DriveAuto::End() {
-
+	Drive().drive(0, 0);
 }
 
 // Called when another command which requires one or more of the same

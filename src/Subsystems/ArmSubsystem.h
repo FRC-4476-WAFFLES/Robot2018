@@ -49,5 +49,5 @@ public:
 	constexpr static float HIGH_LEGAL_LIMIT = 520;
 
 	bool PIDModeEnabled;
-	int WristArmSwitch = 1;
+	int WristArmSwitch = 4;
 };

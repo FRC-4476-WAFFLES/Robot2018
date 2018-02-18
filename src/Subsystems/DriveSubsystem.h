@@ -38,12 +38,12 @@ public:
 	float Left();
 	float Gyro();
 
-	constexpr static float MAX_SPEED = 15.0; // feet/s
-	constexpr static float MAX_ACCEL = 10.0; // feet/s/s
-	constexpr static float MAX_JERK = 60.0; // feet/s/s/s
-	constexpr static float ANGLE_P = 0.8;
+	constexpr static float MAX_SPEED = 10.0; // feet/s
+	constexpr static float MAX_ACCEL = 6.0; // feet/s/s
+	constexpr static float MAX_JERK = 40.0; // feet/s/s/s
+	constexpr static float ANGLE_P = 0.1;
 
-	EncoderConfig left_config = {0, 128, (6.0/12.0)*M_PI, 1.0, 0.0, 0.0, 1.0 / 2.0, 0.0};
-	EncoderConfig right_config = {0, 128, (6.0/12.0)*M_PI, 1.0, 0.0, 0.0, 1.0 / 2.0, 0.0};
+	EncoderConfig left_config = {0, 128, (6.0/12.0)*M_PI, 1.0, 0.0, 0.0, 1.0 / MAX_SPEED, 0.0};
+	EncoderConfig right_config = {0, 128, (6.0/12.0)*M_PI, 1.0, 0.0, 0.0, 1.0 / MAX_SPEED, 0.0};
 	//void special_turn(float direction);
 };
