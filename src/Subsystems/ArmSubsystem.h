@@ -16,11 +16,12 @@ private:
 
 	float NextArmPosition;
 	float NextWristPosition;
-	bool PIDJoystick = false;
+	bool PIDJoystick;
 
 
 	float PosWhenSeekToSet_Arm = 0;
 	float PosWhenSeekToSet_Wrist = 0;
+
 
 public:
 	ArmSubsystem();
@@ -32,17 +33,20 @@ public:
 	void SetClamp(bool shouldClamp);
 	void SeekTo(float armPosition, float wristPosition);
 
-	const float INTAKE_ARM = 27;
-	const float INTAKE_WRIST = -726;
-	const float LOW_FORWARD_ARM = 100;
-	const float LOW_FORWARD_WRIST = -385;
-	const float HIGH_FORWARD_ARM = 713;
-	const float HIGH_FORWARD_WRIST = -1679;
-	const float HIGH_REVERSE_ARM = 713;
-	const float HIGH_REVERSE_WRIST = -527;
-	const float FULL_IN_WRIST = 20;
-	const float SCORE_SCALE_LOW_ARM = 713;
-	const float SCORE_SCALE_LOW_WRIST = 0;
+	constexpr static float INTAKE_ARM = 37;
+	constexpr static float INTAKE_WRIST = -726;
+	constexpr static float LOW_FORWARD_ARM = 110;
+	constexpr static float LOW_FORWARD_WRIST = -368;
+	constexpr static float HIGH_FORWARD_ARM = 713;
+	constexpr static float HIGH_FORWARD_WRIST = -1600;
+	constexpr static float HIGH_REVERSE_ARM = 713;
+	constexpr static float HIGH_REVERSE_WRIST = -527;
+	constexpr static float TRAVEL_WRIST = -368;
+	constexpr static float FULL_IN_WRIST = -20;
+	constexpr static float SCORE_SCALE_LOW_ARM = 713;
+	constexpr static float SCORE_SCALE_LOW_WRIST = -360;
+	constexpr static float LOW_LEGAL_LIMIT = 200;
+	constexpr static float HIGH_LEGAL_LIMIT = 520;
 
 	bool PIDModeEnabled;
 	int WristArmSwitch = 1;

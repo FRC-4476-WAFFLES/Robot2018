@@ -1,8 +1,6 @@
 #include <Subsystems/DriveSubsystem.h>
 #include <Commands/Drive/OperatorTankDrive.h>
-#include <Spark.h>
-#include <Victor.h>
-#include <SpeedController.h>
+#include <SmartDashboard/SmartDashboard.h>
 #include "../RobotMap.h"
 
 DriveSubsystem::DriveSubsystem() :
@@ -16,6 +14,9 @@ DriveSubsystem::DriveSubsystem() :
 		//special_turn_solenoid(DRIVE_SOLENOID_EXTEND, DRIVE_SOLENOID_RETRACT)
 		//special_turn_motor(DRIVE_LIFT_TURN)
 {
+	left1.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
+	right1.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
+
 	right2.Follow(right1);
 	right3.Follow(right1);
 	left2.Follow(left1);
@@ -35,6 +36,24 @@ void DriveSubsystem::drive(float left, float right) {
 	//special_turn_motor.Set(ControlMode::PercentOutput, 0);
 	left1.Set(ControlMode::PercentOutput, -left);
 	right1.Set(ControlMode::PercentOutput, right);
+}
+
+void DriveSubsystem::Prints() {
+	SmartDashboard::PutNumber("Drive/LeftEncoder", Left());
+	SmartDashboard::PutNumber("Drive/RightEncoder", Right());
+	SmartDashboard::PutNumber("Drive/Gyro", Gyro());
+}
+
+float DriveSubsystem::Left() {
+	return left1.GetSelectedSensorPosition(0);
+}
+
+float DriveSubsystem::Right() {
+	return right1.GetSelectedSensorPosition(0);
+}
+
+float DriveSubsystem::Gyro() {
+	return gyro.GetAngle();
 }
 
 //void DriveSubsystem::special_turn(float direction){

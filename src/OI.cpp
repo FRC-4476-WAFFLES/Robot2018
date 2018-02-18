@@ -36,13 +36,15 @@ OI::OI():
 }
 
 double OI::ArmFudge() {
-	return operate.GetRawAxis(1);
+	return -operate.GetRawAxis(1);
 }
 
 double OI::WristFudge() {
-	return operate.GetRawAxis(5);
+	return -operate.GetRawAxis(5);
 }
 
 double OI::IntakeSpeed() {
-	return operate.GetRawAxis(3) - 0.5 * operate.GetRawAxis(2);
+	double in = operate.GetRawAxis(3);
+	double out =  operate.GetRawAxis(2);
+	return in * in - 0.5 * out * out;
 }

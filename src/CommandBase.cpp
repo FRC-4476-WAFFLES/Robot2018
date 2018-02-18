@@ -16,6 +16,7 @@ CommandBase::CommandBase(const std::string& name) :
 
 void CommandBase::Prints() {
 	Arm().Prints();
+	Drive().Prints();
 }
 
 void CommandBase::ModeChange() {

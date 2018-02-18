@@ -9,6 +9,7 @@
 #include <Compressor.h>
 
 #include "Commands/Auto/AutoDoNothing.h"
+#include "Commands/Auto/AutoDriveForward.h"
 #include "CommandBase.h"
 
 class Robot: public frc::IterativeRobot {
@@ -17,7 +18,7 @@ public:
 		compressor = std::make_unique<Compressor>();
 		compressor.get()->SetClosedLoopControl(true);
 		chooser.AddDefault("Drive Do Nothing", new AutoDoNothing());
-		// chooser.AddObject("My Auto", new MyAutoCommand());
+		chooser.AddObject("My Auto", new AutoDriveForward());
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
 	}

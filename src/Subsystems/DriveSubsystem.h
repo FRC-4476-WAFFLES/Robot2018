@@ -9,6 +9,8 @@
 #include <ctre/phoenix/MotorControl/CAN/WPI_TalonSRX.h>
 #include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 #include <ctre/Phoenix.h>
+#include <pathfinder.h>
+#include <ADXRS450_Gyro.h>
 
 class DriveSubsystem: public frc::Subsystem {
 private:
@@ -20,6 +22,7 @@ private:
 	WPI_TalonSRX right1;
 	WPI_VictorSPX right2;
 	WPI_VictorSPX right3;
+	ADXRS450_Gyro gyro;
 	//DoubleSolenoid special_turn_solenoid;
 	//TalonSRX special_turn_motor;
 
@@ -29,5 +32,18 @@ public:
 	void ModeChange();
 
 	void drive(float left, float right);
+	void Prints();
+
+	float Right();
+	float Left();
+	float Gyro();
+
+	constexpr static float MAX_SPEED = 15.0; // feet/s
+	constexpr static float MAX_ACCEL = 10.0; // feet/s/s
+	constexpr static float MAX_JERK = 60.0; // feet/s/s/s
+	constexpr static float ANGLE_P = 0.8;
+
+	EncoderConfig left_config = {0, 128, (6.0/12.0)*M_PI, 1.0, 0.0, 0.0, 1.0 / 2.0, 0.0};
+	EncoderConfig right_config = {0, 128, (6.0/12.0)*M_PI, 1.0, 0.0, 0.0, 1.0 / 2.0, 0.0};
 	//void special_turn(float direction);
 };

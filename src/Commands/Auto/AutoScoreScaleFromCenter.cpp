@@ -7,9 +7,11 @@
 #include "Commands/Arm/LowSetpoint.h"
 #include "Commands/Intake/IntakeOut.h"
 #include "Commands/Intake/IntakeStop.h"
+#include "PathFinder.h"
 
 AutoScoreScaleFromCenter::AutoScoreScaleFromCenter() {
 	SetTimeout(15.0);
+
 	AddSequential(new ScaleState(new DriveAuto("drive and turn Left toward scale"), new DriveAuto("drive and turn Right toward scale")));
 	AddSequential(new LowSetpoint());
 	AddSequential(new WaitForPosition());

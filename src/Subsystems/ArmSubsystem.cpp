@@ -12,17 +12,19 @@ ArmSubsystem::ArmSubsystem() :
 		wrist_motor(INTAKE_TILT),
 		intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1)
 {
-	// Don't use PID until a button is pressed
-	PIDJoystick = false;
+	// Set initial setpoint
+	PIDJoystick = true;
+	NextArmPosition = 0;
+	NextWristPosition = 0;
 
 	//---------------------arm pid-----------------------//
 	arm_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
 	arm_motor.SetSensorPhase(false);
 	arm_motor.SetInverted(false);
 	arm_motor.ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
-	arm_motor.ConfigPeakCurrentLimit(20,10);
+	arm_motor.ConfigPeakCurrentLimit(10,10);
 	arm_motor.ConfigPeakCurrentDuration(30,10);
-	arm_motor.ConfigContinuousCurrentLimit(20,10);
+	arm_motor.ConfigContinuousCurrentLimit(10,10);
 	arm_motor.EnableCurrentLimit(true);
 
 	AddChild(&arm_motor);
@@ -60,7 +62,7 @@ void ArmSubsystem::ModeChange() {
 // Apply all of the changes and send the commands to the motors.
 void ArmSubsystem::Periodic() {
 	UpdatePID("wrist", wrist_motor, 15.0, 0.0, 0.0, 0.0);
-	UpdatePID("arm", arm_motor, 15.0, 0.0, 0.0, 0.0);
+	UpdatePID("arm", arm_motor, 9.0, 0.0, 0.0, 0.0);
 
 	if(CommandBase::oi().left.GetRawButton(10)) {
 	        wrist_motor.SetSelectedSensorPosition(0, 0, 0);
@@ -70,8 +72,16 @@ void ArmSubsystem::Periodic() {
 	double arm_joy = CommandBase::oi().ArmFudge();
 	double wrist_joy = CommandBase::oi().WristFudge();
 
-	double current_arm = arm_motor.GetSelectedSensorPosition(0);
-	double current_wrist = wrist_motor.GetSelectedSensorPosition(0);
+	//double current_arm = arm_motor.GetSelectedSensorPosition(0);
+	//double current_wrist = wrist_motor.GetSelectedSensorPosition(0);
+
+	if(arm_motor.GetSensorCollection().IsRevLimitSwitchClosed()){
+		arm_motor.SetSelectedSensorPosition(0, 0, 0);
+	}
+
+	if(wrist_motor.GetSensorCollection().IsFwdLimitSwitchClosed()){
+		wrist_motor.SetSelectedSensorPosition(0, 0, 0);
+	}
 
 
 	if(PIDJoystick) {
@@ -86,31 +96,33 @@ void ArmSubsystem::Periodic() {
 		}*/
 
 		// Go to the target position
-		/*if(WristArmSwitch == 1){
-			wrist_motor.Set(ControlMode::Position, FULL_IN_WRIST);
+		if(t.Get() < 0.0){
+			arm_motor.Set(ControlMode::PercentOutput, 0.0);
+			wrist_motor.Set(ControlMode::PercentOutput, 0.0);
+		}else if(WristArmSwitch == 1){
+			wrist_motor.Set(ControlMode::Position, TRAVEL_WRIST);
 			arm_motor.Set(ControlMode::Position, PosWhenSeekToSet_Arm);
-			if(fabs(wrist_motor.GetClosedLoopError(0)) < 20){//check if on target
+			if(fabs(wrist_motor.GetSelectedSensorPosition(0) - TRAVEL_WRIST) < 20){//check if on target
 				WristArmSwitch = 2;
 			}
 		}else if(WristArmSwitch == 2){
-			wrist_motor.Set(ControlMode::Position, FULL_IN_WRIST);
+			wrist_motor.Set(ControlMode::Position, TRAVEL_WRIST);
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
-			if(fabs(arm_motor.GetClosedLoopError(0)) < 20){//check if on target
+			float arm_pos = arm_motor.GetSelectedSensorPosition(0);
+			if(fabs(arm_pos - NextArmPosition) < 20 //check if on target
+					|| (arm_pos > HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm <= HIGH_LEGAL_LIMIT && NextArmPosition > HIGH_LEGAL_LIMIT)
+					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT)){
 					WristArmSwitch = 3;
 			}
 		}else if(WristArmSwitch == 3){
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
 			wrist_motor.Set(ControlMode::Position, NextWristPosition);
-			if(fabs(wrist_motor.GetClosedLoopError(0)) < 20){//check if on target
+			if(fabs(wrist_motor.GetSelectedSensorPosition(0) - NextWristPosition) < 20){//check if on target
 					WristArmSwitch = 4;
 			}
-		} else {*/
-		if(t.Get() > 0.5){
+		} else {
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
 			wrist_motor.Set(ControlMode::Position, NextWristPosition);
-		} else {
-			arm_motor.Set(ControlMode::PercentOutput, 0.0);
-			wrist_motor.Set(ControlMode::PercentOutput, 0.0);
 		}
 
 	} else {
@@ -161,9 +173,19 @@ void ArmSubsystem::SetClamp(bool shouldClamp) {
 
 // set target
 void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
-	WristArmSwitch = 4;
 	PosWhenSeekToSet_Wrist = wrist_motor.GetSelectedSensorPosition(0);
-	NextWristPosition = wristPosition;
 	PosWhenSeekToSet_Arm = arm_motor.GetSelectedSensorPosition(0);
+	NextWristPosition = wristPosition;
 	NextArmPosition = armPosition;
+
+	if((NextArmPosition < HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm > LOW_LEGAL_LIMIT) ||
+		(NextArmPosition > LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm < HIGH_LEGAL_LIMIT))
+	{
+		// We need to go in first
+		WristArmSwitch = 1;
+	} else {
+		// We can just go there
+		WristArmSwitch = 4;
+	}
+
 }
