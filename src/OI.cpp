@@ -4,6 +4,7 @@
 #include "Commands/Arm/HighReverseSetpoint.h"
 #include "Commands/Arm/IntakeDown.h"
 #include "Commands/Arm/LowSetpoint.h"
+#include "Commands/Arm/ScoreScaleLow.h"
 #include "Commands/Arm/PIDJoystickSwitch.h"
 #include <math.h>
 #include "Buttons/Button.h"
@@ -29,6 +30,9 @@ OI::OI():
 
 	Button* ArmEncSwitch = new JoystickButton(&operate, OperatorButton::Start);
 	ArmEncSwitch->WhenReleased(new PIDJoystickSwitch());
+
+	Button* LB = new JoystickButton(&operate, OperatorButton::BumperTopLeft);
+	LB->WhenReleased(new ScoreScaleLow);
 }
 
 double OI::ArmFudge() {
@@ -40,5 +44,5 @@ double OI::WristFudge() {
 }
 
 double OI::IntakeSpeed() {
-	return operate.GetRawAxis(3) - operate.GetRawAxis(2);
+	return operate.GetRawAxis(3) - 0.5 * operate.GetRawAxis(2);
 }

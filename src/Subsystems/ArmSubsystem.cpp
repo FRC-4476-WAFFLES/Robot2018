@@ -20,9 +20,9 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor.SetSensorPhase(false);
 	arm_motor.SetInverted(false);
 	arm_motor.ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
-	arm_motor.ConfigPeakCurrentLimit(10,10);
+	arm_motor.ConfigPeakCurrentLimit(20,10);
 	arm_motor.ConfigPeakCurrentDuration(30,10);
-	arm_motor.ConfigContinuousCurrentLimit(10,10);
+	arm_motor.ConfigContinuousCurrentLimit(20,10);
 	arm_motor.EnableCurrentLimit(true);
 
 	AddChild(&arm_motor);
@@ -32,9 +32,9 @@ ArmSubsystem::ArmSubsystem() :
 	wrist_motor.SetInverted(false);
 	wrist_motor.SetSensorPhase(true);
 	wrist_motor.ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
-	wrist_motor.ConfigPeakCurrentLimit(10,10);
+	wrist_motor.ConfigPeakCurrentLimit(20,10);
 	wrist_motor.ConfigPeakCurrentDuration(30,10);
-	wrist_motor.ConfigContinuousCurrentLimit(10,10);
+	wrist_motor.ConfigContinuousCurrentLimit(20,10);
 	wrist_motor.EnableCurrentLimit(true);
 
 
@@ -105,9 +105,13 @@ void ArmSubsystem::Periodic() {
 					WristArmSwitch = 4;
 			}
 		} else {*/
+		if(t.Get() > 0.5){
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
 			wrist_motor.Set(ControlMode::Position, NextWristPosition);
-		//}
+		} else {
+			arm_motor.Set(ControlMode::PercentOutput, 0.0);
+			wrist_motor.Set(ControlMode::PercentOutput, 0.0);
+		}
 
 	} else {
 		// Only fudge works when in manual mode.
@@ -145,6 +149,9 @@ void ArmSubsystem::SetUseEncoder(bool useEncoder) {
 
 // set the intake open/closed
 void ArmSubsystem::SetClamp(bool shouldClamp) {
+	t.Reset();
+	t.Start();
+
 	if(shouldClamp) {
 		intake_solenoid.Set(DoubleSolenoid::kForward);
 	} else {
