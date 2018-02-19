@@ -55,7 +55,7 @@ void DriveAutoLines::Execute() {
 	double angle_d = GetD("drive_angle", 0.0) * ((angle_error - last_angle_error) / time);
 
 	double distance_out = clamp(distance_p + distance_d, -max_speed, max_speed);
-	double angle_out = clamp(angle_p + angle_d, -0.3, 0.3);
+	double angle_out = clamp(angle_p + angle_d, -0.45, 0.45);
 
 	Drive().drive(-distance_out - angle_out, -distance_out + angle_out);
 
@@ -68,7 +68,7 @@ bool DriveAutoLines::IsFinished() {
 	double distance_error = Drive().target_distance - (Drive().Left() + Drive().Right()) / 2.0;
 	double angle_error = Drive().target_angle - Drive().Gyro();
 
-	return fabs(distance_error) < epsilon && fabs(angle_error) < epsilon/4;
+	return fabs(distance_error) < epsilon && fabs(angle_error) < epsilon/8;
 }
 
 // Called once after isFinished returns true

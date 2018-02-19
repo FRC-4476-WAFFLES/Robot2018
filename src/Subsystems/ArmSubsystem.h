@@ -32,7 +32,7 @@ public:
 	bool GetClamp();
 	void SeekTo(float armPosition, float wristPosition);
 
-	constexpr static float INTAKE_ARM = 32;
+	constexpr static float INTAKE_ARM = 28;
 	constexpr static float INTAKE_WRIST = -726;
 	constexpr static float LOW_FORWARD_ARM = 110;
 	constexpr static float LOW_FORWARD_WRIST = -368;

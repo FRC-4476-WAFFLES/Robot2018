@@ -10,5 +10,4 @@ IntakeOut::IntakeOut():
 // Called just before this Command runs the first time
 void IntakeOut::Initialize() {
 	Intake().SetSpeed(-0.5);
-	fprintf(stderr, "starting intake motors...\n");
 }
