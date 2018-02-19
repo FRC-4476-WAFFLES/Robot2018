@@ -9,7 +9,9 @@
 #include "Commands/Intake/IntakeStop.h"
 #include "PathFinder.h"
 
-AutoScoreScaleFromCenter::AutoScoreScaleFromCenter() {
+AutoScoreScaleFromCenter::AutoScoreScaleFromCenter():
+	CommandGroup("AutouScoreScaleFromCenter")
+{
 	SetTimeout(15.0);
 
 	AddSequential(new ScaleState(new DriveAuto("drive and turn Left toward scale"), new DriveAuto("drive and turn Right toward scale")));

@@ -8,7 +8,9 @@
 #include "Commands/Auto/States/PositionState.h"
 #include "Commands/Intake/IntakeStop.h"
 
-AutoScoreSwitchFromSide::AutoScoreSwitchFromSide() {
+AutoScoreSwitchFromSide::AutoScoreSwitchFromSide():
+	CommandGroup("AutoScoreSwitchFromSide")
+{
 	SetTimeout(15.0);
 	AddSequential(new PositionState(new SwitchState(new DriveAuto("drive and turn toward switch"),new DriveAuto("drive")), new SwitchState(new DriveAuto("drive"),new DriveAuto("drive and turn toward switch"))));
 	AddSequential(new LowSetpoint());

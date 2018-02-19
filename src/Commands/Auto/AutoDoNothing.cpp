@@ -1,6 +1,8 @@
 #include <Commands/Auto/AutoDoNothing.h>
 
-AutoDoNothing::AutoDoNothing() {
+AutoDoNothing::AutoDoNothing():
+	CommandGroup("AutoDoNothing")
+{
 	SetTimeout(15.0);
 
 }

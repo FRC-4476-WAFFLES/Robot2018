@@ -24,6 +24,8 @@ DriveSubsystem::DriveSubsystem() :
 }
 
 void DriveSubsystem::ModeChange() {
+	target_distance = (Left() + Right()) / 2.0;
+	target_angle = Gyro();
 }
 
 void DriveSubsystem::InitDefaultCommand() {
@@ -49,7 +51,7 @@ float DriveSubsystem::Left() {
 }
 
 float DriveSubsystem::Right() {
-	return right1.GetSelectedSensorPosition(0);
+	return right1.GetSelectedSensorPosition(0) * 2;
 }
 
 float DriveSubsystem::Gyro() {

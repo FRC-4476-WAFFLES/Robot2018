@@ -6,6 +6,7 @@
 #include "Commands/Arm/LowSetpoint.h"
 #include "Commands/Arm/ScoreScaleLow.h"
 #include "Commands/Arm/PIDJoystickSwitch.h"
+#include "Commands/Arm/ToggleGrab.h"
 #include <math.h>
 #include "Buttons/Button.h"
 #include "Buttons/JoystickButton.h"
@@ -33,6 +34,9 @@ OI::OI():
 
 	Button* LB = new JoystickButton(&operate, OperatorButton::BumperTopLeft);
 	LB->WhenReleased(new ScoreScaleLow);
+
+	Button* RB = new JoystickButton(&operate, OperatorButton::BumperTopRight);
+	RB->WhenReleased(new ToggleGrab);
 }
 
 double OI::ArmFudge() {

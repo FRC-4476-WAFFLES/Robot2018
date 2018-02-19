@@ -1,4 +1,4 @@
-#include "ScaleState.h"
+#include <Commands/Auto/States/ScaleState.h>
 #include "DriverStation.h"
 ScaleState::ScaleState(Command* Left, Command* Right):
 	ConditionalCommand("SwitchState", Left, Right)
