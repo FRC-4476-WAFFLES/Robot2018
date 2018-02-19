@@ -68,7 +68,7 @@ bool DriveAutoLines::IsFinished() {
 	double distance_error = Drive().target_distance - (Drive().Left() + Drive().Right()) / 2.0;
 	double angle_error = Drive().target_angle - Drive().Gyro();
 
-	return fabs(distance_error) < epsilon && fabs(angle_error) < epsilon/8;
+	return fabs(distance_error) < epsilon && fabs(angle_error) < epsilon/5;
 }
 
 // Called once after isFinished returns true
