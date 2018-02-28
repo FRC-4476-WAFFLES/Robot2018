@@ -48,14 +48,17 @@ void DriveAutoLines::Execute() {
 	SmartDashboard::PutNumber("Drive Error", distance_error);
 	SmartDashboard::PutNumber("Angle Error", angle_error);
 
-	double distance_p = GetP("drive_distance", 0.005) * distance_error;
-	double angle_p = GetP("drive_angle", 0.01) * angle_error;
+	double distance_p = GetP("drive_distance", 0.0035) * distance_error;
+	double angle_p = GetP("drive_angle", 0.08) * angle_error;
 
-	double distance_d = GetD("drive_distance", 0.0005) * ((distance_error - last_distance_error) / time);
-	double angle_d = GetD("drive_angle", 0.0) * ((angle_error - last_angle_error) / time);
+	double distance_d = 0;
+	double angle_d = GetD("drive_angle", 0.01) * ((angle_error - last_angle_error) / time);
 
-	double distance_out = clamp(distance_p - distance_d, -max_speed, max_speed);
-	double angle_out = clamp(angle_p - angle_d, -0.45, 0.45);
+	if(fabs(distance) > 0.1) {
+		distance_d = GetD("drive_distance", 0.0006) * ((distance_error - last_distance_error) / time);
+	}
+	double distance_out = clamp(distance_p + distance_d, -max_speed, max_speed);
+	double angle_out = clamp(angle_p + angle_d, -0.45, 0.45);
 
 	Drive().drive(-distance_out - angle_out, -distance_out + angle_out);
 
@@ -68,7 +71,7 @@ bool DriveAutoLines::IsFinished() {
 	double distance_error = Drive().target_distance - (Drive().Left() + Drive().Right()) / 2.0;
 	double angle_error = Drive().target_angle - Drive().Gyro();
 
-	return fabs(distance_error) < epsilon && fabs(angle_error) < epsilon/5;
+	return fabs(distance_error) < epsilon && fabs(angle_error) < epsilon/8;
 }
 
 // Called once after isFinished returns true

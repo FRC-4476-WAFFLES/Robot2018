@@ -49,11 +49,11 @@ void DriveSubsystem::Prints() {
 }
 
 float DriveSubsystem::Left() {
-	return left1.GetSelectedSensorPosition(0);
+	return right1.GetSelectedSensorPosition(0) * 2;
 }
 
 float DriveSubsystem::Right() {
-	return right1.GetSelectedSensorPosition(0) * 2;
+	return left1.GetSelectedSensorPosition(0) * 2;
 }
 
 float DriveSubsystem::Gyro() {

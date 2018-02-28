@@ -62,7 +62,7 @@ void ArmSubsystem::ModeChange() {
 
 // Apply all of the changes and send the commands to the motors.
 void ArmSubsystem::Periodic() {
-	UpdatePID("wrist", wrist_motor, 15.0, 0.0, 0.0, 0.0);
+	UpdatePID("wrist", wrist_motor, 20.0, 0.0, 20.0, 0.0);
 	UpdatePID("arm", arm_motor, 9.0, 0.0, 0.0, 0.0);
 
 	if(CommandBase::oi().left.GetRawButton(10)) {

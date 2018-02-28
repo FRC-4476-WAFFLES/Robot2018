@@ -14,12 +14,12 @@ constexpr int INTAKE1 = 6;
 constexpr int INTAKE2 = 7;
 
 // CAN
-constexpr int DRIVE_RIGHT1 = 1;//srx
-constexpr int DRIVE_RIGHT2 = 1;//spx
-constexpr int DRIVE_RIGHT3 = 2;//spx
-constexpr int DRIVE_LEFT1 = 2;//srx
-constexpr int DRIVE_LEFT2 = 3;//spx
-constexpr int DRIVE_LEFT3 = 4;//spx
+constexpr int DRIVE_RIGHT1 = 2;//srx
+constexpr int DRIVE_RIGHT2 = 3;//spx
+constexpr int DRIVE_RIGHT3 = 4;//spx
+constexpr int DRIVE_LEFT1 = 1;//1srx
+constexpr int DRIVE_LEFT2 = 1;//1spx
+constexpr int DRIVE_LEFT3 = 2;//2spx
 //constexpr int DRIVE_LIFT_TURN = 3;
 constexpr int ARM_TILT_SLAVE = 8;//spx
 constexpr int ARM_TILT = 4;//srx

@@ -18,7 +18,7 @@ AutoDriveForward::AutoDriveForward():
 	CommandGroup("AutoDriveForward")
 {
 	//drive forward
-	AddSequential(new DriveAutoLines(5, 0, 15, 0.8));
+	AddSequential(new DriveAutoLines(10, 0, 15, 0.8));
 
 	//turn
 //  Scale from side
