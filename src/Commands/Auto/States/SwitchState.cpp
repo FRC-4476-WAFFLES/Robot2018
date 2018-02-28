@@ -1,4 +1,4 @@
-#include "SwitchState.h"
+#include <Commands/Auto/States/SwitchState.h>
 #include "DriverStation.h"
 SwitchState::SwitchState(Command* Left, Command* Right):
 	ConditionalCommand("SwitchState", Left, Right)

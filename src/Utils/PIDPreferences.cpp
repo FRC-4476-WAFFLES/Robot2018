@@ -21,3 +21,15 @@ void UpdatePID(std::string name, WPI_TalonSRX &talon, double p, double i, double
 void UpdatePID(std::string name, WPI_TalonSRX &talon) {
 	UpdatePID(name, talon, 0.0, 0.0, 0.0, 0.0);
 }
+
+double GetP(std::string name, double v) {
+	return UpdateSinglePreference(name + " P", v);
+}
+
+double GetI(std::string name, double v) {
+	return UpdateSinglePreference(name + " I", v);
+}
+
+double GetD(std::string name, double v) {
+	return UpdateSinglePreference(name + " D", v);
+}

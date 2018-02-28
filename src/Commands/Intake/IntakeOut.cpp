@@ -9,5 +9,5 @@ IntakeOut::IntakeOut():
 
 // Called just before this Command runs the first time
 void IntakeOut::Initialize() {
-	Intake().SetSpeed(-1.0);
+	Intake().SetSpeed(-0.5);
 }

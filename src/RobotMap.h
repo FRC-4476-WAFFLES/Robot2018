@@ -8,10 +8,10 @@
  */
 
 // PWM
-constexpr int SPARE_1 = 6;
-constexpr int SPARE_2 = 7;
-constexpr int INTAKE1 = 8;
-constexpr int INTAKE2 = 9;
+constexpr int SPARE_1 = 8;
+constexpr int SPARE_2 = 9;
+constexpr int INTAKE1 = 6;
+constexpr int INTAKE2 = 7;
 
 // CAN
 constexpr int DRIVE_RIGHT1 = 1;//srx

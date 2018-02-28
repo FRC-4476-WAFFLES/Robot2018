@@ -57,6 +57,7 @@ ArmSubsystem::ArmSubsystem() :
 
 // Runs when the robot's operating mode changes
 void ArmSubsystem::ModeChange() {
+	WristArmSwitch = 4;
 }
 
 // Apply all of the changes and send the commands to the motors.
@@ -85,15 +86,6 @@ void ArmSubsystem::Periodic() {
 
 
 	if(PIDJoystick) {
-		// Arm fudge
-		/*if(fabs(arm_joy) > 0.1) {
-			NextArmPosition = current_arm + arm_joy;
-		}
-
-		// Wrist fudge
-		if(fabs(wrist_joy) > 0.1) {
-			NextWristPosition = current_wrist + wrist_joy;
-		}*/
 
 		// Go to the target position
 		if(t.Get() < 0.0){
@@ -102,7 +94,7 @@ void ArmSubsystem::Periodic() {
 		}else if(WristArmSwitch == 1){
 			wrist_motor.Set(ControlMode::Position, TRAVEL_WRIST);
 			arm_motor.Set(ControlMode::Position, PosWhenSeekToSet_Arm);
-			if(fabs(wrist_motor.GetSelectedSensorPosition(0) - TRAVEL_WRIST) < 20){//check if on target
+			if(fabs(wrist_motor.GetSelectedSensorPosition(0) - TRAVEL_WRIST) < 40){//check if on target
 				WristArmSwitch = 2;
 			}
 		}else if(WristArmSwitch == 2){
@@ -121,6 +113,16 @@ void ArmSubsystem::Periodic() {
 					WristArmSwitch = 4;
 			}
 		} else {
+			// Arm fudge
+			if(fabs(arm_joy) > 0.1) {
+				NextArmPosition =  arm_motor.GetSelectedSensorPosition(0) + arm_joy * 20.0;
+			}
+
+			// Wrist fudge
+			if(fabs(wrist_joy) > 0.1) {
+				NextWristPosition = wrist_motor.GetSelectedSensorPosition(0) + wrist_joy * 40.0;
+			}
+
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
 			wrist_motor.Set(ControlMode::Position, NextWristPosition);
 		}
@@ -169,6 +171,11 @@ void ArmSubsystem::SetClamp(bool shouldClamp) {
 	} else {
 		intake_solenoid.Set(DoubleSolenoid::kReverse);
 	}
+}
+
+// get the intake open/closed
+bool ArmSubsystem::GetClamp() {
+	return intake_solenoid.Get() == DoubleSolenoid::kForward;
 }
 
 // set target

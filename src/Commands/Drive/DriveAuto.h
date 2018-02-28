@@ -3,6 +3,7 @@
 #include "CommandBase.h"
 #include <vector>
 #include <pathfinder.h>
+
 class DriveAuto : public CommandBase {
 private:
 	std::vector<Waypoint> waypoints;

@@ -9,7 +9,10 @@
 #include "Commands/Auto/States/PositionState.h"
 #include "Commands/Intake/IntakeStop.h"
 
-AutoScoreScaleSwitchFromSide::AutoScoreScaleSwitchFromSide() {
+AutoScoreScaleSwitchFromSide::AutoScoreScaleSwitchFromSide():
+	CommandGroup("AutoScoreScaleFromSIde")
+{
+
 	SetTimeout(15.0);
 	AddSequential(new PositionState(new ScaleState(new DriveAuto("drive and turn toward Scale"),new SwitchState(new DriveAuto("drive and turn toward switch"),new DriveAuto("drive"))),
 			new ScaleState(new SwitchState(new DriveAuto("drive"), new DriveAuto("drive and turn toward switch")), new DriveAuto("drive and turn toward scale"))));

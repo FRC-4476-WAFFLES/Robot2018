@@ -7,18 +7,25 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
 #include <Compressor.h>
+//#include <Commands/Auto/AutoScoreSwitchFromCenter.h>
+#include <Subsystems/ArmSubsystem.h>
 
 #include "Commands/Auto/AutoDoNothing.h"
 #include "Commands/Auto/AutoDriveForward.h"
 #include "CommandBase.h"
+#include "Commands/Auto/AutoDriveTurn.h"
+#include "Commands/Auto/AutoTurn.h"
 
 class Robot: public frc::IterativeRobot {
 public:
 	void RobotInit() override {
 		compressor = std::make_unique<Compressor>();
 		compressor.get()->SetClosedLoopControl(true);
-		chooser.AddDefault("Drive Do Nothing", new AutoDoNothing());
-		chooser.AddObject("My Auto", new AutoDriveForward());
+		chooser.AddDefault("Nothing", &do_nothing);
+		chooser.AddObject("My Auto.drv", &drive_forward);
+		chooser.AddObject("turn", &turn);
+		chooser.AddObject("drive turn", &drive_turn);
+//		chooser.AddObject("Center -> Switch", &score_from_centre);
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
 	}
@@ -56,12 +63,24 @@ public:
 		else {
 			autonomousCommand.reset(new ExampleCommand());
 		} */
+
+		CommandBase::Arm().NextArmPosition = 0;
+		CommandBase::Arm().NextWristPosition = 0;
+		CommandBase::Arm().WristArmSwitch = 4;
+
+		if (autonomousCommand != nullptr) {
+			autonomousCommand->Cancel();
+		}
+
 		CommandBase::ModeChange();
 
-		autonomousCommand.reset(chooser.GetSelected());
+		autonomousCommand = chooser.GetSelected();
 
-		if (autonomousCommand.get() != nullptr) {
+		if (autonomousCommand != nullptr) {
+			fprintf(stderr, "Starting auto %s\n", autonomousCommand->GetName().c_str());
 			autonomousCommand->Start();
+		} else {
+			fprintf(stderr, "No auto\n");
 		}
 	}
 
@@ -91,7 +110,12 @@ public:
 	}
 
 private:
-	std::unique_ptr<frc::Command> autonomousCommand;
+	frc::Command* autonomousCommand;
+	AutoDoNothing do_nothing;
+	AutoDriveForward drive_forward;
+	AutoTurn turn;
+	AutoDriveTurn drive_turn;
+//	AutoScoreSwitchFromCenter score_from_centre;
 	frc::SendableChooser<frc::Command*> chooser;
 	std::unique_ptr<Compressor> compressor;
 };
