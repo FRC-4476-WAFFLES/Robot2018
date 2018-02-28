@@ -54,8 +54,8 @@ void DriveAutoLines::Execute() {
 	double distance_d = GetD("drive_distance", 0.0005) * ((distance_error - last_distance_error) / time);
 	double angle_d = GetD("drive_angle", 0.0) * ((angle_error - last_angle_error) / time);
 
-	double distance_out = clamp(distance_p + distance_d, -max_speed, max_speed);
-	double angle_out = clamp(angle_p + angle_d, -0.45, 0.45);
+	double distance_out = clamp(distance_p - distance_d, -max_speed, max_speed);
+	double angle_out = clamp(angle_p - angle_d, -0.45, 0.45);
 
 	Drive().drive(-distance_out - angle_out, -distance_out + angle_out);
 

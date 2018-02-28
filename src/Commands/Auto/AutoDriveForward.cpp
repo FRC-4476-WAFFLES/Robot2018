@@ -16,6 +16,10 @@
 AutoDriveForward::AutoDriveForward():
 	CommandGroup("AutoDriveForward")
 {
+	//drive forward
+	AddSequential(new DriveAutoLines(5, 0, 15, 0.8));
+
+	//turn
 //  Scale from side
 //	AddSequential(new DriveAutoLines(-5, 0, 150 , 0.9));
 //	AddSequential(new LowSetpoint());
@@ -31,32 +35,32 @@ AutoDriveForward::AutoDriveForward():
 //	AddSequential(new IntakeDown());
 
 //Scla From side 2 Cube
-	AddSequential(new DriveAutoLines(-11, 0, 20 , 0.7));
-	AddSequential(new HighReverseSetpoint());
-	AddSequential(new DriveAutoLines(0, -20));
-	AddSequential(new DriveAutoLines(-11.5, 0, 20, 0.4));
-	AddSequential(new WaitForPosition());
-	AddSequential(new WaitCommand(0.25));
-	AddSequential(new IntakeOut());
-	AddSequential(new WaitCommand(0.5));
-	AddSequential(new IntakeStop()); //drop
-	AddSequential(new WaitForPosition());
-	AddSequential(new IntakeDown());
-	AddSequential(new IntakeIn());
-	AddSequential(new DriveAutoLines(0, 28));
-	AddSequential(new DriveAutoLines(2.5, 0, 20, 0.4));
-	AddSequential(new ToggleGrab());
-	AddSequential(new WaitCommand(0.5));
-	AddSequential(new IntakeStop());//pickup
-	AddSequential(new HighReverseSetpoint());
-	AddSequential(new DriveAutoLines(-2.5, 0));
-	AddSequential(new DriveAutoLines(0, -20));
-	AddSequential(new WaitForPosition());
-	AddSequential(new WaitCommand(0.25));
-	AddSequential(new IntakeOut());
-	AddSequential(new WaitCommand(0.5));
-	AddSequential(new IntakeStop()); //drop
-	AddSequential(new IntakeDown());
+//	AddSequential(new DriveAutoLines(-11, 0, 20 , 0.7));
+//	AddSequential(new HighReverseSetpoint());
+//	AddSequential(new DriveAutoLines(0, -20));
+//	AddSequential(new DriveAutoLines(-11.5, 0, 20, 0.4));
+//	AddSequential(new WaitForPosition());
+//	AddSequential(new WaitCommand(0.25));
+//	AddSequential(new IntakeOut());
+//	AddSequential(new WaitCommand(0.5));
+//	AddSequential(new IntakeStop()); //drop
+//	AddSequential(new WaitForPosition());
+//	AddSequential(new IntakeDown());
+//	AddSequential(new IntakeIn());
+//	AddSequential(new DriveAutoLines(0, 28));
+//	AddSequential(new DriveAutoLines(2.5, 0, 20, 0.4));
+//	AddSequential(new ToggleGrab());
+//	AddSequential(new WaitCommand(0.5));
+//	AddSequential(new IntakeStop());//pickup
+//	AddSequential(new HighReverseSetpoint());
+//	AddSequential(new DriveAutoLines(-2.5, 0));
+//	AddSequential(new DriveAutoLines(0, -20));
+//	AddSequential(new WaitForPosition());
+//	AddSequential(new WaitCommand(0.25));
+//	AddSequential(new IntakeOut());
+//	AddSequential(new WaitCommand(0.5));
+//	AddSequential(new IntakeStop()); //drop
+//	AddSequential(new IntakeDown());
 
 
 
