@@ -1,4 +1,4 @@
-#include <Commands/Auto/AutoScoreScaleFromCenter.h>
+#include <Commands/Auto/ComplicatedAutosToBeFixed/AutoScoreScaleFromCenter.h>
 #include "Commands/Drive/DriveAuto.h"
 #include "Commands/Auto/States/SwitchState.h"
 #include "Commands/Auto/States/ScaleState.h"

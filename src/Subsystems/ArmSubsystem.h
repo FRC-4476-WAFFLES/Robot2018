@@ -49,4 +49,7 @@ public:
 
 	bool PIDModeEnabled;
 	int WristArmSwitch = 4;
+
+	float NextArmPosition = 0;
+	float NextWristPosition = 0;
 };
