@@ -7,21 +7,25 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
 #include <Compressor.h>
-#include <Commands/Auto/AutoScoreSwitchFromCenter.h>
+//#include <Commands/Auto/AutoScoreSwitchFromCenter.h>
 #include <Subsystems/ArmSubsystem.h>
 
 #include "Commands/Auto/AutoDoNothing.h"
 #include "Commands/Auto/AutoDriveForward.h"
 #include "CommandBase.h"
+#include "Commands/Auto/AutoDriveTurn.h"
+#include "Commands/Auto/AutoTurn.h"
 
 class Robot: public frc::IterativeRobot {
 public:
 	void RobotInit() override {
 		compressor = std::make_unique<Compressor>();
 		compressor.get()->SetClosedLoopControl(true);
-		chooser.AddDefault("Drive Do Nothing", &do_nothing);
-		chooser.AddObject("My Auto", &drive_forward);
-		chooser.AddObject("Center -> Switch", &score_from_centre);
+		chooser.AddDefault("Nothing", &do_nothing);
+		chooser.AddObject("My Auto.drv", &drive_forward);
+		chooser.AddObject("turn", &turn);
+		chooser.AddObject("drive turn", &drive_turn);
+//		chooser.AddObject("Center -> Switch", &score_from_centre);
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
 	}
@@ -109,7 +113,9 @@ private:
 	frc::Command* autonomousCommand;
 	AutoDoNothing do_nothing;
 	AutoDriveForward drive_forward;
-	AutoScoreSwitchFromCenter score_from_centre;
+	AutoTurn turn;
+	AutoDriveTurn drive_turn;
+//	AutoScoreSwitchFromCenter score_from_centre;
 	frc::SendableChooser<frc::Command*> chooser;
 	std::unique_ptr<Compressor> compressor;
 };
