@@ -4,13 +4,12 @@
 #include "Commands/Arm/HighReverseSetpoint.h"
 #include "Commands/Arm/IntakeDown.h"
 #include "Commands/Arm/LowSetpoint.h"
-#include "Commands/Arm/ScoreScaleLow.h"
+#include "Commands/Arm/ToggleAlternate.h"
 #include "Commands/Arm/PIDJoystickSwitch.h"
 #include "Commands/Arm/ToggleGrab.h"
 #include <math.h>
 #include "Buttons/Button.h"
 #include "Buttons/JoystickButton.h"
-
 
 OI::OI():
 	left(0),
@@ -33,10 +32,10 @@ OI::OI():
 	ArmEncSwitch->WhenReleased(new PIDJoystickSwitch());
 
 	Button* LB = new JoystickButton(&operate, OperatorButton::BumperTopLeft);
-	LB->WhenReleased(new ScoreScaleLow);
+	LB->WhenReleased(new ToggleAlternate());
 
 	Button* RB = new JoystickButton(&operate, OperatorButton::BumperTopRight);
-	RB->WhenReleased(new ToggleGrab);
+	RB->WhenReleased(new ToggleGrab());
 }
 
 double OI::ArmFudge() {

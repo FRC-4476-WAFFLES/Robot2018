@@ -1,15 +1,15 @@
 #pragma once
-
 #include "CommandBase.h"
 #include "Subsystems/ArmSubsystem.h"
 
-class ScoreScaleLow : public CommandBase {
+class ToggleAlternate : public CommandBase {
 public:
-	ScoreScaleLow();
+	ToggleAlternate();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
 };
+
 

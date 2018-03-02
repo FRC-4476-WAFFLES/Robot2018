@@ -180,10 +180,17 @@ bool ArmSubsystem::GetClamp() {
 
 // set target
 void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
-	PosWhenSeekToSet_Wrist = wrist_motor.GetSelectedSensorPosition(0);
+	SeekTo(armPosition, wristPosition, wristPosition);
+}
+
+// set target with alternate wrist
+void ArmSubsystem::SeekTo(float armPosition, float wristPosition, float alternateWristPosition) {
 	PosWhenSeekToSet_Arm = arm_motor.GetSelectedSensorPosition(0);
-	NextWristPosition = wristPosition;
+	PosWhenSeekToSet_Wrist = wrist_motor.GetSelectedSensorPosition(0);
+
 	NextArmPosition = armPosition;
+	NextWristPosition = wristPosition;
+	AlternateWristPosition = alternateWristPosition;
 
 	if((NextArmPosition < HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm > LOW_LEGAL_LIMIT) ||
 		(NextArmPosition > LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm < HIGH_LEGAL_LIMIT))
@@ -194,5 +201,9 @@ void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
 		// We can just go there
 		WristArmSwitch = 4;
 	}
+}
 
+void ArmSubsystem::ToggleAlternate() {
+	// Swap the wrist position for the alternate wrist position
+	SeekTo(NextArmPosition, AlternateWristPosition, NextWristPosition);
 }
