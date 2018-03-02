@@ -6,6 +6,7 @@ PositionState::PositionState(Command* Left, Command* Right) :
 {
 	SetTimeout(15.0);
 }
+
 bool PositionState::Condition() {
 	if(*CommandBase::Info().position->GetSelected() == 1){
 		return true;

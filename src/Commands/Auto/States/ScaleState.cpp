@@ -10,14 +10,14 @@ ScaleState::ScaleState(Command* Left, Command* Right):
 bool ScaleState::Condition() {
 	std::string gameData;
 	gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-	if(gameData.length() > 0){
+	if(gameData.length() > 1){
 		if(gameData[1] == 'L')
 		{
 			return true;
 		} else {
 			return false;
 		}
-	}else{
+	} else {
 		fprintf(stderr, "no position data available -> ScaleState.cpp \n");
 		return true;
 	}

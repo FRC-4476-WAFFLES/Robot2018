@@ -17,7 +17,7 @@ bool SwitchState::Condition() {
 		} else {
 			return false;
 		}
-	}else{
+	} else {
 		fprintf(stderr, "no position data available -> SwitchState.cpp \n");
 		return true;
 	}

@@ -13,8 +13,8 @@
 #include "Commands/Auto/AutoDoNothing.h"
 #include "Commands/Auto/AutoDriveForward.h"
 #include "CommandBase.h"
-#include "Commands/Auto/AutoDriveTurn.h"
-#include "Commands/Auto/AutoTurn.h"
+#include "Commands/Auto/AutoMiddleToSwitch.h"
+#include "Commands/Auto/AutoSideToSwitchOrScale.h"
 
 class Robot: public frc::IterativeRobot {
 public:
@@ -22,10 +22,9 @@ public:
 		compressor = std::make_unique<Compressor>();
 		compressor.get()->SetClosedLoopControl(true);
 		chooser.AddDefault("Nothing", &do_nothing);
-		chooser.AddObject("My Auto.drv", &drive_forward);
-		chooser.AddObject("turn", &turn);
-		chooser.AddObject("drive turn", &drive_turn);
-//		chooser.AddObject("Center -> Switch", &score_from_centre);
+		chooser.AddObject("DriveForward", &drive_forward);
+		chooser.AddObject("SwitchMiddle", &middle_to_switch);
+		chooser.AddObject("SwitchOrScale", &switch_or_scale);
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
 	}
@@ -113,9 +112,8 @@ private:
 	frc::Command* autonomousCommand;
 	AutoDoNothing do_nothing;
 	AutoDriveForward drive_forward;
-	AutoTurn turn;
-	AutoDriveTurn drive_turn;
-//	AutoScoreSwitchFromCenter score_from_centre;
+	AutoMiddleToSwitch middle_to_switch;
+	AutoSideToSwitchOrScale switch_or_scale;
 	frc::SendableChooser<frc::Command*> chooser;
 	std::unique_ptr<Compressor> compressor;
 };
