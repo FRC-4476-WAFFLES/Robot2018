@@ -11,7 +11,7 @@ LowSetpoint::LowSetpoint():
 // Called just before this Command runs the first time
 void LowSetpoint::Initialize() {
 	Arm().SetClamp(true);
-	Arm().SeekTo(Arm().LOW_FORWARD_ARM, Arm().LOW_FORWARD_WRIST);
+	Arm().SeekTo(Arm().LOW_FORWARD_ARM, Arm().LOW_FORWARD_WRIST, 0);
 }
 
 // Called repeatedly when this Command is scheduled to run

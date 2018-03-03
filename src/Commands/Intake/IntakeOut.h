@@ -5,7 +5,9 @@
 
 class IntakeOut : public CommandBase {
 public:
-	IntakeOut();
+	IntakeOut(): IntakeOut(0.5) {}
+	IntakeOut(double spd);
 	void Initialize();
 	bool IsFinished() { return true; };
+	double speed;
 };

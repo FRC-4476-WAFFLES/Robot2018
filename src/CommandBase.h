@@ -22,7 +22,6 @@ class CommandBase: public frc::Command {
 public:
 	explicit CommandBase(const std::string& name);
 
-	static void InitializeSubsystems();
 	static void ModeChange();
 	static void Prints();
 

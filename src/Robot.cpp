@@ -1,3 +1,4 @@
+#include <Commands/Auto/AutoRightToScale.h>
 #include <memory>
 
 #include <Commands/Command.h>
@@ -15,15 +16,18 @@
 #include "CommandBase.h"
 #include "Commands/Auto/AutoMiddleToSwitch.h"
 #include "Commands/Auto/AutoSideToSwitchOrScale.h"
+#include "Commands/Auto/AutoRightToScale.h"
 #include "Commands/PrintCommand.h"
 #include "Commands/Auto/States/SwitchState.h"
 #include "Commands/Auto/States/ScaleState.h"
 #include "Commands/Auto/States/PositionState.h"
+#include "Commands/Intake/IntakeOut.h"
 
 class Robot: public frc::IterativeRobot {
 public:
 	Robot():
 		IterativeRobot(),
+		test_auto(0.5),
 		switch_print(new PrintCommand("Switch is left\n"), new PrintCommand("Switch is right\n")),
 		scale_print(new PrintCommand("Scale is left\n"), new PrintCommand("Scale is right\n")),
 		position_print(new PrintCommand("Position is left\n"), new PrintCommand("Position is right\n"))
@@ -37,9 +41,13 @@ public:
 		chooser.AddObject("DriveForward", &drive_forward);
 		chooser.AddObject("SwitchMiddle", &middle_to_switch);
 		chooser.AddObject("SwitchOrScale", &switch_or_scale);
+		chooser.AddObject("RightScale", &right_scale);
+		chooser.AddObject("TestAuto", &test_auto);
 
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
+
+		CommandBase::Info();
 	}
 
 	/**
@@ -133,11 +141,13 @@ private:
 	AutoDriveForward drive_forward;
 	AutoMiddleToSwitch middle_to_switch;
 	AutoSideToSwitchOrScale switch_or_scale;
+	AutoRightToScale right_scale;
+
+	IntakeOut test_auto;
 
 	SwitchState switch_print;
 	ScaleState scale_print;
 	PositionState position_print;
-
 
 	frc::SendableChooser<frc::Command*> chooser;
 	std::unique_ptr<Compressor> compressor;

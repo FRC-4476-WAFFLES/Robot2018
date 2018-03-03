@@ -1,13 +1,14 @@
 #include "IntakeOut.h"
 #include "Subsystems/IntakeSubsystem.h"
 
-IntakeOut::IntakeOut():
+IntakeOut::IntakeOut(double spd):
 	CommandBase("IntakeOut")
 {
 	Requires(&Intake());
+	speed = spd;
 }
 
 // Called just before this Command runs the first time
 void IntakeOut::Initialize() {
-	Intake().SetSpeed(-0.5);
+	Intake().SetSpeed(-speed);
 }

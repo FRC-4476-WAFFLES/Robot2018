@@ -32,7 +32,7 @@ public:
 
 		// Score
 		AddSequential(new WaitCommand(0.25));
-		AddSequential(new IntakeOut());
+		AddSequential(new IntakeOut(0.5));
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());
 
@@ -57,7 +57,7 @@ public:
 		// Score
 		AddSequential(new WaitForPosition());
 		AddSequential(new WaitCommand(0.25));
-		AddSequential(new IntakeOut());
+		AddSequential(new IntakeOut(0.5));
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());
 

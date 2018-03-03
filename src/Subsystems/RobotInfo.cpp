@@ -9,6 +9,6 @@ RobotInfo::RobotInfo():
 	position->AddObject("Right", new int(0));
 	position->AddObject("Left", new int(1));
 	position->AddDefault("Center", new int(2));
-	SmartDashboard::PutData(position);
+	SmartDashboard::PutData("Start Position", position);
 }
 
