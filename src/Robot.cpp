@@ -15,9 +15,21 @@
 #include "CommandBase.h"
 #include "Commands/Auto/AutoMiddleToSwitch.h"
 #include "Commands/Auto/AutoSideToSwitchOrScale.h"
+#include "Commands/PrintCommand.h"
+#include "Commands/Auto/States/SwitchState.h"
+#include "Commands/Auto/States/ScaleState.h"
+#include "Commands/Auto/States/PositionState.h"
 
 class Robot: public frc::IterativeRobot {
 public:
+	Robot():
+		IterativeRobot(),
+		switch_print(new PrintCommand("Switch is left\n"), new PrintCommand("Switch is right\n")),
+		scale_print(new PrintCommand("Scale is left\n"), new PrintCommand("Scale is right\n")),
+		position_print(new PrintCommand("Position is left\n"), new PrintCommand("Position is right\n"))
+	{
+	}
+
 	void RobotInit() override {
 		compressor = std::make_unique<Compressor>();
 		compressor.get()->SetClosedLoopControl(true);
@@ -25,6 +37,7 @@ public:
 		chooser.AddObject("DriveForward", &drive_forward);
 		chooser.AddObject("SwitchMiddle", &middle_to_switch);
 		chooser.AddObject("SwitchOrScale", &switch_or_scale);
+
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 		SmartDashboard::PutData(Scheduler::GetInstance());
 	}
@@ -75,6 +88,9 @@ public:
 
 		autonomousCommand = chooser.GetSelected();
 
+		switch_print.Start();
+		scale_print.Start();
+		position_print.Start();
 		if (autonomousCommand != nullptr) {
 			fprintf(stderr, "Starting auto %s\n", autonomousCommand->GetName().c_str());
 			autonomousCommand->Start();
@@ -105,6 +121,9 @@ public:
 		CommandBase::Prints();
 	}
 
+	void TestInit() override {
+	}
+
 	void TestPeriodic() override {
 	}
 
@@ -114,6 +133,12 @@ private:
 	AutoDriveForward drive_forward;
 	AutoMiddleToSwitch middle_to_switch;
 	AutoSideToSwitchOrScale switch_or_scale;
+
+	SwitchState switch_print;
+	ScaleState scale_print;
+	PositionState position_print;
+
+
 	frc::SendableChooser<frc::Command*> chooser;
 	std::unique_ptr<Compressor> compressor;
 };
