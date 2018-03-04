@@ -127,7 +127,7 @@ public:
 	{
 		AddSequential(new DriveAutoLines(-11, 0, 20 , 0.7));
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(0, -20));
+		AddSequential(new DriveAutoLines(0, 20));
 		AddSequential(new DriveAutoLines(-11, 0, 20, 0.4));
 		AddSequential(new WaitForPosition());
 		AddSequential(new WaitCommand(0.25));
