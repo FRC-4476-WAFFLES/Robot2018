@@ -66,7 +66,7 @@ public:
 		AddSequential(new LowSetpoint());
 		AddSequential(new DriveAutoLines(1, 0));
 		AddSequential(new DriveAutoLines(0, 28));
-		AddSequential(new DriveAutoLines(7, 0));
+		AddSequential(new DriveAutoLines(7, 0, 30));
 		AddSequential(new IntakeOut());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());
