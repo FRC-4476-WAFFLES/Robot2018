@@ -9,7 +9,7 @@
 #include <ctre/phoenix/MotorControl/CAN/WPI_TalonSRX.h>
 #include <ctre/phoenix/MotorControl/CAN/TalonSRX.h>
 #include <ctre/Phoenix.h>
-#include <pathfinder.h>
+
 #include <ADXRS450_Gyro.h>
 
 class DriveSubsystem: public frc::Subsystem {
@@ -44,8 +44,8 @@ public:
 	constexpr static float MAX_JERK = 10.0; // feet/s/s/s
 	constexpr static float ANGLE_P = 0.8;
 
-	EncoderConfig left_config = {.initial_position = 0, .ticks_per_revolution = 128, .wheel_circumference = (6.0/12.0)*M_PI, .kp = 0.5, .ki = 0.0, .kd = 0.0, .kv = 1.0/30.0, .ka = 0.0};
-	EncoderConfig right_config = {.initial_position = 0, .ticks_per_revolution = 128, .wheel_circumference = (6.0/12.0)*M_PI, .kp = 0.5, .ki = 0.0, .kd = 0.0, .kv = 1.0/30.0, .ka = 0.0};
+
+
 
 	//void special_turn(float direction);
 

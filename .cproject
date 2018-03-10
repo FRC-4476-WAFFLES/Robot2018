@@ -47,12 +47,8 @@
 								<option id="gnu.cpp.link.option.libs.1363675797" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="CTRE_Phoenix"/>
 									<listOptionValue builtIn="false" value="CTRE_PhoenixCCI"/>
-									<listOptionValue builtIn="false" value="CTRLib"/>
-									<listOptionValue builtIn="false" value="pathfinder"/>
 									<listOptionValue builtIn="false" value="CTRE_Phoenix"/>
 									<listOptionValue builtIn="false" value="CTRE_PhoenixCCI"/>
-									<listOptionValue builtIn="false" value="CTRLib"/>
-									<listOptionValue builtIn="false" value="pathfinder"/>
 									<listOptionValue builtIn="false" value="wpi"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1566479969" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
@@ -72,6 +68,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751.462929411" name="KnownPaths.h" rcbsApplicability="disable" resourcePath="src/Commands/Auto/KnownPaths.h" toolsToInvoke=""/>
 					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751.1639124901" name="/" resourcePath="src/Commands/Auto/ComplicatedAutosToBeFixed">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.217186568" name="Cross GCC" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
 							<option id="cdt.managedbuild.option.gnu.cross.prefix.541714056.219371491" name="Prefix" superClass="cdt.managedbuild.option.gnu.cross.prefix.541714056"/>
@@ -91,8 +88,9 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751.290952599" name="DriveAuto.h" rcbsApplicability="disable" resourcePath="src/Commands/Drive/DriveAuto.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="src/Commands/Auto/ComplicatedAutosToBeFixed" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/Commands/Drive/DriveAuto.h|src/Commands/Drive/DriveAuto.cpp|src/Commands/Auto/KnownPaths.cpp|src/Commands/Auto/KnownPaths.h|src/Commands/Auto/ComplicatedAutosToBeFixed" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

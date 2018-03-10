@@ -2,7 +2,7 @@
 
 #include "CommandBase.h"
 #include <vector>
-#include <pathfinder.h>
+
 #include <Timer.h>
 
 class DriveAutoLines : public CommandBase {
