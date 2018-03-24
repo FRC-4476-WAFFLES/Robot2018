@@ -2,6 +2,7 @@
 
 #include <Commands/Subsystem.h>
 #include <ctre/Phoenix.h>
+#include <AnalogInput.h>
 #include "DoubleSolenoid.h"
 #include "Timer.h"
 
@@ -19,6 +20,9 @@ private:
 
 	float PosWhenSeekToSet_Arm = 0;
 	float PosWhenSeekToSet_Wrist = 0;
+	AnalogInput infrared_sensor;
+	double current_distance_voltage = 0;
+	bool hasCUBE = 0;
 
 public:
 	ArmSubsystem();

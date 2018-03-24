@@ -42,4 +42,7 @@ constexpr int INTAKE_TILT_ENCODER_B = 6;
 constexpr int ARM_TILT_ENCODER_A = 7;
 constexpr int ARM_TILT_ENCODER_B = 8;
 
+//ANALOG INPUT
+constexpr int INFRARED = 0;
+
 

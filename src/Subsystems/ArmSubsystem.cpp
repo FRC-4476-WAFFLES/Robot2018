@@ -10,7 +10,8 @@ ArmSubsystem::ArmSubsystem() :
 		arm_motor(ARM_TILT),
 		arm_motor_slave(ARM_TILT_SLAVE),
 		wrist_motor(INTAKE_TILT),
-		intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1)
+		intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1),
+		infrared_sensor(INFRARED)
 {
 	// Set initial setpoint
 	PIDJoystick = true;
@@ -53,6 +54,9 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor.ConfigSetParameter(ParamEnum::eClearPosOnLimitF, 0, 0, 0, 10);
 	arm_motor.ConfigSetParameter(ParamEnum::eClearPositionOnQuadIdx, 0, 0, 0, 10);
 	arm_motor.OverrideLimitSwitchesEnable(true);
+
+
+
 }
 
 // Runs when the robot's operating mode changes
@@ -64,6 +68,14 @@ void ArmSubsystem::ModeChange() {
 void ArmSubsystem::Periodic() {
 	UpdatePID("wrist", wrist_motor, 20.0, 0.0, 20.0, 0.0);
 	UpdatePID("arm", arm_motor, 9.0, 0.0, 0.0, 0.0);
+
+	current_distance_voltage = infrared_sensor.GetValue();
+	if(current_distance_voltage > 1.8){
+		hasCUBE = true;
+	}else{
+		hasCUBE = false;
+	}
+
 
 	if(CommandBase::oi().left.GetRawButton(10)) {
 	        wrist_motor.SetSelectedSensorPosition(0, 0, 0);
@@ -153,6 +165,8 @@ void ArmSubsystem::Prints() {
 
 	SmartDashboard::PutNumber("arm target", NextArmPosition);
 	SmartDashboard::PutNumber("wrist target", NextWristPosition);
+	SmartDashboard::PutNumber("Arm/Infrared/infrared voltage", current_distance_voltage);
+	SmartDashboard::PutBoolean("/Arm/Infrared/Has Cube?", hasCUBE);
 }
 
 // set true if the sensor should be used
