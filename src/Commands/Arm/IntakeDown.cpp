@@ -1,5 +1,5 @@
 #include "Commands/Arm/IntakeDown.h"
-
+#include "Subsystems/IntakeSubsystem.h"
 IntakeDown::IntakeDown():
 	CommandBase("IntakeDown")
 {
@@ -10,7 +10,14 @@ IntakeDown::IntakeDown():
 // Called just before this Command runs the first time
 void IntakeDown::Initialize() {
 	Arm().SetClamp(false);
-	Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST);
+	if(Intake().is_outtaking){
+		Arm().outtaking = true;
+		Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST, 0);
+	}else{
+		Arm().outtaking = false;
+		Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST, 0);
+	}
+
 }
 
 // Called repeatedly when this Command is scheduled to run

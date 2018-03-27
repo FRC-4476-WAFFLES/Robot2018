@@ -11,4 +11,5 @@ IntakeOut::IntakeOut(double spd):
 // Called just before this Command runs the first time
 void IntakeOut::Initialize() {
 	Intake().SetSpeed(-speed);
+
 }

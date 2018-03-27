@@ -18,5 +18,6 @@ public:
 	void ModeChange();
 
 	void SetSpeed(double speed);
+	bool is_outtaking = false;
 };
 

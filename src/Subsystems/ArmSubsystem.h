@@ -5,6 +5,8 @@
 #include <AnalogInput.h>
 #include "DoubleSolenoid.h"
 #include "Timer.h"
+#include <PowerDistributionPanel.h>
+
 
 class ArmSubsystem : public Subsystem {
 private:
@@ -52,11 +54,17 @@ public:
 	constexpr static float FULL_IN_WRIST = -20;
 	constexpr static float LOW_LEGAL_LIMIT = 200;
 	constexpr static float HIGH_LEGAL_LIMIT = 520;
+	constexpr static float WRIST_EXCHANGE_ZONE = -715;
+
 
 	bool PIDModeEnabled;
 	int WristArmSwitch = 4;
+	bool outtaking = false;
 
 	float NextArmPosition = 0;
 	float NextWristPosition = 0;
+	float NextWristPosition4 = 0;
 	float AlternateWristPosition = 0;
+
+
 };

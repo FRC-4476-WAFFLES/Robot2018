@@ -23,9 +23,9 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor.SetSensorPhase(false);
 	arm_motor.SetInverted(false);
 	arm_motor.ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
-	arm_motor.ConfigPeakCurrentLimit(10,10);
+	arm_motor.ConfigPeakCurrentLimit(30,10);
 	arm_motor.ConfigPeakCurrentDuration(30,10);
-	arm_motor.ConfigContinuousCurrentLimit(10,10);
+	arm_motor.ConfigContinuousCurrentLimit(30,10);
 	arm_motor.EnableCurrentLimit(true);
 
 	AddChild(&arm_motor);
@@ -70,7 +70,7 @@ void ArmSubsystem::Periodic() {
 	UpdatePID("arm", arm_motor, 9.0, 0.0, 0.0, 0.0);
 
 	current_distance_voltage = infrared_sensor.GetValue();
-	if(current_distance_voltage > 1.8){
+	if(current_distance_voltage > 1800 && current_distance_voltage < 3000){
 		hasCUBE = true;
 	}else{
 		hasCUBE = false;
@@ -127,16 +127,22 @@ void ArmSubsystem::Periodic() {
 		} else {
 			// Arm fudge
 			if(fabs(arm_joy) > 0.1) {
-				NextArmPosition =  arm_motor.GetSelectedSensorPosition(0) + arm_joy * 20.0;
+				NextArmPosition =  arm_motor.GetSelectedSensorPosition(0) + arm_joy * 30.0;
 			}
 
 			// Wrist fudge
 			if(fabs(wrist_joy) > 0.1) {
-				NextWristPosition = wrist_motor.GetSelectedSensorPosition(0) + wrist_joy * 40.0;
+				NextWristPosition = wrist_motor.GetSelectedSensorPosition(0) + wrist_joy * 50.0;
+			}
+
+			if(outtaking){
+				NextWristPosition4 = NextWristPosition + 7;
+			}else{
+				NextWristPosition4 = NextWristPosition;
 			}
 
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
-			wrist_motor.Set(ControlMode::Position, NextWristPosition);
+			wrist_motor.Set(ControlMode::Position, NextWristPosition4);
 		}
 
 	} else {
@@ -144,6 +150,7 @@ void ArmSubsystem::Periodic() {
 		arm_motor.Set(ControlMode::PercentOutput, arm_joy);
 		wrist_motor.Set(ControlMode::PercentOutput, wrist_joy);
 	}
+
 
 }
 

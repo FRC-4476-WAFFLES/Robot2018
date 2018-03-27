@@ -35,6 +35,11 @@ void IntakeSubsystem::Periodic() {
 	}
 
 	SmartDashboard::PutBoolean("Has Cube?", hasCube);
+	if(speed < -1){
+		is_outtaking = true;
+	}else{
+		is_outtaking = false;
+	}
 
 }
 
