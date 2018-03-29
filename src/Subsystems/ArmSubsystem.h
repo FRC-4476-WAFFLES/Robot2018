@@ -40,8 +40,8 @@ public:
 	void ToggleAlternate();
 
 // Middle is -1335
-	constexpr static float INTAKE_ARM = 28;
-	constexpr static float INTAKE_WRIST = -726;
+	constexpr static float INTAKE_ARM = 15; //28
+	constexpr static float INTAKE_WRIST = -678;//-726
 	constexpr static float LOW_FORWARD_ARM = 113;
 	constexpr static float LOW_FORWARD_WRIST = -368;
 	constexpr static float HIGH_FORWARD_ARM = 713;

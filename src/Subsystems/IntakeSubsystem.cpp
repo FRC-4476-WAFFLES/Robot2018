@@ -41,6 +41,27 @@ void IntakeSubsystem::Periodic() {
 		is_outtaking = false;
 	}
 
+//	if(OI::A){
+//		held_time.Start();
+//	}else if(OI::B){
+//		held_time.Start();
+//	}else if(OI::X){
+//		held_time.Start();
+//	}else if(OI::Y){
+//		held_time.Start();
+//	}else{
+//		held_time.Stop();
+//		held_time.Reset();
+//	}
+//	if(held_time.Get() > 1000){
+//		held = true;
+//		SetSpeed(0.5);
+//	}else{
+//		held = false;
+//		SetSpeed(0.0);
+//	}
+
+
 }
 
 void IntakeSubsystem::SetSpeed(double newSpeed) {

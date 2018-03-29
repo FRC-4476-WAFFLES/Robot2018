@@ -1,6 +1,7 @@
 #pragma once
 #include <Commands/Subsystem.h>
 #include <VictorSP.h>
+#include <Timer.h>
 
 class IntakeSubsystem : public Subsystem {
 private:
@@ -19,5 +20,7 @@ public:
 
 	void SetSpeed(double speed);
 	bool is_outtaking = false;
+	bool held = false;
+	Timer held_time;
 };
 
