@@ -82,9 +82,11 @@ int main() {
 		
 		while(true) {
 				// Calculate the motor outputs for both the left and right sides
-				double leftEncoderValue = 0.0; // Replace with the reading of the actual encoder value
+				// Replace with the reading of the actual encoder value
+				// Note that this is raw ticks, not rotations. So the /128 thing that DriveSubsystem does won't work.
+				int leftEncoderValue = 0;
 				double l = pathfinder_follow_encoder(leftConfig, &leftFollower, leftTrajectory.data(), leftTrajectory.size(), leftEncoderValue);
-				double rightEncoderValue = 0.0; // Replace with the reading of the actual encoder value
+				int rightEncoderValue = 0; // Replace with the reading of the actual encoder value
 				double r = pathfinder_follow_encoder(rightConfig, &rightFollower, rightTrajectory.data(), rightTrajectory.size(), rightEncoderValue);
 
 				// Then call a function that will set the motors, this is just for testing
