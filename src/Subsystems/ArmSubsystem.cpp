@@ -136,7 +136,11 @@ void ArmSubsystem::Periodic() {
 
 			// Wrist fudge
 			if(fabs(wrist_joy) > 0.1) {
-				NextWristPosition = wrist_motor.GetSelectedSensorPosition(0) + wrist_joy * 50.0;
+				if(wrist_motor.GetSelectedSensorPosition(0) > -1000.0){ //TODO use real values
+					NextWristPosition = wrist_motor.GetSelectedSensorPosition(0) + wrist_joy * 50.0;
+				}else{
+					NextWristPosition = wrist_motor.GetSelectedSensorPosition(0) + wrist_joy * -50.0;
+				}
 			}
 
 			if(outtaking){

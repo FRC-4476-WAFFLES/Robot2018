@@ -42,7 +42,7 @@ int main() {
 		// This will need to be tuned to the robot as well.
 		// This is the distance from one side of the robot's
 		// wheels to the other set of wheels.
-    double wheelbase_width = 0.6;
+    double wheelbase_width = 0.635;
 
     pathfinder_modify_tank(trajectory.data(), length, leftTrajectory.data(), rightTrajectory.data(), wheelbase_width);
 
