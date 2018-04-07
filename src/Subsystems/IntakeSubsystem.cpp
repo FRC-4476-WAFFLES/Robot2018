@@ -34,37 +34,19 @@ void IntakeSubsystem::Periodic() {
 		hasCube = false;
 	}
 
+
 	SmartDashboard::PutBoolean("Has Cube?", hasCube);
 	if(speed < -1){
 		is_outtaking = true;
 	}else{
 		is_outtaking = false;
 	}
-
-//	if(OI::A){
-//		held_time.Start();
-//	}else if(OI::B){
-//		held_time.Start();
-//	}else if(OI::X){
-//		held_time.Start();
-//	}else if(OI::Y){
-//		held_time.Start();
-//	}else{
-//		held_time.Stop();
-//		held_time.Reset();
-//	}
-//	if(held_time.Get() > 1000){
-//		held = true;
-//		SetSpeed(0.5);
-//	}else{
-//		held = false;
-//		SetSpeed(0.0);
-//	}
-
-
 }
 
 void IntakeSubsystem::SetSpeed(double newSpeed) {
 	this->speed = newSpeed;
 }
 
+void IntakeSubsystem::SetOuttakeDistance(double driveSpeed){
+	SetSpeed((20*driveSpeed)/13180);
+}

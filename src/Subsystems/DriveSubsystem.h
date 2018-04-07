@@ -33,6 +33,9 @@ public:
 	float Right();
 	float Left();
 	float Gyro();
+	double GetSpeed();
+	double speed = 0.0;
+
 	WPI_TalonSRX left1;
 	WPI_VictorSPX left2;
 	WPI_VictorSPX left3;
@@ -54,4 +57,5 @@ public:
 
 	double target_distance;
 	double target_angle;
+	double drive_speed_FPS = 0.0;
 };

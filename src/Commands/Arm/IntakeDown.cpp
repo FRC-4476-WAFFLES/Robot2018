@@ -9,15 +9,9 @@ IntakeDown::IntakeDown():
 
 // Called just before this Command runs the first time
 void IntakeDown::Initialize() {
+	Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST, 0);
 	Arm().SetClamp(false);
-	if(Intake().is_outtaking){
-		Arm().outtaking = true;
-		Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST, 0);
-	}else{
-		Arm().outtaking = false;
-		Arm().SeekTo(Arm().INTAKE_ARM, Arm().INTAKE_WRIST, 0);
-	}
-
+	Arm().intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone = true;
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -75,7 +75,11 @@ void ArmSubsystem::Periodic() {
 	}else{
 		hasCUBE = false;
 	}
-
+	if(toggled && intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone){
+		SetClamp(true);
+	}else{
+		SetClamp(false);
+	}
 
 	if(CommandBase::oi().left.GetRawButton(10)) {
 	        wrist_motor.SetSelectedSensorPosition(0, 0, 0);
@@ -202,6 +206,7 @@ bool ArmSubsystem::GetClamp() {
 // set target
 void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
 	SeekTo(armPosition, wristPosition, wristPosition);
+	toggled = false;
 }
 
 // set target with alternate wrist
@@ -226,5 +231,7 @@ void ArmSubsystem::SeekTo(float armPosition, float wristPosition, float alternat
 
 void ArmSubsystem::ToggleAlternate() {
 	// Swap the wrist position for the alternate wrist position
+
 	SeekTo(NextArmPosition, AlternateWristPosition, NextWristPosition);
+	toggled = true;
 }

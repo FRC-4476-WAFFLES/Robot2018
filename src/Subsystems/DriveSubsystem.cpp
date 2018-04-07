@@ -60,6 +60,9 @@ float DriveSubsystem::Gyro() {
 	return gyro.GetAngle();
 }
 
+double DriveSubsystem::GetSpeed() {
+	return speed;
+}
 //void DriveSubsystem::special_turn(float direction){
 //	special_turn_solenoid.Set(DoubleSolenoid::kForward);
 //	//special_turn_motor.Set(ControlMode::PercentOutput, direction);

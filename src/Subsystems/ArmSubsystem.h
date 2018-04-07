@@ -60,6 +60,8 @@ public:
 	bool PIDModeEnabled;
 	int WristArmSwitch = 4;
 	bool outtaking = false;
+	bool toggled = false;
+	bool intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone = false;
 
 	float NextArmPosition = 0;
 	float NextWristPosition = 0;

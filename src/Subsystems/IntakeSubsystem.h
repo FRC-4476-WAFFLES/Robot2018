@@ -17,10 +17,12 @@ public:
 	IntakeSubsystem();
 	void Periodic();
 	void ModeChange();
+	void SetOuttakeDistance(double driveSpeed);
 
 	void SetSpeed(double speed);
 	bool is_outtaking = false;
 	bool held = false;
 	Timer held_time;
+
 };
 

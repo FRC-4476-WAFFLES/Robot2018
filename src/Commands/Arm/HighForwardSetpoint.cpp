@@ -12,6 +12,8 @@ HighForwardSetpoint::HighForwardSetpoint():
 void HighForwardSetpoint::Initialize() {
 	Arm().SetClamp(true);
 	Arm().SeekTo(Arm().HIGH_FORWARD_ARM, Arm().HIGH_FORWARD_WRIST, Arm().HIGH_FORWARD_LOW_WRIST);
+	Arm().intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone = false;
+
 }
 
 // Called repeatedly when this Command is scheduled to run

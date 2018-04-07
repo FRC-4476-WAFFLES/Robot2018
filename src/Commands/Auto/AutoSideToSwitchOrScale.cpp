@@ -1,5 +1,6 @@
 #include "AutoSideToSwitchOrScale.h"
 
+
 #include "Commands/Auto/States/PositionState.h"
 #include "Commands/Auto/States/SwitchState.h"
 #include "Commands/Auto/States/ScaleState.h"
@@ -11,12 +12,14 @@
 #include "Commands/Arm/WaitForPosition.h"
 #include "Commands/Drive/DriveAutoLines.h"
 #include "Commands/WaitCommand.h"
+#include "Commands/Arm/ToggleGrab.h"
 
 class ScoreSwitch: public CommandGroup {
 public:
 	ScoreSwitch():
 		CommandGroup("Score Switch")
 	{
+		AddSequential(new ToggleGrab());
 		// Move wrist up
 		AddSequential(new LowSetpoint());
 

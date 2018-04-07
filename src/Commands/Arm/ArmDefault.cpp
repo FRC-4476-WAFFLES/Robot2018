@@ -1,5 +1,5 @@
 #include "ArmDefault.h"
-
+#include "Subsystems/IntakeSubsystem.h"
 ArmDefault::ArmDefault():
 	CommandBase("ArmDefault")
 {
@@ -15,6 +15,7 @@ void ArmDefault::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ArmDefault::Execute() {
+	Arm().outtaking = Intake().is_outtaking;
 }
 
 // Make this return true when this Command no longer needs to run execute()

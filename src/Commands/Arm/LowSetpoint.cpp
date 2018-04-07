@@ -1,4 +1,5 @@
 #include "Commands/Arm/LowSetpoint.h"
+#include "Subsystems/IntakeSubsystem.h"
 
 LowSetpoint::LowSetpoint():
 	CommandBase("LowSetpoint")
@@ -12,6 +13,7 @@ LowSetpoint::LowSetpoint():
 void LowSetpoint::Initialize() {
 	Arm().SetClamp(true);
 	Arm().SeekTo(Arm().LOW_FORWARD_ARM, Arm().LOW_FORWARD_WRIST, 0);
+	Arm().intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone = false;
 }
 
 // Called repeatedly when this Command is scheduled to run
