@@ -5,3 +5,8 @@ Debug/
 *.autotools
 *.cproject
 .settings/language.settings.xml
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/Robot2018/v15/Browse.VC.db
+.vs/Robot2018/v15/.suo
+.vs/ProjectSettings.json
