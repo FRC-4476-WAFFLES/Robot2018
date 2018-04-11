@@ -98,6 +98,7 @@ public:
 		AddSequential(new IntakeStop()); //drop
 		AddSequential(new IntakeDown());
 		AddSequential(new DriveAutoLines(0, 25));
+		AddSequential(new DriveAutoLines(0, 45));//CHECK THIS BEFORE MATCH
 		AddSequential(new DriveAutoLines(4.8, 0, 20, 0.6));
 	}
 };
