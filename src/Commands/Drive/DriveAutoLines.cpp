@@ -13,7 +13,7 @@ double clamp(double value, double min, double max) {
 	}
 }
 
-DriveAutoLines::DriveAutoLines(double distance, double angle, double epsilon, double speed_max):
+DriveAutoLines::DriveAutoLines(double distance, double angle, double epsilon, double speed_max, bool timed):
 		CommandBase("DriveAutoLines"),
 		distance(distance * 614),
 		angle(angle),
@@ -22,6 +22,7 @@ DriveAutoLines::DriveAutoLines(double distance, double angle, double epsilon, do
 {
 	Requires(&Drive());
 }
+
 
 // Called just before this Command runs the first time
 void DriveAutoLines::Initialize() {
@@ -64,6 +65,7 @@ void DriveAutoLines::Execute() {
 
 	last_angle_error = angle_error;
 	last_distance_error = distance_error;
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

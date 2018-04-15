@@ -1,39 +1,35 @@
-#include "ArmDefault.h"
-#include "Subsystems/IntakeSubsystem.h"
+#include "WaitForCube.h"
 #include "Subsystems/ArmSubsystem.h"
-#include "OI.h"
-#include "SmartDashboard/SmartDashboard.h"
-#include "Subsystems/DriveSubsystem.h"
-ArmDefault::ArmDefault():
-	CommandBase("ArmDefault")
+
+WaitForCube::WaitForCube() :
+		CommandBase("WaitForPosition")
 {
-	Requires(&Arm());
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void ArmDefault::Initialize() {
+void WaitForCube::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ArmDefault::Execute() {
-	Arm().outtaking = Intake().is_outtaking;
+void WaitForCube::Execute() {
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmDefault::IsFinished() {
-	return false;
+bool WaitForCube::IsFinished() {
+	return Arm().hasCUBE;
 }
 
 // Called once after isFinished returns true
-void ArmDefault::End() {
+void WaitForCube::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ArmDefault::Interrupted() {
+void WaitForCube::Interrupted() {
 
 }

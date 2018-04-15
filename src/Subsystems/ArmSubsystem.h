@@ -24,7 +24,7 @@ private:
 	float PosWhenSeekToSet_Wrist = 0;
 	AnalogInput infrared_sensor;
 	double current_distance_voltage = 0;
-	bool hasCUBE = 0;
+
 
 public:
 	ArmSubsystem();
@@ -44,10 +44,10 @@ public:
 	constexpr static float INTAKE_WRIST = -678;//-726
 	constexpr static float LOW_FORWARD_ARM = 113;
 	constexpr static float LOW_FORWARD_WRIST = -368;
-	constexpr static float HIGH_FORWARD_ARM = 713;
+	constexpr static float HIGH_FORWARD_ARM = 672;
 	constexpr static float HIGH_FORWARD_WRIST = -1600;
 	constexpr static float HIGH_FORWARD_LOW_WRIST = -2490;
-	constexpr static float HIGH_REVERSE_ARM = 713;
+	constexpr static float HIGH_REVERSE_ARM = 672;
 	constexpr static float HIGH_REVERSE_WRIST = -535;
 	constexpr static float HIGH_REVERSE_LOW_WRIST = -180;
 	constexpr static float TRAVEL_WRIST = -368;
@@ -67,6 +67,6 @@ public:
 	float NextWristPosition = 0;
 	float NextWristPosition4 = 0;
 	float AlternateWristPosition = 0;
-
+	bool hasCUBE = 0;
 
 };

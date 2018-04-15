@@ -4,6 +4,7 @@
 #include "../CommandBase.h"
 #include "../OI.h"
 #include "Utils/PIDPreferences.h"
+#include "DigitalOutput.h"
 
 ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
@@ -72,22 +73,29 @@ void ArmSubsystem::Periodic() {
 	current_distance_voltage = infrared_sensor.GetValue();
 	if(current_distance_voltage > 1800 && current_distance_voltage < 3000){
 		hasCUBE = true;
+		DigitalOutput(9).Set(true);
 	}else{
 		hasCUBE = false;
 	}
-	if(toggled && intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone){
-		SetClamp(true);
-	}else{
-		SetClamp(false);
-	}
+	DigitalOutput(9).Set(hasCUBE);
+//	if(toggled && intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone){
+//		SetClamp(true);
+////	}else{
+////		SetClamp(false);
+//	}
 
 	if(CommandBase::oi().left.GetRawButton(10)) {
 	        wrist_motor.SetSelectedSensorPosition(0, 0, 0);
 	        arm_motor.SetSelectedSensorPosition(0, 0, 0);
 	}
 
+//	if(CommandBase::oi().Back){
+//        arm_motor.SetSelectedSensorPosition(0, 0, 0);
+//	}
+
 	double arm_joy = CommandBase::oi().ArmFudge();
-	double wrist_joy = CommandBase::oi().WristFudge();
+	double wrist_joy = CommandBase::oi()
+	.WristFudge();
 
 	//double current_arm = arm_motor.GetSelectedSensorPosition(0);
 	//double current_wrist = wrist_motor.GetSelectedSensorPosition(0);

@@ -13,6 +13,8 @@
 #include "Commands/Drive/DriveAutoLines.h"
 #include "Commands/WaitCommand.h"
 #include "Commands/Arm/ToggleGrab.h"
+#include "Commands/Intake/IntakeIn.h"
+#include "Commands/Arm/ToggleAlternate.h"
 
 class ScoreSwitch: public CommandGroup {
 public:
@@ -66,6 +68,43 @@ public:
 
 		// Move the intake back down
 		AddSequential(new IntakeDown());
+
+		//start 3 cube stuff
+		AddSequential(new PositionState(new DriveAutoLines(0, -28), new DriveAutoLines(0, 28)));
+		AddSequential(new PositionState(new DriveAutoLines(2.5, 0, 20, 0.4), new WaitForPosition()));
+		AddSequential(new PositionState(new ToggleGrab(), new DriveAutoLines(3.4, 0, 30, 0.7)));
+		AddSequential(new PositionState(new WaitCommand(0.5), new ToggleGrab()));
+		AddSequential(new IntakeStop());
+		AddSequential(new HighReverseSetpoint());
+		AddSequential(new PositionState(new DriveAutoLines(-2.5, 0), new DriveAutoLines(-3.8, 0, 20, 0.7)));
+		AddSequential(new PositionState(new DriveAutoLines(0, 20), new DriveAutoLines(0, -35)));
+		AddSequential(new WaitForPosition());
+		AddSequential(new ToggleAlternate());
+		AddSequential(new PositionState(new WaitCommand(0.25), new IntakeOut(1)));
+		AddSequential(new PositionState(new IntakeOut(), new WaitCommand(0.05)));
+		AddSequential(new PositionState(new WaitCommand(0.5), new IntakeOut(0.3)));
+		AddSequential(new PositionState(new IntakeStop(), new WaitCommand(0.25)));
+		AddSequential(new PositionState(new IntakeDown(), new IntakeStop()));
+		AddSequential(new PositionState(new DriveAutoLines(0, -35), new IntakeDown()));
+		AddSequential(new PositionState(new WaitForPosition(), new ToggleGrab()));
+		AddSequential(new PositionState(new DriveAutoLines(3, 0, 20, 0.6), new IntakeIn()));
+		AddSequential(new PositionState(new WaitForPosition(), new DriveAutoLines(0, 60)));
+		AddSequential(new PositionState(new WaitForPosition(), new DriveAutoLines(5, 0, 20, 0.7)));
+		AddSequential(new PositionState(new WaitForPosition(), new ToggleGrab()));
+		AddSequential(new PositionState(new WaitForPosition(), new WaitCommand(0.25)));
+		AddSequential(new PositionState(new WaitForPosition(), new IntakeStop()));
+		AddSequential(new PositionState(new WaitForPosition(), new LowSetpoint()));
+		AddSequential(new PositionState(new WaitForPosition(), new DriveAutoLines(-5, 0, 20, 0.7)));
+		AddSequential(new PositionState(new WaitForPosition(), new HighReverseSetpoint()));
+		AddSequential(new PositionState(new WaitForPosition(), new DriveAutoLines(0, 60)));
+		AddSequential(new WaitForPosition());
+		AddSequential(new PositionState(new WaitForPosition(), new WaitCommand(0.5)));
+		AddSequential(new PositionState(new WaitForPosition(), new IntakeOut(1)));
+		AddSequential(new PositionState(new WaitForPosition(), new WaitCommand(0.05)));
+		AddSequential(new PositionState(new WaitForPosition(), new IntakeOut(0.3)));
+		AddSequential(new PositionState(new WaitForPosition(), new WaitCommand(0.25)));
+		AddSequential(new PositionState(new WaitForPosition(), new IntakeStop()));
+		AddSequential(new PositionState(new WaitForPosition(), new IntakeDown()));
 	}
 };
 

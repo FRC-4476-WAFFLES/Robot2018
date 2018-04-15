@@ -15,7 +15,7 @@ private:
 	Timer last_time;
 	double max_speed;
 public:
-	DriveAutoLines(double distance, double angle, double epsilon = 25, double speed_max = 0.6);
+	DriveAutoLines(double distance, double angle, double epsilon = 25, double speed_max = 0.6, bool timed = false);
 
 	void Initialize();
 	void Execute();

@@ -13,12 +13,15 @@
 #include "Commands/WaitCommand.h"
 #include "Commands/Intake/IntakeStop.h"
 #include "Commands/Arm/IntakeDown.h"
+#include "Commands/Drive/DriveAutoTime.h"
 
 AutoDriveForward::AutoDriveForward():
 	CommandGroup("AutoDriveForward")
 {
 	//drive forward
-	AddSequential(new DriveAutoLines(10, 0, 15, 0.9));
+	AddSequential(new WaitCommand(12.0));
+	AddSequential(new DriveAutoTime(4.0, 0.5));
+//	AddSequential(new DriveAutoLines(10, 0, 15, 0.9));
 
 	//turn
 //  Scale from side

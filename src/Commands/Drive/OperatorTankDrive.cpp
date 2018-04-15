@@ -1,6 +1,7 @@
 #include "OperatorTankDrive.h"
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/ArmSubsystem.h"
+#include "Subsystems/IntakeSubsystem.h"
 OperatorTankDrive::OperatorTankDrive():
 	CommandBase("OperatorTankDrive")
 {
@@ -35,11 +36,16 @@ void OperatorTankDrive::Execute() {
 	Drive().drive(oi().left.GetY(), oi().right.GetY());
 
 	time_coeff = 1/sec.Get();
-	feet_in_last_second = (((Drive().Left() + Drive().Right() / 2.0) - last_encoder_position) /639)*time_coeff;
+//	feet_in_last_second = (((Drive().Left() + Drive().Right() / 2.0) - last_encoder_position) /639)*time_coeff;
+	feet_in_last_second = (oi().left.GetY() + oi().right.GetY()) / 2;
 	sec.Reset();
 	sec.Start();
 	last_encoder_position = Drive().Left() + Drive().Right() / 2.0;
 	Drive().speed = feet_in_last_second;
+//	Intake().drive_speed = feet_in_last_second;
+//	oi().positioned_outtake = Intake().positioned_outtake_speed;
+//	Intake().is_button_pressed = oi().button_is_pressed;
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

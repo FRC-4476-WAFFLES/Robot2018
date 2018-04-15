@@ -36,6 +36,7 @@ OI::OI():
 
 	Button* RB = new JoystickButton(&operate, OperatorButton::BumperTopRight);
 	RB->WhenReleased(new ToggleGrab());
+
 }
 
 double OI::ArmFudge() {
@@ -47,6 +48,7 @@ double OI::WristFudge() {
 }
 
 double OI::IntakeSpeed() {
+
 	double in = operate.GetRawAxis(3);
 	double out =  operate.GetRawAxis(2);
 	return in * in - 0.5 * out * out;
