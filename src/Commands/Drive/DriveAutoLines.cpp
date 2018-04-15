@@ -49,10 +49,10 @@ void DriveAutoLines::Execute() {
 	SmartDashboard::PutNumber("Drive Error", distance_error);
 	SmartDashboard::PutNumber("Angle Error", angle_error);
 
-	double distance_p = GetP("drive_distance", 0.003) * distance_error;
+	double distance_p = GetP("drive_distance", 0.0035) * distance_error;
 	double angle_p = GetP("drive_angle", 0.08) * angle_error;
 
-	double distance_d = 0.000;//0
+	double distance_d = 0.00065;//0
 	double angle_d = GetD("drive_angle", 0.013) * ((angle_error - last_angle_error) / time);
 
 	if(fabs(distance) > 0.1) {
