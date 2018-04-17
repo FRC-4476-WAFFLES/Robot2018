@@ -10,4 +10,5 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	double drive_at_start = 0;
 };

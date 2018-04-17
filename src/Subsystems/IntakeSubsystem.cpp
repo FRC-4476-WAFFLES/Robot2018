@@ -43,33 +43,36 @@ void IntakeSubsystem::Periodic() {
 		is_outtaking = false;
 	}
 
+
+
+	if(CommandBase::oi().operate.GetRawButton(CommandBase::oi().OperatorButton::Back)){
+		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
+		SmartDashboard::PutBoolean("default holding", true);
+		drive_outtake_code = true;
+//	}else if(CommandBase::oi().operate.GetRawButton(CommandBase::oi().OperatorButton::B)){
+//		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
+//		SmartDashboard::PutBoolean("default holding", true);
 //
-//
-//	if(OI::OI().operate.GetRawButtonPressed(OI::OperatorButton::A)){
+//	}else if(CommandBase::oi().operate.GetRawButton(CommandBase::oi().OperatorButton::X)){
 //		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
 //		SmartDashboard::PutBoolean("default holding", true);
-//	}else if(!OI::B){
+//	}else if(CommandBase::oi().operate.GetRawButton(CommandBase::oi().OperatorButton::Y)){
 //		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
 //		SmartDashboard::PutBoolean("default holding", true);
-//
-//	}else if(!OI::X){
-//		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
-//		SmartDashboard::PutBoolean("default holding", true);
-//	}else if(!OI::Y){
-//		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
-//		SmartDashboard::PutBoolean("default holding", true);
-//	}else{
-//		SmartDashboard::PutBoolean("default holding", false);
-//		instaid_of_button_held_timer = 0;
-//	}
-//	if(instaid_of_button_held_timer > 50){
-////		positioned_outtake_speed = (((20*drive_speed)/13180) + 0.3);
-//		positioned_outtake_speed = drive_speed;
-//	}else{
-//		positioned_outtake_speed = 0.0;
-//	}
-//	SmartDashboard::PutNumber("holding counter", instaid_of_button_held_timer);
-//	SmartDashboard::PutBoolean("is button pressed", OI::OI().operate.GetRawButtonPressed(OI::OperatorButton::A));
+	}else{
+		SmartDashboard::PutBoolean("default holding", false);
+		instaid_of_button_held_timer = 0;
+		drive_outtake_code = false;
+	}
+	if(instaid_of_button_held_timer > 5){
+//		positioned_outtake_speed = (((20*drive_speed)/13180) + 0.3);
+		positioned_outtake_speed = drive_speed;
+	}else{
+		positioned_outtake_speed = 0.0;
+	}
+
+	SmartDashboard::PutNumber("holding counter", instaid_of_button_held_timer);
+	SmartDashboard::PutBoolean("is button pressed", CommandBase::oi().operate.GetRawButtonPressed(CommandBase::oi().OperatorButton::A));
 
 }
 

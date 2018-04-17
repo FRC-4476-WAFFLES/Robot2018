@@ -42,9 +42,9 @@ void OperatorTankDrive::Execute() {
 	sec.Start();
 	last_encoder_position = Drive().Left() + Drive().Right() / 2.0;
 	Drive().speed = feet_in_last_second;
-//	Intake().drive_speed = feet_in_last_second;
-//	oi().positioned_outtake = Intake().positioned_outtake_speed;
-//	Intake().is_button_pressed = oi().button_is_pressed;
+	Intake().drive_speed = feet_in_last_second;
+	oi().positioned_outtake = Intake().positioned_outtake_speed;
+	Intake().is_button_pressed = oi().button_is_pressed;
 
 }
 

@@ -51,5 +51,5 @@ double OI::IntakeSpeed() {
 
 	double in = operate.GetRawAxis(3);
 	double out =  operate.GetRawAxis(2);
-	return in * in - 0.5 * out * out;
+	return in * in - 0.25 * out * out + positioned_outtake;
 }

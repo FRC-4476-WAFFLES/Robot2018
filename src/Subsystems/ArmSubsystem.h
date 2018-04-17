@@ -6,6 +6,7 @@
 #include "DoubleSolenoid.h"
 #include "Timer.h"
 #include <PowerDistributionPanel.h>
+#include <Talon.h>
 
 
 class ArmSubsystem : public Subsystem {
@@ -14,15 +15,13 @@ private:
 	WPI_VictorSPX arm_motor_slave;
 	WPI_TalonSRX wrist_motor;
 	Timer t;
-
 	DoubleSolenoid intake_solenoid;
+	AnalogInput infrared_sensor;
+	Talon test_motor;
 
 	bool PIDJoystick;
-
-
 	float PosWhenSeekToSet_Arm = 0;
 	float PosWhenSeekToSet_Wrist = 0;
-	AnalogInput infrared_sensor;
 	double current_distance_voltage = 0;
 
 

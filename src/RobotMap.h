@@ -12,6 +12,7 @@ constexpr int SPARE_1 = 8;
 constexpr int SPARE_2 = 9;
 constexpr int INTAKE1 = 6;
 constexpr int INTAKE2 = 7;
+constexpr int test = 0;
 
 // CAN
 constexpr int DRIVE_RIGHT1 = 2;//srx

@@ -5,6 +5,7 @@
 #include "../OI.h"
 #include "Utils/PIDPreferences.h"
 #include "DigitalOutput.h"
+#include "IntakeSubsystem.h"
 
 ArmSubsystem::ArmSubsystem() :
 		frc::Subsystem("ArmSubsystem"),
@@ -12,7 +13,8 @@ ArmSubsystem::ArmSubsystem() :
 		arm_motor_slave(ARM_TILT_SLAVE),
 		wrist_motor(INTAKE_TILT),
 		intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1),
-		infrared_sensor(INFRARED)
+		infrared_sensor(INFRARED),
+		test_motor(test)
 {
 	// Set initial setpoint
 	PIDJoystick = true;
@@ -73,10 +75,13 @@ void ArmSubsystem::Periodic() {
 	current_distance_voltage = infrared_sensor.GetValue();
 	if(current_distance_voltage > 1800 && current_distance_voltage < 3000){
 		hasCUBE = true;
-		DigitalOutput(9).Set(true);
 	}else{
 		hasCUBE = false;
 	}
+	if(CommandBase::Intake().drive_outtake_code){
+		SetClamp(false);
+	}
+	DigitalOutput(8).Set(CommandBase::Intake().drive_outtake_code);
 	DigitalOutput(9).Set(hasCUBE);
 //	if(toggled && intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone){
 //		SetClamp(true);

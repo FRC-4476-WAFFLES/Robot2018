@@ -23,10 +23,11 @@ public:
 	bool is_outtaking = false;
 	bool held = false;
 	Timer held_time;
-//	int instaid_of_button_held_timer = 0;
-//	double drive_speed = 0;
-//	double positioned_outtake_speed = 0;
-//	bool is_button_pressed = false;
+	int instaid_of_button_held_timer = 0;
+	double drive_speed = 0;
+	double positioned_outtake_speed = 0;
+	bool is_button_pressed = false;
+	bool drive_outtake_code = false;
 
 };
 

@@ -26,4 +26,6 @@ public:
 
 	// Intake speed
 	double IntakeSpeed();
+	double positioned_outtake = 0;
+	bool button_is_pressed = false;
 };
