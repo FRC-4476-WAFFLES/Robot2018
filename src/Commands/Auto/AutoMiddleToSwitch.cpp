@@ -28,10 +28,9 @@ public:
 		AddSequential(new DriveAutoLines(0, 25));
 		AddSequential(new IntakeDown());
 		AddSequential(new IntakeIn());
-		AddParallel(new DriveAutoLines(3.9, 0));
-		AddSequential(new WaitForCube());
+		AddSequential(new DriveAutoLines(3.9, 0));
+//		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
-		AddSequential(new WaitForCube());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new DriveAutoLines(-3.9, 0));
@@ -66,11 +65,10 @@ public:
 		AddSequential(new DriveAutoLines(0, -25));
 		AddSequential(new IntakeDown());
 		AddSequential(new IntakeIn());
-		AddParallel(new DriveAutoLines(3.5, 0));
-		AddSequential(new WaitForCube());
+		AddSequential(new DriveAutoLines(3.5, 0));
+//		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 		AddSequential(new WaitCommand(0.5));
-		AddSequential(new WaitForCube());
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new DriveAutoLines(-3.5, 0));
 		AddSequential(new LowSetpoint());

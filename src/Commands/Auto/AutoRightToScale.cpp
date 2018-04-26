@@ -38,13 +38,13 @@ public:
 		AddSequential(new DriveAutoLines(0, -7));
 		AddSequential(new WaitForPosition()); //second cube
 		AddSequential(new IntakeIn());
-		AddParallel(new DriveAutoLines(5.1, 0, 30, 0.6));
+		AddSequential(new DriveAutoLines(4.1, 0, 30, 0.6));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-5.5, 0, 20, 0.6));
+		AddSequential(new DriveAutoLines(-4.5, 0, 20, 0.6));
 		AddSequential(new DriveAutoLines(0, 7));
 		AddSequential(new WaitForPosition());
 		AddSequential(new ToggleAlternate());
@@ -89,13 +89,13 @@ public:
 		AddSequential(new IntakeIn());
 		AddSequential(new DriveAutoLines(0, 28));
 		AddSequential(new WaitForPosition());
-		AddParallel(new DriveAutoLines(4.4, 0, 30, 0.7));
+		AddSequential(new DriveAutoLines(3.4, 0, 30, 0.7));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 //		AddSequential(new WaitCommand(0.5));//////////////////////////////////////not here anymore
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-4.8, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(-3.8, 0, 20, 0.7));
 		AddSequential(new DriveAutoLines(0, -35));
 		AddSequential(new WaitForPosition());
 //		AddSequential(new WaitCommand(0.5));//////////////////////////////////////
@@ -109,13 +109,13 @@ public:
 		AddSequential(new ToggleGrab());
 		AddSequential(new IntakeIn());//3rd cube pickup
 		AddSequential(new DriveAutoLines(0, 60, 20, 0.4));//CHECK THIS BEFORE MATCH
-		AddParallel(new DriveAutoLines(6.1, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(5.1, 0, 20, 0.7));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 //		AddSequential(new WaitCommand(0.25));////////////////////////////////////////
 		AddSequential(new IntakeStop());
 		AddSequential(new LowSetpoint());
-		AddSequential(new DriveAutoLines(-6.1, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(-5.1, 0, 20, 0.7));
 		AddSequential(new HighReverseSetpoint());
 		AddSequential(new DriveAutoLines(0, -55));
 		AddSequential(new WaitForPosition());// 3rd drop
@@ -151,13 +151,13 @@ public:
 		AddSequential(new DriveAutoLines(0, 7));
 		AddSequential(new WaitForPosition()); //second cube
 		AddSequential(new IntakeIn());
-		AddParallel(new DriveAutoLines(3.6, 0));
+		AddSequential(new DriveAutoLines(2.6, 0));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-3.8, 0));
+		AddSequential(new DriveAutoLines(-2.8, 0));
 		AddSequential(new DriveAutoLines(0, -7));
 		AddSequential(new WaitForPosition());
 		AddSequential(new ToggleAlternate());
@@ -250,13 +250,13 @@ public:
 		AddSequential(new IntakeIn());
 		AddSequential(new DriveAutoLines(0, -31));
 		AddSequential(new WaitForPosition());
-		AddParallel(new DriveAutoLines(4.4, 0, 30, 0.7));
+		AddSequential(new DriveAutoLines(3.4, 0, 30, 0.7));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 //		AddSequential(new WaitCommand(0.5));//////////////////////////////////////not here anymore
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-4.8, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(-3.8, 0, 20, 0.7));
 		AddSequential(new DriveAutoLines(0, 35));
 		AddSequential(new WaitForPosition());
 //		AddSequential(new WaitCommand(0.5));//////////////////////////////////////
@@ -270,7 +270,7 @@ public:
 		AddSequential(new ToggleGrab());
 		AddSequential(new IntakeIn());//3rd cube pickup
 		AddSequential(new DriveAutoLines(0, -60, 20, 0.4));//CHECK THIS BEFORE MATCH
-		AddParallel(new DriveAutoLines(6.1, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(5.1, 0, 20, 0.7));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
 //		AddSequential(new WaitCommand(0.25));////////////////////////////////////////
