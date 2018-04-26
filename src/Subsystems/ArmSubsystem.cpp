@@ -75,7 +75,7 @@ void ArmSubsystem::Periodic() {
 	UpdatePID("arm", arm_motor, 9.0, 0.0, 0.0, 0.0);
 
 	current_distance_voltage = infrared_sensor.GetValue();
-	if(current_distance_voltage > 1800 && current_distance_voltage < 3000){
+	if(current_distance_voltage > 1200 && current_distance_voltage < 3000){
 		hasCUBE = true;
 	}else{
 		hasCUBE = false;
@@ -154,7 +154,7 @@ void ArmSubsystem::Periodic() {
 		} else {
 			// Arm fudge
 			if(fabs(arm_joy) > 0.1) {
-				NextArmPosition =  arm_motor.GetSelectedSensorPosition(0) + arm_joy * 30.0;
+				NextArmPosition =  arm_motor.GetSelectedSensorPosition(0) + arm_joy * 50.0;
 			}
 
 			// Wrist fudge
