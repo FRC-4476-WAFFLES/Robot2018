@@ -45,7 +45,6 @@ public:
 		chooser.AddObject("TestAuto", &test_auto);
 
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
-		SmartDashboard::PutData(Scheduler::GetInstance());
 
 		CommandBase::Info();
 	}

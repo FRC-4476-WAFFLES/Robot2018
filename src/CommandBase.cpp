@@ -2,6 +2,7 @@
 
 #include <Commands/Scheduler.h>
 #include <Commands/Command.h>
+#include <SmartDashboard/SmartDashboard.h>
 
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/ArmSubsystem.h"
@@ -15,6 +16,7 @@ CommandBase::CommandBase(const std::string& name) :
 }
 
 void CommandBase::Prints() {
+	SmartDashboard::PutData(Scheduler::GetInstance());
 	Arm().Prints();
 	Drive().Prints();
 }

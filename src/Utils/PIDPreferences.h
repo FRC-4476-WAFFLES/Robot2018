@@ -9,3 +9,4 @@ void UpdatePID(std::string name, WPI_TalonSRX &talon);
 double GetP(std::string name, double v);
 double GetI(std::string name, double v);
 double GetD(std::string name, double v);
+double UpdateSinglePreference(std::string name, double v);

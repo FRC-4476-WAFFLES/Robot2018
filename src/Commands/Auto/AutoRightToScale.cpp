@@ -182,46 +182,104 @@ public:
 	ScoreLeftFromLeft():
 		CommandGroup("ScoreLeftFromLeft")
 	{
+
+		//initial left
+//		AddSequential(new ToggleGrab());
+//		AddSequential(new DriveAutoLines(-11, 0, 20 , 0.7));
+//		AddSequential(new HighReverseSetpoint());
+//		AddSequential(new DriveAutoLines(0, 20));
+//		AddSequential(new DriveAutoLines(-11, 0, 20, 0.4));
+//		AddSequential(new WaitForPosition());
+//		AddSequential(new WaitCommand(0.25));
+//		AddSequential(new IntakeOut(0.4));
+//		AddSequential(new WaitCommand(0.5));
+//		AddSequential(new IntakeStop()); //drop
+//		AddSequential(new WaitForPosition());
+//		AddSequential(new IntakeDown());//second cube
+//		AddSequential(new IntakeIn());
+//		AddSequential(new DriveAutoLines(0, -25));
+//		AddSequential(new DriveAutoLines(2.5, 0, 20, 0.4));
+//		AddSequential(new WaitForCube());
+//		AddSequential(new ToggleGrab());
+//		AddSequential(new WaitCommand(0.5));
+//		AddSequential(new IntakeStop());//pickup
+//		AddSequential(new HighReverseSetpoint());
+//		AddSequential(new DriveAutoLines(-2.5, 0));
+//		AddSequential(new DriveAutoLines(0, 20));
+//		AddSequential(new WaitForPosition());
+//		AddSequential(new ToggleAlternate());
+//		AddSequential(new WaitCommand(0.25));
+//		AddSequential(new IntakeOut());
+//		AddSequential(new WaitCommand(0.5));
+//		AddSequential(new IntakeStop()); //drop
+//		AddSequential(new IntakeDown());
+//		AddSequential(new IntakeIn());//3rd cube pickup
+//		AddSequential(new DriveAutoLines(0, -35, 20, 0.4));
+//		AddSequential(new DriveAutoLines(4.9, 0, 20, 0.7));
+//		AddSequential(new WaitForCube());
+//		AddSequential(new ToggleGrab());
+//		AddSequential(new WaitCommand(0.25));
+//		AddSequential(new IntakeStop());
+//		AddSequential(new LowSetpoint());
+//		AddSequential(new DriveAutoLines(4.9, 0, 20, 0.7));
+//		AddSequential(new HighReverseSetpoint());
+//		AddSequential(new DriveAutoLines(0, 35, 20, 0.4));
+//		AddSequential(new WaitCommand(0.5));
+//		AddSequential(new IntakeOut(1));
+//		AddSequential(new WaitCommand(0.05));
+//		AddSequential(new IntakeOut(0.3));
+//		AddSequential(new WaitCommand(0.25));
+//		AddSequential(new IntakeStop());
+//		AddSequential(new IntakeDown());
+
+//mirrored from right
 		AddSequential(new ToggleGrab());
-		AddSequential(new DriveAutoLines(-11, 0, 20 , 0.7));
+		AddSequential(new DriveAutoLines(-12, 0, 20 , 0.9));
+		AddSequential(new DriveAutoLines(0, 17));
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(0, 20));
-		AddSequential(new DriveAutoLines(-11, 0, 20, 0.4));
+		AddSequential(new DriveAutoLines(-10.3, 0, 20, 0.5));
 		AddSequential(new WaitForPosition());
-		AddSequential(new WaitCommand(0.25));
-		AddSequential(new IntakeOut(0.4));
 		AddSequential(new WaitCommand(0.5));
+		AddSequential(new IntakeOut(1));
+		AddSequential(new WaitCommand(0.05));
+		AddSequential(new IntakeOut(0.3));
+		AddSequential(new WaitCommand(0.25));
 		AddSequential(new IntakeStop()); //drop
 		AddSequential(new WaitForPosition());
 		AddSequential(new IntakeDown());//second cube
 		AddSequential(new IntakeIn());
-		AddSequential(new DriveAutoLines(0, -25));
-		AddSequential(new DriveAutoLines(2.5, 0, 20, 0.4));
+		AddSequential(new DriveAutoLines(0, -31));
+		AddSequential(new WaitForPosition());
+		AddSequential(new DriveAutoLines(3.4, 0, 30, 0.7));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
-		AddSequential(new WaitCommand(0.5));
+//		AddSequential(new WaitCommand(0.5));//////////////////////////////////////not here anymore
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-2.5, 0));
-		AddSequential(new DriveAutoLines(0, 20));
+		AddSequential(new DriveAutoLines(-3.8, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(0, 35));
 		AddSequential(new WaitForPosition());
+//		AddSequential(new WaitCommand(0.5));//////////////////////////////////////
 		AddSequential(new ToggleAlternate());
+		AddSequential(new IntakeOut(1));
+		AddSequential(new WaitCommand(0.05));
+		AddSequential(new IntakeOut(0.3));
 		AddSequential(new WaitCommand(0.25));
-		AddSequential(new IntakeOut());
-		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop()); //drop
 		AddSequential(new IntakeDown());
+		AddSequential(new ToggleGrab());
 		AddSequential(new IntakeIn());//3rd cube pickup
-		AddSequential(new DriveAutoLines(0, -35, 20, 0.4));
-		AddSequential(new DriveAutoLines(4.9, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(0, -60, 20, 0.4));//CHECK THIS BEFORE MATCH
+		AddSequential(new DriveAutoLines(5.1, 0, 20, 0.7));
 		AddSequential(new WaitForCube());
 		AddSequential(new ToggleGrab());
-		AddSequential(new WaitCommand(0.25));
+//		AddSequential(new WaitCommand(0.25));////////////////////////////////////////
 		AddSequential(new IntakeStop());
 		AddSequential(new LowSetpoint());
-		AddSequential(new DriveAutoLines(4.9, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(-5.1, 0, 20, 0.7));
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(0, 35, 20, 0.4));
+		AddSequential(new DriveAutoLines(0, 55));
+		AddSequential(new WaitForPosition());// 3rd drop
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeOut(1));
 		AddSequential(new WaitCommand(0.05));

@@ -7,9 +7,11 @@
 #include "Commands/Arm/ToggleAlternate.h"
 #include "Commands/Arm/PIDJoystickSwitch.h"
 #include "Commands/Arm/ToggleGrab.h"
+#include "Commands/Arm/ResetArmEncoder.h"
 #include <math.h>
 #include "Buttons/Button.h"
 #include "Buttons/JoystickButton.h"
+#include <smartdashboard/SmartDashboard.h>
 
 OI::OI():
 	left(0),
@@ -37,6 +39,8 @@ OI::OI():
 	Button* RB = new JoystickButton(&operate, OperatorButton::BumperTopRight);
 	RB->WhenReleased(new ToggleGrab());
 
+	SmartDashboard::PutData(new ResetArmEncoder());
+
 }
 
 double OI::ArmFudge() {
@@ -51,5 +55,5 @@ double OI::IntakeSpeed() {
 
 	double in = operate.GetRawAxis(3);
 	double out =  operate.GetRawAxis(2);
-	return in * in - 0.25 * out * out + positioned_outtake;
+	return in * in - 0.5 * out * out + positioned_outtake;
 }

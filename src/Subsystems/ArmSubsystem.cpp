@@ -14,7 +14,8 @@ ArmSubsystem::ArmSubsystem() :
 		wrist_motor(INTAKE_TILT),
 		intake_solenoid(INTAKE_SOLENOID_EXTEND_1, INTAKE_SOLENOID_RETRACT_1),
 		infrared_sensor(INFRARED),
-		test_motor(test)
+		test_motor(test),
+		lights(9)
 {
 	// Set initial setpoint
 	PIDJoystick = true;
@@ -30,6 +31,7 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor.ConfigPeakCurrentDuration(30,10);
 	arm_motor.ConfigContinuousCurrentLimit(30,10);
 	arm_motor.EnableCurrentLimit(true);
+	arm_motor.ConfigPeakOutputReverse(-0.75, 10);
 
 	AddChild(&arm_motor);
 	arm_motor_slave.SetInverted(true);
@@ -57,7 +59,7 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor.ConfigSetParameter(ParamEnum::eClearPosOnLimitF, 0, 0, 0, 10);
 	arm_motor.ConfigSetParameter(ParamEnum::eClearPositionOnQuadIdx, 0, 0, 0, 10);
 	arm_motor.OverrideLimitSwitchesEnable(true);
-
+	lights.EnablePWM(0.0);
 
 
 }
@@ -81,8 +83,16 @@ void ArmSubsystem::Periodic() {
 	if(CommandBase::Intake().drive_outtake_code){
 		SetClamp(false);
 	}
-	DigitalOutput(8).Set(CommandBase::Intake().drive_outtake_code);
-	DigitalOutput(9).Set(hasCUBE);
+
+	if(hasCUBE){
+		lights.UpdateDutyCycle(UpdateSinglePreference("lights duty cycle", 1.0));
+	}else if(CommandBase::Intake().drive_outtake_code){
+		lights.UpdateDutyCycle(0.5);
+	}else{
+		lights.UpdateDutyCycle(0.0);
+	}
+//	DigitalOutput(8).Set(CommandBase::Intake().drive_outtake_code);
+//	DigitalOutput(9).Set(hasCUBE);
 //	if(toggled && intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone){
 //		SetClamp(true);
 ////	}else{
@@ -251,4 +261,8 @@ void ArmSubsystem::ToggleAlternate() {
 
 	SeekTo(NextArmPosition, AlternateWristPosition, NextWristPosition);
 	toggled = true;
+}
+
+void ArmSubsystem::ResetArmEncoder() {
+	arm_motor.SetSelectedSensorPosition(0, 0, 0);
 }

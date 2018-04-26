@@ -11,7 +11,6 @@ private:
 	VictorSP intake_motor_2;
 
 	double speed = 0.0;
-	double hasCube = false;
 
 public:
 	IntakeSubsystem();
@@ -28,6 +27,7 @@ public:
 	double positioned_outtake_speed = 0;
 	bool is_button_pressed = false;
 	bool drive_outtake_code = false;
+	Timer intake_clamp_timer;
 
 };
 

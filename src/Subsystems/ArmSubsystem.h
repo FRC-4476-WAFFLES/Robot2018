@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include <PowerDistributionPanel.h>
 #include <Talon.h>
+#include "DigitalOutput.h"
 
 
 class ArmSubsystem : public Subsystem {
@@ -37,10 +38,11 @@ public:
 	void SeekTo(float armPosition, float wristPosition);
 	void SeekTo(float armPosition, float wristPosition, float alternateWristPosition);
 	void ToggleAlternate();
+	void ResetArmEncoder();
 
 // Middle is -1335
-	constexpr static float INTAKE_ARM = 15; //28
-	constexpr static float INTAKE_WRIST = -678;//-726
+	constexpr static float INTAKE_ARM = 25; //28
+	constexpr static float INTAKE_WRIST = -750;//-726, 678
 	constexpr static float LOW_FORWARD_ARM = 113;
 	constexpr static float LOW_FORWARD_WRIST = -368;
 	constexpr static float HIGH_FORWARD_ARM = 672;
@@ -67,5 +69,6 @@ public:
 	float NextWristPosition4 = 0;
 	float AlternateWristPosition = 0;
 	bool hasCUBE = 0;
+	DigitalOutput lights;
 
 };

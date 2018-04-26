@@ -9,6 +9,7 @@
 #include "../OI.h"
 #include <DriverStation.h>
 #include "DriveSubsystem.h"
+#include "Subsystems/ArmSubsystem.h"
 
 IntakeSubsystem::IntakeSubsystem() :
 	frc::Subsystem("IntakeSubsystem"),
@@ -27,23 +28,6 @@ void IntakeSubsystem::Periodic() {
 
 	intake_motor_1.Set(-speed);
 	intake_motor_2.Set(speed);
-
-	if(speed > 0.3) {
-		float current = CommandBase::Info().pdp.GetCurrent(10) + CommandBase::Info().pdp.GetCurrent(11);
-		hasCube = current > 13.0;
-	} else if(speed < -0.3) {
-		hasCube = false;
-	}
-
-
-	SmartDashboard::PutBoolean("Has Cube?", hasCube);
-	if(speed < -1){
-		is_outtaking = true;
-	}else{
-		is_outtaking = false;
-	}
-
-
 
 	if(CommandBase::oi().operate.GetRawButton(CommandBase::oi().OperatorButton::Back)){
 		instaid_of_button_held_timer = instaid_of_button_held_timer + 1;
@@ -64,7 +48,7 @@ void IntakeSubsystem::Periodic() {
 		instaid_of_button_held_timer = 0;
 		drive_outtake_code = false;
 	}
-	if(instaid_of_button_held_timer > 5){
+	if(instaid_of_button_held_timer > 1){
 //		positioned_outtake_speed = (((20*drive_speed)/13180) + 0.3);
 		positioned_outtake_speed = drive_speed;
 	}else{
@@ -74,6 +58,20 @@ void IntakeSubsystem::Periodic() {
 	SmartDashboard::PutNumber("holding counter", instaid_of_button_held_timer);
 	SmartDashboard::PutBoolean("is button pressed", CommandBase::oi().operate.GetRawButtonPressed(CommandBase::oi().OperatorButton::A));
 
+	if(speed > 0.1 && CommandBase::Arm().intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone && CommandBase::Arm().hasCUBE && frc::DriverStation::GetInstance().IsOperatorControl()){
+		intake_clamp_timer.Start();
+	}else{
+		intake_clamp_timer.Stop();
+		intake_clamp_timer.Reset();
+	}
+
+	if(speed < -0.1 && CommandBase::Arm().intake_down_position_so_that_the_alt_position_can_use_clamp_for_the_exchange_zone && frc::DriverStation::GetInstance().IsOperatorControl()){
+		CommandBase::Arm().SetClamp(false);
+	}
+
+	if(intake_clamp_timer.Get() > 0.2){
+		CommandBase::Arm().SetClamp(true);
+	}
 }
 
 void IntakeSubsystem::SetSpeed(double newSpeed) {
