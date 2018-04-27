@@ -26,9 +26,10 @@ AutoDriveForward::AutoDriveForward():
 //	AddSequential(new WaitForPosition());
 //	AddSequential(new WaitForCube);
 	//drive forward
-	AddSequential(new WaitCommand(12.0));
+//	AddSequential(new WaitCommand(12.0));
 //	AddSequential(new DriveAutoTime(4.0, 0.5));
-	AddSequential(new DriveAutoLines(10, 0, 15, 0.9));
+	AddSequential(new DriveAutoLines(-10, 0, 15, 0.9));
+	AddSequential(new DriveAutoLines(0, 90, 15, 0.9));
 
 	//turn
 //  Scale from side

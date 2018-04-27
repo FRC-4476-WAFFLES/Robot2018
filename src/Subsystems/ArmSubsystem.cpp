@@ -16,7 +16,7 @@ ArmSubsystem::ArmSubsystem() :
 		infrared_sensor(INFRARED),
 		test_motor(test),
 		lights(9)
-{
+{//things
 	// Set initial setpoint
 	PIDJoystick = true;
 	NextArmPosition = 0;

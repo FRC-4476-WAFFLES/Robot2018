@@ -74,9 +74,9 @@ public:
 		//working here--------------------------------------------------------
 		AddSequential(new ToggleGrab());
 		AddSequential(new DriveAutoLines(-12, 0, 20 , 0.9));
-		AddSequential(new DriveAutoLines(0, -17));
+		AddSequential(new DriveAutoLines(0, -16));
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-10.3, 0, 20, 0.5));
+		AddSequential(new DriveAutoLines(-10.4, 0, 20, 0.5));
 		AddSequential(new WaitForPosition());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeOut(1));
@@ -120,6 +120,7 @@ public:
 		AddSequential(new DriveAutoLines(0, -55));
 		AddSequential(new WaitForPosition());// 3rd drop
 		AddSequential(new WaitCommand(0.5));
+		AddSequential(new ToggleAlternate());
 		AddSequential(new IntakeOut(1));
 		AddSequential(new WaitCommand(0.05));
 		AddSequential(new IntakeOut(0.3));

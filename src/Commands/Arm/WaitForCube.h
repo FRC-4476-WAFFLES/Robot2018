@@ -2,6 +2,7 @@
 
 #include "CommandBase.h"
 #include "Commands/Drive/DriveAutoLines.h"
+#include "Timer.h"
 
 class WaitForCube : public CommandBase {
 public:
@@ -11,8 +12,6 @@ public:
 	bool IsFinished();
 	void End();
 	void Interrupted();
-	double drive_at_start = 0;
-//	DriveAutoLines drive;
-//	DriveAutoLines drive_back;
-//	int state_thing = 0;
+	Timer wait_for_intake;
+
 };

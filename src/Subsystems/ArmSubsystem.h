@@ -42,7 +42,7 @@ public:
 
 // Middle is -1335
 	constexpr static float INTAKE_ARM = 25; //28
-	constexpr static float INTAKE_WRIST = -750;//-726, 678
+	constexpr static float INTAKE_WRIST = -680;//-726
 	constexpr static float LOW_FORWARD_ARM = 113;
 	constexpr static float LOW_FORWARD_WRIST = -368;
 	constexpr static float HIGH_FORWARD_ARM = 672;

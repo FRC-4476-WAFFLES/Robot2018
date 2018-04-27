@@ -16,7 +16,7 @@ IntakeSubsystem::IntakeSubsystem() :
 	intake_motor_1(INTAKE1),
 	intake_motor_2(INTAKE2)
 {
-}
+}//things
 
 void IntakeSubsystem::ModeChange() {
 }
