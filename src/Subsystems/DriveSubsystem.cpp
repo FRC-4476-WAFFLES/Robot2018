@@ -36,8 +36,12 @@ void DriveSubsystem::InitDefaultCommand() {
 void DriveSubsystem::drive(float left, float right) {
 //	special_turn_solenoid.Set(DoubleSolenoid::kReverse);
 	//special_turn_motor.Set(ControlMode::PercentOutput, 0);
-	left1.Set(ControlMode::PercentOutput, -left);
-	right1.Set(ControlMode::PercentOutput, right);
+		left1.Set(ControlMode::PercentOutput, -left);
+		right1.Set(ControlMode::PercentOutput, right);
+}
+void DriveSubsystem::rc_drive(float forwards, float turn){
+	left1.Set(ControlMode::PercentOutput, -forwards + turn);
+	right1.Set(ControlMode::PercentOutput, forwards - turn);
 }
 
 void DriveSubsystem::Prints() {

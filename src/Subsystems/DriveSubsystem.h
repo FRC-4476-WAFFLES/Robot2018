@@ -28,6 +28,7 @@ public:
 	void ModeChange();
 
 	void drive(float left, float right);
+	void rc_drive(float forwards, float turn);
 	void Prints();
 
 	float Right();
@@ -51,7 +52,7 @@ public:
 	PowerDistributionPanel PDP;
 
 
-
+	bool drive_toggle = true;
 
 	//void special_turn(float direction);
 

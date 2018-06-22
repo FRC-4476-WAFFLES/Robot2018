@@ -33,7 +33,11 @@ void OperatorTankDrive::Execute() {
 		Drive().left1.ConfigPeakCurrentLimit(40, 10);
 		Drive().left1.ConfigPeakCurrentDuration(40, 10);
 	}
-	Drive().drive(oi().left.GetY(), oi().right.GetY());
+	if(Drive().drive_toggle){
+		Drive().drive(oi().left.GetY(), oi().right.GetY());
+	} else {
+		Drive().drive(oi().left.GetY(), oi().right.GetX());
+	}
 
 	time_coeff = 1/sec.Get();
 //	feet_in_last_second = (((Drive().Left() + Drive().Right() / 2.0) - last_encoder_position) /639)*time_coeff;
