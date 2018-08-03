@@ -15,8 +15,8 @@
 #include <smartdashboard/SmartDashboard.h>
 
 OI::OI():
-	left(0),
-	right(1),
+	left(1),
+	right(0),
 	operate(2)
 {
 	Button* ScoreHighBack = new JoystickButton(&operate, OperatorButton::Y);
