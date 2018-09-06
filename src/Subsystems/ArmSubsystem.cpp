@@ -24,7 +24,7 @@ ArmSubsystem::ArmSubsystem() :
 
 	//---------------------arm pid-----------------------//
 	arm_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
-	arm_motor.SetSensorPhase(false);
+	arm_motor.SetSensorPhase(true);
 	arm_motor.SetInverted(false);
 	arm_motor.ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
 	arm_motor.ConfigPeakCurrentLimit(30,10);
@@ -38,7 +38,7 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor_slave.Follow(arm_motor);
 
 	wrist_motor.SetInverted(false);
-	wrist_motor.SetSensorPhase(true);
+	wrist_motor.SetSensorPhase(false);
 	wrist_motor.ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
 	wrist_motor.ConfigPeakCurrentLimit(20,10);
 	wrist_motor.ConfigPeakCurrentDuration(30,10);
