@@ -139,7 +139,7 @@ void ArmSubsystem::Periodic() {
 		}else if(WristArmSwitch == 2){
 			wrist_motor.Set(ControlMode::Position, TRAVEL_WRIST);
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
-			float arm_pos = arm_motor.GetSelectedSensorPosition(0);
+			float arm_pos = -1*arm_motor.GetSelectedSensorPosition(0);
 			if(fabs(arm_pos - NextArmPosition) < 20 //check if on target
 					|| (arm_pos > HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm <= HIGH_LEGAL_LIMIT && NextArmPosition > HIGH_LEGAL_LIMIT)
 					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT)){
@@ -154,7 +154,7 @@ void ArmSubsystem::Periodic() {
 		} else {
 			// Arm fudge
 			if(fabs(arm_joy) > 0.1) {
-				NextArmPosition =  arm_motor.GetSelectedSensorPosition(0) + arm_joy * 50.0;
+				NextArmPosition =  -1*arm_motor.GetSelectedSensorPosition(0) + arm_joy * 50.0;
 			}
 
 			// Wrist fudge
@@ -187,7 +187,7 @@ void ArmSubsystem::Periodic() {
 
 void ArmSubsystem::Prints() {
 	// Print out useful info
-	SmartDashboard::PutNumber("Arm/Arm/Encoder", arm_motor.GetSelectedSensorPosition(0));
+	SmartDashboard::PutNumber("Arm/Arm/Encoder", -1*arm_motor.GetSelectedSensorPosition(0));
 	SmartDashboard::PutNumber("Arm/Arm/Target", arm_motor.GetClosedLoopTarget(0));
 	SmartDashboard::PutNumber("Arm/Arm/Output", arm_motor.GetMotorOutputPercent());
 
@@ -238,7 +238,7 @@ void ArmSubsystem::SeekTo(float armPosition, float wristPosition) {
 
 // set target with alternate wrist
 void ArmSubsystem::SeekTo(float armPosition, float wristPosition, float alternateWristPosition) {
-	PosWhenSeekToSet_Arm = arm_motor.GetSelectedSensorPosition(0);
+	PosWhenSeekToSet_Arm = -1*arm_motor.GetSelectedSensorPosition(0);
 	PosWhenSeekToSet_Wrist = wrist_motor.GetSelectedSensorPosition(0);
 
 	NextArmPosition = armPosition;
