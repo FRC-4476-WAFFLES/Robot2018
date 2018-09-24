@@ -24,7 +24,7 @@ ArmSubsystem::ArmSubsystem() :
 
 	//---------------------arm pid-----------------------//
 	arm_motor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
-	arm_motor.SetSensorPhase(false);
+	arm_motor.SetSensorPhase(true);
 	arm_motor.SetInverted(false);
 	arm_motor.ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
 	arm_motor.ConfigPeakCurrentLimit(30,10);
@@ -38,7 +38,7 @@ ArmSubsystem::ArmSubsystem() :
 	arm_motor_slave.Follow(arm_motor);
 
 	wrist_motor.SetInverted(false);
-	wrist_motor.SetSensorPhase(true);
+	wrist_motor.SetSensorPhase(false);
 	wrist_motor.ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, 0);
 	wrist_motor.ConfigPeakCurrentLimit(20,10);
 	wrist_motor.ConfigPeakCurrentDuration(30,10);
@@ -142,14 +142,24 @@ void ArmSubsystem::Periodic() {
 			float arm_pos = arm_motor.GetSelectedSensorPosition(0);
 			if(fabs(arm_pos - NextArmPosition) < 20 //check if on target
 					|| (arm_pos > HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm <= HIGH_LEGAL_LIMIT && NextArmPosition > HIGH_LEGAL_LIMIT)
-					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT)){
+					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT )
+					|| (fabs(arm_pos - (HIGH_LEGAL_LIMIT -100)) < 20)){
 					WristArmSwitch = 3;
 			}
 		}else if(WristArmSwitch == 3){
+			wrist_motor.Set(ControlMode::Position, NextWristPosition);
+			arm_motor.Set(ControlMode::Position, NextArmPosition);
+			float arm_pos = arm_motor.GetSelectedSensorPosition(0);
+			if(fabs(arm_pos - NextArmPosition) < 20 //check if on target
+					|| (arm_pos > HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm <= HIGH_LEGAL_LIMIT && NextArmPosition > HIGH_LEGAL_LIMIT)
+					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT )){
+					WristArmSwitch = 4;
+			}
+		}else if(WristArmSwitch == 4){
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
 			wrist_motor.Set(ControlMode::Position, NextWristPosition);
 			if(fabs(wrist_motor.GetSelectedSensorPosition(0) - NextWristPosition) < 20){//check if on target
-					WristArmSwitch = 4;
+					WristArmSwitch = 5;
 			}
 		} else {
 			// Arm fudge
