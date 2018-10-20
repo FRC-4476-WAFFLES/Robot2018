@@ -1,5 +1,5 @@
 #include "PIDPreferences.h"
-
+#include "Preferences.h"
 double UpdateSinglePreference(std::string name, double v) {
 	if(!Preferences::GetInstance()->ContainsKey(name)) {
 		Preferences::GetInstance()->PutDouble(name, v);

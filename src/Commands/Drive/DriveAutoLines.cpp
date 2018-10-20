@@ -49,7 +49,7 @@ void DriveAutoLines::Execute() {
 	SmartDashboard::PutNumber("Drive Error", distance_error);
 	SmartDashboard::PutNumber("Angle Error", angle_error);
 
-	double distance_p = GetP("drive_distance", 0.0055) * distance_error; //alternate = 0.0055
+	double distance_p = GetP("drive_distance", 0.00001 ) * distance_error; //alternate = 0.0055
 	double angle_p = GetP("drive_angle", 0.08) * angle_error;
 
 	double distance_d = 0.0;//0 alternate = 0.00163
@@ -61,7 +61,7 @@ void DriveAutoLines::Execute() {
 	double distance_out = clamp(distance_p + distance_d, -max_speed, max_speed);
 	double angle_out = clamp(angle_p + angle_d, -0.45, 0.45);
 
-	Drive().drive(-distance_out - angle_out, -distance_out + angle_out);
+	Drive().drive(-distance_out + angle_out, -distance_out - angle_out);
 
 	last_angle_error = angle_error;
 	last_distance_error = distance_error;

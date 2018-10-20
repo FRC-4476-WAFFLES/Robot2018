@@ -28,8 +28,8 @@ AutoDriveForward::AutoDriveForward():
 	//drive forward
 //	AddSequential(new WaitCommand(12.0));
 //	AddSequential(new DriveAutoTime(4.0, 0.5));
-	AddSequential(new DriveAutoLines(-10, 0, 15, 0.9));
-	AddSequential(new DriveAutoLines(0, 90, 15, 0.9));
+	AddSequential(new DriveAutoLines(-1, 0, 0, 0.8));
+//	AddSequential(new DriveAutoLines(0, 90, 0, 0.8));
 
 	//turn
 //  Scale from side

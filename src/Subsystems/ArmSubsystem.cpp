@@ -141,9 +141,8 @@ void ArmSubsystem::Periodic() {
 			arm_motor.Set(ControlMode::Position, NextArmPosition);
 			float arm_pos = arm_motor.GetSelectedSensorPosition(0);
 			if(fabs(arm_pos - NextArmPosition) < 20 //check if on target
-					|| (arm_pos > HIGH_LEGAL_LIMIT && PosWhenSeekToSet_Arm <= HIGH_LEGAL_LIMIT && NextArmPosition > HIGH_LEGAL_LIMIT)
-					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT )
-					|| (fabs(arm_pos - (HIGH_LEGAL_LIMIT -100)) < 20)){
+					|| (arm_pos > (HIGH_LEGAL_LIMIT-200) && PosWhenSeekToSet_Arm <= HIGH_LEGAL_LIMIT && NextArmPosition > HIGH_LEGAL_LIMIT)
+					|| (arm_pos < LOW_LEGAL_LIMIT && PosWhenSeekToSet_Arm >= LOW_LEGAL_LIMIT && NextArmPosition < LOW_LEGAL_LIMIT )){
 					WristArmSwitch = 3;
 			}
 		}else if(WristArmSwitch == 3){
