@@ -63,7 +63,6 @@ public:
 //		AddSequential(new HighReverseSetpoint());
 		AddSequential(new DriveAutoLines(0, 50));
 //		AddSequential(new WaitForPosition());
-
 	}
 };
 
@@ -110,8 +109,8 @@ public:
 		AddSequential(new IntakeDown());
 		AddSequential(new ToggleGrab());
 		AddSequential(new IntakeIn());//3rd cube pickup
-		AddSequential(new DriveAutoLines(0, 60, 20, 0.4));//CHECK THIS BEFORE MATCH
-		AddParallel(new DriveAutoLines(6.1, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(0, 55, 20, 0.4));//CHECK THIS BEFORE MATCH
+		AddParallel(new DriveAutoLines(5.9, 0, 20, 0.7));
 //		AddSequential(new WaitForCube());
 		AddSequential(new WaitCommand(2));
 		AddSequential(new ToggleGrab());
