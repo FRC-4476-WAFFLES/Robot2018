@@ -69,10 +69,12 @@ public:
 		AddSequential(new IntakeDown());
 		AddSequential(new IntakeIn());
 		AddParallel(new DriveAutoLines(3.5, 0));
-		AddSequential(new WaitForCube());
+//		AddSequential(new WaitForCube());
+		AddSequential(new WaitCommand(0.5));//////////////////////////////////////////////
 		AddSequential(new ToggleGrab());
 		AddSequential(new WaitCommand(0.5));
-		AddSequential(new WaitForCube());
+//		AddSequential(new WaitForCube());
+		AddSequential(new WaitCommand(0.5));/////////////////////////////////////////////
 		AddSequential(new IntakeStop());//pickup
 		AddSequential(new DriveAutoLines(-3.5, 0));
 		AddSequential(new LowSetpoint());
