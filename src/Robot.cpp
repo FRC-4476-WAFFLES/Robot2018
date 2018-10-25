@@ -85,7 +85,7 @@ public:
 
 		CommandBase::Arm().NextArmPosition = 0;
 		CommandBase::Arm().NextWristPosition = 0;
-		CommandBase::Arm().WristArmSwitch = 4;
+		CommandBase::Arm().WristArmSwitch = 5;
 
 		if (autonomousCommand != nullptr) {
 			autonomousCommand->Cancel();
