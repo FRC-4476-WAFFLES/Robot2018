@@ -15,7 +15,7 @@ double clamp(double value, double min, double max) {
 
 DriveAutoLines::DriveAutoLines(double distance, double angle, double epsilon, double speed_max, bool timed):
 		CommandBase("DriveAutoLines"),
-		distance(distance * 614),
+		distance(distance * 706),
 		angle(angle),
 		epsilon(epsilon),
 		max_speed(speed_max)
@@ -49,10 +49,10 @@ void DriveAutoLines::Execute() {
 	SmartDashboard::PutNumber("Drive Error", distance_error);
 	SmartDashboard::PutNumber("Angle Error", angle_error);
 
-	double distance_p = GetP("drive_distance", 0.00001 ) * distance_error; //alternate = 0.0055
+	double distance_p = GetP("drive_distance", 0.0129 ) * distance_error; //alternate = 0.0055
 	double angle_p = GetP("drive_angle", 0.08) * angle_error;
 
-	double distance_d = 0.0;//0 alternate = 0.00163
+	double distance_d = 0.00333;//0 alternate = 0.00163
 	if(fabs(distance) > 0.1) {
 		distance_d = GetD("drive_distance", 0.00163) * ((distance_error - last_distance_error) / time);
 	}
