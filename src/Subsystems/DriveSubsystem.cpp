@@ -17,6 +17,17 @@ DriveSubsystem::DriveSubsystem() :
 	left1.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
 	right1.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
 
+	//current limiting
+	left1.ConfigPeakCurrentDuration(30,10);
+	left1.ConfigPeakCurrentLimit(22, 10);
+	left1.ConfigContinuousCurrentLimit(22,10);
+	left1.EnableCurrentLimit(true);
+
+	right1.ConfigPeakCurrentDuration(30,10);
+	right1.ConfigPeakCurrentLimit(22, 10);
+	right1.ConfigContinuousCurrentLimit(22,10);
+	right1.EnableCurrentLimit(true);
+
 	right2.Follow(right1);
 	right3.Follow(right1);
 	left2.Follow(left1);

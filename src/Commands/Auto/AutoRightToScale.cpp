@@ -20,10 +20,12 @@ public:
 	ScoreLeftFromRight():
 		CommandGroup("ScoreLeftFromRight")
 	{
+
+		/*
 		AddSequential(new ToggleGrab());
-		AddSequential(new DriveAutoLines(-20.2, 0, 20, 0.9));
+		AddSequential(new DriveAutoLines(-19.7, 0, 10, 0.9));
 		AddSequential(new DriveAutoLines(0, -90));
-		AddSequential(new DriveAutoLines(-17.5, 0, 20, 0.9));
+		AddSequential(new DriveAutoLines(-17.3, 0, 10, 0.9));
 		AddSequential(new HighReverseSetpoint());
 		AddSequential(new DriveAutoLines(0, 90));
 		AddSequential(new DriveAutoLines(-2.5, 0, 20, 0.4));
@@ -63,6 +65,9 @@ public:
 //		AddSequential(new HighReverseSetpoint());
 		AddSequential(new DriveAutoLines(0, 50));
 //		AddSequential(new WaitForPosition());
+		*/
+		AddSequential(new DriveAutoLines(-19.7, 0, 10, 0.9));
+
 	}
 };
 
@@ -138,6 +143,7 @@ public:
 	ScoreRightFromLeft():
 		CommandGroup("ScoreRightFromLeft")
 	{
+		/*
 		AddSequential(new ToggleGrab());
 		AddSequential(new DriveAutoLines(-20.2, 0));
 		AddSequential(new DriveAutoLines(0, 90));
@@ -178,6 +184,9 @@ public:
 //		AddSequential(new HighReverseSetpoint());
 		AddSequential(new DriveAutoLines(0, -50));
 //		AddSequential(new WaitForPosition());
+ *
+ */
+		AddSequential(new DriveAutoLines(-17, 0, 10, 0.9));
 	}
 };
 
@@ -239,9 +248,9 @@ public:
 //mirrored from right
 		AddSequential(new ToggleGrab());
 		AddSequential(new DriveAutoLines(-12, 0, 20 , 0.9));
-		AddSequential(new DriveAutoLines(0, 17));
+		AddSequential(new DriveAutoLines(0, 16));
 		AddSequential(new HighReverseSetpoint());
-		AddSequential(new DriveAutoLines(-10.3, 0, 20, 0.5));
+		AddSequential(new DriveAutoLines(-9.7, 0, 20, 0.5));
 		AddSequential(new WaitForPosition());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeOut(1));
@@ -252,9 +261,9 @@ public:
 		AddSequential(new WaitForPosition());
 		AddSequential(new IntakeDown());//second cube
 		AddSequential(new IntakeIn());
-		AddSequential(new DriveAutoLines(0, -31));
+		AddSequential(new DriveAutoLines(0, -28));
 		AddSequential(new WaitForPosition());
-		AddParallel(new DriveAutoLines(4.4, 0, 30, 0.7));
+		AddParallel(new DriveAutoLines(4.8, 0, 30, 0.7));
 	//	AddSequential(new WaitForCube());
 		AddSequential(new WaitCommand(2));
 		AddSequential(new ToggleGrab());
@@ -274,15 +283,15 @@ public:
 		AddSequential(new IntakeDown());
 		AddSequential(new ToggleGrab());
 		AddSequential(new IntakeIn());//3rd cube pickup
-		AddSequential(new DriveAutoLines(0, -60, 20, 0.4));//CHECK THIS BEFORE MATCH
-		AddParallel(new DriveAutoLines(6.1, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(0, -53, 20, 0.4));//CHECK THIS BEFORE MATCH
+		AddParallel(new DriveAutoLines(5.9, 0, 20, 0.7));
 //		AddSequential(new WaitForCube());
 		AddSequential(new WaitCommand(2));
 		AddSequential(new ToggleGrab());
 //		AddSequential(new WaitCommand(0.25));////////////////////////////////////////
 		AddSequential(new IntakeStop());
 		AddSequential(new LowSetpoint());
-		AddSequential(new DriveAutoLines(-5.1, 0, 20, 0.7));
+		AddSequential(new DriveAutoLines(-6.1, 0, 20, 0.7));
 		AddSequential(new HighReverseSetpoint());
 		AddSequential(new DriveAutoLines(0, 55));
 		AddSequential(new WaitForPosition());// 3rd drop

@@ -15,7 +15,7 @@ double clamp(double value, double min, double max) {
 
 DriveAutoLines::DriveAutoLines(double distance, double angle, double epsilon, double speed_max, bool timed):
 		CommandBase("DriveAutoLines"),
-		distance(distance * 706),
+		distance(distance * 680),
 		angle(angle),
 		epsilon(epsilon),
 		max_speed(speed_max)

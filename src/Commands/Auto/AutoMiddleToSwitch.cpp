@@ -19,7 +19,7 @@ public:
 		AddSequential(new LowSetpoint());
 		AddSequential(new DriveAutoLines(1, 0, 20, 0.8));
 		AddSequential(new DriveAutoLines(0, -25));
-		AddSequential(new DriveAutoLines(8.1, 0, 20, 0.9));
+		AddSequential(new DriveAutoLines(8, 0, 25, 0.9));
 		AddSequential(new IntakeOut());
 		AddSequential(new WaitCommand(0.5));
 		AddSequential(new IntakeStop());//drop
